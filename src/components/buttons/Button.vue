@@ -118,7 +118,7 @@ export default defineComponent({
   }
 
   &.mag-button-outline {
-    background: $white;
+    background: $white !important;
     color: $font-color-base;
     border: 1px solid $border-color-base;
   }
