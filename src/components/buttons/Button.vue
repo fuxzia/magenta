@@ -1,5 +1,7 @@
 <template>
   <button :class="computedClasses">
+    <Spinner v-if="loading" />
+    <Feather v-if="icon && !loading" :icon="icon" />
     <span v-if="$slots.default || label">
       <slot v-if="$slots.default"/>
       <template v-else-if="label">
@@ -11,10 +13,16 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
+import Feather from '../icons/Feather.vue'
+import Spinner from '../loaders/Spinner.vue'
 import { Sizes, Shapes, Types } from '../../types/Buttons'
 
 export default defineComponent({
   name: 'MButton',
+  components: {
+    Feather,
+    Spinner,
+  },
   props: {
     type: {
       type: String as PropType<Types>,
@@ -22,6 +30,10 @@ export default defineComponent({
       validator: (value: string) => (Object.values(Types) as string[]).includes(value),
     },
     label: {
+      type: String,
+      default: null,
+    },
+    icon: {
       type: String,
       default: null,
     },
@@ -121,6 +133,10 @@ export default defineComponent({
     background: $white !important;
     color: $font-color-base;
     border: 1px solid $border-color-base;
+
+    & .mag-spinner {
+      color: $primary-color;
+    }
   }
 
   &.mag-button-sm {
@@ -165,6 +181,20 @@ export default defineComponent({
 
   &.mag-button-circle {
     border-radius: 100%;
+  }
+
+  & > .mag-spinner {
+    color: $button-font-color;
+    
+    + span {
+      margin-left: $spacing-sm;
+    }
+  }
+
+  & > .mag-icon {
+    + span {
+      margin-left: $spacing-sm;
+    }
   }
 }
 </style>

@@ -1,12 +1,12 @@
 // ========
 // Spacings
 // ========
-@import 'spacings';
+@import 'variables.spacings';
 
 // ======
 // Colors
 // ======
-@import 'colors';
+@import 'variables.colors';
 
 // ============
 // Fonts, texts
@@ -37,6 +37,11 @@ $font-color-muted: $gray-500;
 // ===========
 $transition-cubic: all cubic-bezier(0.4, 0, 0.2, 1) 150ms;
 $transition-base: $transition-cubic;
+
+// ==========
+// Animations
+// ==========
+$animation-spin: spin 1s linear infinite;
 
 // ======
 // Radius

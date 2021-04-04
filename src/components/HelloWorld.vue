@@ -22,7 +22,7 @@
     <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Docs</a>
   </p>
 
-  <MButton size="sm" style="margin-right: 15px;">Button text</MButton>
+  <MButton size="sm" icon="archive" style="margin-right: 15px;">Button text</MButton>
   <MButton size="sm" type="secondary" style="margin-right: 15px;">Button text</MButton>
   <MButton style="margin-right: 15px;">Button text</MButton>
   <MButton type="secondary" style="margin-right: 15px;">Button text</MButton>
@@ -32,9 +32,9 @@
   <br/>
   <br/>
 
-  <MButton size="lg" type="secondary" shape="circle" style="margin-right: 15px;">Button text</MButton>
+  <MButton size="lg" type="secondary" shape="circle" style="margin-right: 15px;" icon="activity" loading />
 
-  <MButton size="lg" type="secondary" :outline="true" shape="circle" style="margin-right: 15px;">Button text</MButton>
+  <MButton size="lg" type="secondary" :outline="true" shape="circle" style="margin-right: 15px;" icon="bluetooth" loading/>
 
   <br/>
   <br/>
@@ -58,6 +58,10 @@
 
   <br />
 
+  <Feather icon="archive" />
+
+  <br />
+
   <button @click="count++">count is: {{ count }}</button>
   <p>
     Edit
@@ -68,10 +72,12 @@
 <script lang="ts">
 import { ref, defineComponent } from 'vue'
 import MButton from './buttons/Button.vue'
+import Feather from './icons/Feather.vue'
 
 export default defineComponent({
   components: {
     MButton,
+    Feather,
   },
   name: 'HelloWorld',
   props: {
