@@ -29,6 +29,8 @@ $line-height-sm: 1;
 $line-height-md: 1.5;
 $line-height-xl: 2;
 $line-height-base: $line-height-md;
+$font-color-base: $cool-gray-800;
+$font-color-muted: $gray-500;
 
 // ===========
 // Transitions
@@ -47,7 +49,7 @@ $radius-base: $radius-md;
 // =======
 // Borders
 // =======
-$border-color-base: $gray-600;
+$border-color-base: $cool-gray-300;
 
 // ======
 // Inputs

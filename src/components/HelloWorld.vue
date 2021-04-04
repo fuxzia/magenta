@@ -30,10 +30,33 @@
   <MButton size="lg" type="secondary" style="margin-right: 15px;">Button text</MButton>
 
   <br/>
+  <br/>
 
   <MButton size="lg" type="secondary" shape="circle" style="margin-right: 15px;">Button text</MButton>
 
+  <MButton size="lg" type="secondary" :outline="true" shape="circle" style="margin-right: 15px;">Button text</MButton>
+
   <br/>
+  <br/>
+
+  <MButton size="sm" :outline="true" style="margin-right: 15px;">Button text</MButton>
+  <MButton size="sm" style="margin-right: 15px;">Button text</MButton>
+  <MButton :outline="true" style="margin-right: 15px;">Button text</MButton>
+  <MButton size="md" style="margin-right: 15px;">Button text</MButton>
+  <MButton size="lg" :outline="true" style="margin-right: 15px;">Button text</MButton>
+  <MButton size="lg" style="margin-right: 15px;">Button text</MButton>
+
+  <br/>
+  <br/>
+
+  <MButton size="sm" :outline="true" style="margin-right: 15px;" disabled>Button text</MButton>
+  <MButton size="sm" disabled style="margin-right: 15px;">Button text</MButton>
+  <MButton :outline="true" style="margin-right: 15px;">Button text</MButton>
+  <MButton size="md" style="margin-right: 15px;">Button text</MButton>
+  <MButton size="lg" :outline="true" style="margin-right: 15px;">Button text</MButton>
+  <MButton size="lg" style="margin-right: 15px;">Button text</MButton>
+
+  <br />
 
   <button @click="count++">count is: {{ count }}</button>
   <p>

@@ -87,6 +87,8 @@ export default defineComponent({
   font-family: $font-family-base;
   font-size: $font-size-base;
   transition: $transition-base;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   
   &:focus {
     box-shadow: 0 0 0 calc(4px) lighten($button-bg-primary, 40%);
@@ -100,6 +102,12 @@ export default defineComponent({
     background: lighten($button-bg-primary, 5%);
   }
 
+  &:disabled {
+    opacity: .6;
+    cursor: no-drop;
+    pointer-events: none;
+  }
+
   &.mag-button-secondary {
     background: lighten($button-bg-primary, 40%);
     color: $button-bg-primary;
@@ -107,6 +115,12 @@ export default defineComponent({
     &:hover {
       background: lighten($button-bg-primary, 42%);
     }
+  }
+
+  &.mag-button-outline {
+    background: $white;
+    color: $font-color-base;
+    border: 1px solid $border-color-base;
   }
 
   &.mag-button-sm {
