@@ -237,7 +237,8 @@ export default defineComponent({
   & > .mag-spinner {
     line-height: 0;
     position: relative;
-    top: 1px;
+    display: inline-flex;
+    align-items: center;
     color: $button-font-color;
     
     + span {
@@ -247,10 +248,17 @@ export default defineComponent({
 
   & > .mag-icon {
     line-height: 0;
+    display: inline-flex;
+    align-items: center;
 
     + span {
       margin-left: $spacing-sm;
     }
+  }
+
+  & > span {
+    display: inline-flex;
+    align-items: center;
   }
 }
 </style>

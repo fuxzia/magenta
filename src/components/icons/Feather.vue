@@ -1,5 +1,5 @@
 <template>
-  <i class="mag-icon" v-html="svg" />
+  <i class="mag-icon" v-if="svg" v-html="svg" />
 </template>
 
 <script lang="ts">
@@ -17,8 +17,13 @@ export default defineComponent({
   },
   setup: (props) => {
     const { icon } = props
-    const featherIcon = feather.icons[icon]
+    
     const svg = computed(() => {
+      if (!feather.icons[icon]) {
+        return null
+      }
+      
+      const featherIcon = feather.icons[icon]
       const options = { width: '1em', height: '1em' }
       return featherIcon.toSvg(options)
     })

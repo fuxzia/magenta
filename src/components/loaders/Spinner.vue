@@ -48,6 +48,7 @@ export default defineComponent({
   justify-content: center;
   line-height: 1;
   color: $primary-color;
+  vertical-align: -.125em;
 
   svg {
     animation: $animation-spin;
