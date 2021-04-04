@@ -15,7 +15,7 @@
 import { computed, defineComponent, PropType } from 'vue'
 import Feather from '../icons/Feather.vue'
 import Spinner from '../loaders/Spinner.vue'
-import { Sizes, Types } from '../../types/Button'
+import { Sizes } from '../../types/Button'
 
 export default defineComponent({
   name: 'MButton',
@@ -24,11 +24,6 @@ export default defineComponent({
     Spinner,
   },
   props: {
-    type: {
-      type: String as PropType<Types>,
-      default: Types.Default,
-      validator: (value: string) => (Object.values(Types) as string[]).includes(value),
-    },
     label: {
       type: String,
       default: null,
@@ -64,7 +59,7 @@ export default defineComponent({
     },
   },
   setup: (props) => {
-    const { label, rounded, circle, outline, loading, type, size, secondary } = props
+    const { label, rounded, circle, outline, loading, size, secondary } = props
     const computedClasses = computed(() => {
       return [
         'mag-button', 
