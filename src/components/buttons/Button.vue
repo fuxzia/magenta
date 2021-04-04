@@ -57,21 +57,26 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    danger: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup: (props) => {
-    const { label, rounded, circle, outline, loading, size, secondary } = props
+    const { label, rounded, circle, outline, loading, size, secondary, danger } = props
     const computedClasses = computed(() => {
       return [
         'mag-button', 
         {
-          'mag-button-primary': !secondary,
+          'mag-button-primary': !secondary && !danger,
           'mag-button-secondary': secondary,
+          'mag-button-danger': danger,
           'mag-button-circle': circle,
           'mag-button-rounded': rounded,
           'mag-button-square': !circle && !rounded,
           'mag-button-sm': size === Sizes.Small,
           'mag-button-md': ([Sizes.Medium, Sizes.Default] as string[]).includes(size),
-          'mag-button-xl': size === Sizes.Large,
+          'mag-button-lg': size === Sizes.Large,
           'mag-button-loading': loading,
           'mag-button-outline': outline,
         }
@@ -121,7 +126,6 @@ export default defineComponent({
   &:disabled {
     opacity: .6;
     cursor: no-drop;
-    pointer-events: none;
   }
 
   &.mag-button-secondary {
@@ -130,6 +134,22 @@ export default defineComponent({
 
     &:hover {
       background: lighten($button-bg-primary, 42%);
+    }
+  }
+
+  &.mag-button-danger {
+    background: $danger-color;
+
+    &:hover {
+      background: lighten($danger-color, 5%);
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 calc(4px) lighten($danger-color, 40%);
+    }
+
+    &:active {
+      box-shadow: 0 0 0 calc(4px) lighten($danger-color, 40%);
     }
   }
 
@@ -155,6 +175,10 @@ export default defineComponent({
     &.mag-button-circle {
       width: $button-sm-height;
     }
+
+    &.mag-button-rounded {
+      padding: $button-sm-padding-vertical $button-sm-padding-horizontal * 1.5;
+    }
   }
 
   &.mag-button-md {
@@ -168,21 +192,34 @@ export default defineComponent({
     &.mag-button-circle {
       width: $button-md-height;
     }
+
+    &.mag-button-rounded {
+      padding: $button-md-padding-vertical $button-md-padding-horizontal * 1.3;
+    }
+
+    > span, > .mag-icon {
+      top: -1px;
+      position: relative;
+    }
   }
 
-  &.mag-button-xl {
-    height: $button-xl-height;
-    padding: $button-xl-padding-vertical $button-xl-padding-horizontal;
+  &.mag-button-lg {
+    height: $button-lg-height;
+    padding: $button-lg-padding-vertical $button-lg-padding-horizontal;
 
     &.mag-button-square {
-      border-radius: $button-xl-radius;
+      border-radius: $button-lg-radius;
     }
 
     &.mag-button-circle {
-      width: $button-xl-height;
+      width: $button-lg-height;
     }
 
-    > span {
+    &.mag-button-rounded {
+      padding: $button-lg-padding-vertical $button-lg-padding-horizontal * 1.2;
+    }
+
+    > span, > .mag-icon {
       top: -1px;
       position: relative;
     }

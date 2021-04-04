@@ -17,7 +17,7 @@ $font-family-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 $font-family-base: $font-family-sans;
 $font-size-sm: 14px;
 $font-size-md: 16px;
-$font-size-xl: 18px;
+$font-size-lg: 18px;
 $font-size-base: $font-size-md;
 $font-weight-light: 300;
 $font-weight-normal: 400;
@@ -27,7 +27,7 @@ $font-weight-extra-bold: 800;
 $font-weight-default: $font-weight-normal;
 $line-height-sm: 1;
 $line-height-md: 1.5;
-$line-height-xl: 2;
+$line-height-lg: 2;
 $line-height-base: $line-height-md;
 $font-color-base: $cool-gray-800;
 $font-color-muted: $gray-500;
@@ -48,7 +48,7 @@ $animation-spin: spin 1s linear infinite;
 // ======
 $radius-sm: 4px;
 $radius-md: 6px;
-$radius-xl: 8px;
+$radius-lg: 8px;
 $radius-base: $radius-md;
 
 // =======
@@ -61,11 +61,11 @@ $border-color-base: $cool-gray-300;
 // ======
 $input-height-sm: 38px;
 $input-height-md: 42px;
-$input-height-xl: 48px;
+$input-height-lg: 48px;
 $input-height-base: $input-height-md;
 $input-radius-sm: $radius-md;
 $input-radius-md: $radius-md;
-$input-radius-xl: $radius-xl;
+$input-radius-lg: $radius-lg;
 $input-radius-base: $input-radius-md;
 $input-border-color: $border-color-base;
 
@@ -85,9 +85,9 @@ $button-md-height: $input-height-md;
 $button-md-font-size: $font-size-md;
 $button-md-radius: $input-radius-md;
 $button-md-padding-vertical: 0;
-$button-md-padding-horizontal: $spacing-xl;
-$button-xl-height: $input-height-xl;
-$button-xl-font-size: $font-size-xl;
-$button-xl-radius: $input-radius-xl;
-$button-xl-padding-vertical: 0;
-$button-xl-padding-horizontal: $spacing-2xl;
+$button-md-padding-horizontal: $spacing-lg;
+$button-lg-height: $input-height-lg;
+$button-lg-font-size: $font-size-lg;
+$button-lg-radius: $input-radius-lg;
+$button-lg-padding-vertical: 0;
+$button-lg-padding-horizontal: $spacing-xl;
