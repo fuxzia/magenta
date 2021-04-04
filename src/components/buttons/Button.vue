@@ -210,19 +210,10 @@ export default defineComponent({
 
   & > .mag-icon {
     line-height: 0;
-    // top: -2px;
-    position: relative;
-    // top: 0px;
 
     + span {
       margin-left: $spacing-sm;
     }
-  }
-
-  > span {
-    display: inline-flex;
-    // line-height: 0;
-    // position: relative;
   }
 }
 </style>
