@@ -2,6 +2,14 @@
   <section class="buttons-view">
     
     <section v-for="(button, key) in buttons" :key="key">
+      
+      <Heading size="lg">{{ button.title }}</Heading>
+      <Heading size="lg" subtitle>{{ button.title }} subtitle</Heading>
+      <Heading size="md">{{ button.title }}</Heading>
+      <Heading size="md" subtitle>{{ button.title }} subtitle</Heading>
+      <Heading size="sm">{{ button.title }}</Heading>
+      <Heading :label="`${button.title} subtitle`" subtitle/>
+      
       <div class="buttons">
         <Button size="sm" :outline="button.outline" :danger="button.danger" :secondary="button.secondary">Button text</Button>
         <Button size="md" :outline="button.outline" :danger="button.danger" :secondary="button.secondary">Button text</Button>
@@ -63,12 +71,12 @@
 <script lang="ts">
 import { ref, defineComponent } from 'vue'
 import Button from './buttons/Button.vue'
-import Feather from './icons/Feather.vue'
+import Heading from './typography/Heading.vue'
 
 export default defineComponent({
   components: {
     Button,
-    Feather,
+    Heading
   },
   name: 'HelloWorld',
   props: {
@@ -81,21 +89,25 @@ export default defineComponent({
     const count = ref(0)
     const buttons = [
       {
+        title: 'Primary buttons',
         outline: false,
         secondary: false,
         danger: false,
       },
       {
+        title: 'Secondary buttons',
         outline: false,
         secondary: true,
         danger: false,
       },
       {
+        title: 'Outline buttons',
         outline: true,
         secondary: false,
         danger: false,
       },
       {
+        title: 'Danger buttons',
         outline: false,
         secondary: false,
         danger: true,

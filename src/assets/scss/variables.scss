@@ -29,8 +29,22 @@ $line-height-sm: 1;
 $line-height-md: 1.5;
 $line-height-lg: 2;
 $line-height-base: $line-height-md;
-$font-color-base: $cool-gray-800;
+$font-color-base: $cool-gray-900;
 $font-color-muted: $gray-500;
+
+// ========
+// Headings
+// ========
+$heading-font-family: $font-family-base;
+$heading-font-color: $font-color-base;
+$heading-subtitle-font-color: $cool-gray-600;
+$heading-line-height: $line-height-base;
+$heading-sm-font-size: $font-size-base + 2px; 
+$heading-sm-font-weight: $font-weight-bold;
+$heading-md-font-size: $font-size-base + 8px;
+$heading-md-font-weight: $font-weight-bold;
+$heading-lg-font-size: $font-size-base + 18px;
+$heading-lg-font-weight: $font-weight-extra-bold;
 
 // ===========
 // Transitions
