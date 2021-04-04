@@ -41,5 +41,6 @@ export default defineComponent({
   text-transform: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  vertical-align: -.125em;
 }
 </style>

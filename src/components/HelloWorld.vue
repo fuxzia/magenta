@@ -22,19 +22,25 @@
     <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Docs</a>
   </p>
 
-  <MButton size="sm" icon="archive" style="margin-right: 15px;">Button text</MButton>
-  <MButton size="sm" type="secondary" style="margin-right: 15px;">Button text</MButton>
-  <MButton style="margin-right: 15px;">Button text</MButton>
-  <MButton type="secondary" style="margin-right: 15px;">Button text</MButton>
-  <MButton size="lg" style="margin-right: 15px;">Button text</MButton>
-  <MButton size="lg" type="secondary" style="margin-right: 15px;">Button text</MButton>
+  <div style="display:block; align-items: center">
+    <MButton size="sm" icon="archive" style="margin-right: 15px;">Button text</MButton>
+    <MButton size="sm" type="secondary" style="margin-right: 15px;">Button text</MButton>
+    <MButton size="sm" icon="archive" style="margin-right: 15px;"/>
+    <MButton size="sm" icon="arrow-right-circle" style="margin-right: 15px;"/>
+    <MButton size="md" icon="trello" secondary style="margin-right: 15px;">Go to Trello</MButton>
+    <MButton size="sm" icon="users" rounded style="margin-right: 15px;"/>
+    <MButton style="margin-right: 15px;">Button text</MButton>
+    <MButton type="secondary" style="margin-right: 15px;">Button text</MButton>
+    <MButton size="lg" style="margin-right: 15px;">Button text</MButton>
+    <MButton size="lg" icon="battery-charging" type="secondary" style="margin-right: 15px;">Button text</MButton>
+  </div>
 
   <br/>
   <br/>
 
-  <MButton size="lg" type="secondary" shape="circle" style="margin-right: 15px;" icon="activity" loading />
+  <MButton size="lg" type="secondary" circle style="margin-right: 15px;" icon="activity" />
 
-  <MButton size="lg" type="secondary" :outline="true" shape="circle" style="margin-right: 15px;" icon="bluetooth" loading/>
+  <MButton size="lg" type="secondary" :outline="true" circle style="margin-right: 15px;" icon="bluetooth" loading/>
 
   <br/>
   <br/>
@@ -49,6 +55,19 @@
   <br/>
   <br/>
 
+  <br/>
+  <br/>
+
+  <MButton size="sm" :outline="true" style="margin-right: 15px;" rounded>Button text</MButton>
+  <MButton size="sm" style="margin-right: 15px;" rounded>Button text</MButton>
+  <MButton :outline="true" style="margin-right: 15px;" rounded>Button text</MButton>
+  <MButton size="md" style="margin-right: 15px;" rounded>Button text</MButton>
+  <MButton size="lg" :outline="true" style="margin-right: 15px;" rounded loading>Button text</MButton>
+  <MButton size="lg" style="margin-right: 15px;" rounded>Button text</MButton>
+
+  <br/>
+  <br/>
+
   <MButton size="sm" :outline="true" style="margin-right: 15px;" disabled>Button text</MButton>
   <MButton size="sm" disabled style="margin-right: 15px;">Button text</MButton>
   <MButton :outline="true" style="margin-right: 15px;">Button text</MButton>
@@ -58,7 +77,11 @@
 
   <br />
 
-  <Feather icon="archive" />
+  <p>This is a text with icon <Feather icon="archive" /> inside.</p>
+  <div>This is a text with icon <Feather icon="user" /> inside.</div>
+  <p>This is a text with icon <Feather icon="award" /> inside.</p>
+  <p>This is a text with icon <Feather icon="users" /> inside.</p>
+  <p>This is a text with icon <Feather icon="bar-chart" /> inside.</p>
 
   <br />
 

@@ -15,7 +15,7 @@
 import { computed, defineComponent, PropType } from 'vue'
 import Feather from '../icons/Feather.vue'
 import Spinner from '../loaders/Spinner.vue'
-import { Sizes, Shapes, Types } from '../../types/Buttons'
+import { Sizes, Types } from '../../types/Button'
 
 export default defineComponent({
   name: 'MButton',
@@ -42,11 +42,6 @@ export default defineComponent({
       default: Sizes.Default,
       validator: (value: string) => (Object.values(Sizes) as string[]).includes(value),
     },
-    shape: {
-      type: String as PropType<Shapes>,
-      default: Shapes.Default,
-      validator: (value: string) => (Object.values(Shapes) as string[]).includes(value),
-    },
     loading: {
       type: Boolean,
       default: false,
@@ -55,23 +50,35 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    circle: {
+      type: Boolean,
+      default: false,
+    },
+    rounded: {
+      type: Boolean,
+      default: false,
+    },
+    secondary: {
+      type: Boolean,
+      default: false,
+    },
   },
   setup: (props) => {
-    const { label } = props
+    const { label, rounded, circle, outline, loading, type, size, secondary } = props
     const computedClasses = computed(() => {
       return [
         'mag-button', 
         {
-          'mag-button-primary': ([Types.Primary, Types.Default] as string[]).indexOf(props.type) !== -1,
-          'mag-button-secondary': props.type === Types.Secondary,
-          'mag-button-circle': props.shape === Shapes.Circle,
-          'mag-button-rounded': props.shape === Shapes.Rounded,
-          'mag-button-square': ([Shapes.Square, Shapes.Default] as string[]).indexOf(props.shape) !== -1,
-          'mag-button-sm': props.size === Sizes.Small,
-          'mag-button-md': ([Sizes.Medium, Sizes.Default] as string[]).indexOf(props.size) !== -1,
-          'mag-button-xl': props.size === Sizes.Large,
-          'mag-button-loading': props.loading,
-          'mag-button-outline': props.outline,
+          'mag-button-primary': !secondary,
+          'mag-button-secondary': secondary,
+          'mag-button-circle': circle,
+          'mag-button-rounded': rounded,
+          'mag-button-square': !circle && !rounded,
+          'mag-button-sm': size === Sizes.Small,
+          'mag-button-md': ([Sizes.Medium, Sizes.Default] as string[]).includes(size),
+          'mag-button-xl': size === Sizes.Large,
+          'mag-button-loading': loading,
+          'mag-button-outline': outline,
         }
       ]
     })
@@ -86,12 +93,14 @@ export default defineComponent({
 @import '../../assets/scss/variables.scss';
 
 .mag-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   line-height: 1;
-  outline: none;
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  text-align: center;
+  background-image: none;
   cursor: pointer;
+  outline: none;
   border-width: $button-border-size;
   background: $button-bg-primary;
   color: $button-font-color;
@@ -177,13 +186,26 @@ export default defineComponent({
     &.mag-button-circle {
       width: $button-xl-height;
     }
+
+    > span {
+      top: -1px;
+      position: relative;
+    }
   }
 
   &.mag-button-circle {
     border-radius: 100%;
+    padding: 0;
+  }
+
+  &.mag-button-rounded {
+    border-radius: 100px;
   }
 
   & > .mag-spinner {
+    line-height: 0;
+    position: relative;
+    top: 1px;
     color: $button-font-color;
     
     + span {
@@ -192,9 +214,20 @@ export default defineComponent({
   }
 
   & > .mag-icon {
+    line-height: 0;
+    // top: -2px;
+    position: relative;
+    // top: 0px;
+
     + span {
       margin-left: $spacing-sm;
     }
+  }
+
+  > span {
+    display: inline-flex;
+    // line-height: 0;
+    // position: relative;
   }
 }
 </style>
