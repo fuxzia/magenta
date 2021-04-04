@@ -39,6 +39,7 @@ export default defineComponent({
           'mag-heading-sm': ([Sizes.Small, Sizes.Default] as string[]).includes(size),
           'mag-heading-md': size === Sizes.Medium,
           'mag-heading-lg': size === Sizes.Large,
+          'mag-heading-2lg': size === Sizes.LargeX2,
           'mag-heading-subtitle': subtitle,
         }
       ]
@@ -82,6 +83,15 @@ export default defineComponent({
 
     &.mag-heading-subtitle {
       font-size: $heading-lg-font-size * .8;
+    }
+  }
+
+  &.mag-heading-2lg {
+    font-size: $heading-2lg-font-size;
+    font-weight: $heading-2lg-font-weight;
+
+    &.mag-heading-subtitle {
+      font-size: $heading-2lg-font-size * .8;
     }
   }
 

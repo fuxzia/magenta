@@ -1,8 +1,79 @@
 <template>
   <section class="buttons-view">
+
+    <section>
+
+      <Heading size="lg">Typography</Heading>
+      
+      <div>
+        <Heading>Text default</Heading>
+        <Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio tempora animi quisquam illo sed suscipit voluptate similique? Tempore explicabo ut itaque inventore facilis cumque, quisquam maxime magnam tempora ab impedit?</Text>
+      </div>
+      
+      <div>
+        <Heading>Text lg</Heading>
+        <Text size="lg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda eveniet consequuntur vitae dolorem est rerum at necessitatibus aspernatur? Vitae quisquam quidem incidunt dolor veritatis ab omnis, dicta repudiandae porro quae.</Text>
+      </div>
+
+      <div>
+        <Heading>Text 2lg</Heading>
+        <Text size="2lg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda eveniet consequuntur vitae dolorem est rerum at necessitatibus aspernatur? Vitae quisquam quidem incidunt dolor veritatis ab omnis, dicta repudiandae porro quae.</Text>
+      </div>
+
+      <div>
+        <Heading>Text small</Heading>
+        <Text size="sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda eveniet consequuntur vitae dolorem est rerum at necessitatibus aspernatur? Vitae quisquam quidem incidunt dolor veritatis ab omnis, dicta repudiandae porro quae.</Text>
+      </div>
+      
+      <div>
+        <Heading>Text muted</Heading>
+        <Text muted>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae magnam perferendis qui neque atque perspiciatis sed, sit numquam illum officiis fuga, adipisci amet eius vero dicta culpa laboriosam doloribus facere?</Text>
+      </div>
+
+      <div>
+        <Heading>Text italic</Heading>
+        <Text italic>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae magnam perferendis qui neque atque perspiciatis sed, sit numquam illum officiis fuga, adipisci amet eius vero dicta culpa laboriosam doloribus facere?</Text>
+      </div>
+
+      <div>
+        <Heading>Text nowrap</Heading>
+        <Text nowrap>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae magnam perferendis qui neque atque perspiciatis sed, sit numquam illum officiis fuga, adipisci amet eius vero dicta culpa laboriosam doloribus facere?</Text>
+      </div>
+
+      <div>
+        <Heading>Text ellipsis</Heading>
+        <Text ellipsis>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae magnam perferendis qui neque atque perspiciatis sed, sit numquam illum officiis fuga, adipisci amet eius vero dicta culpa laboriosam doloribus facere?</Text>
+      </div>
+
+      <div>
+        <Heading>Text danger</Heading>
+        <Text danger>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae magnam perferendis qui neque atque perspiciatis sed, sit numquam illum officiis fuga, adipisci amet eius vero dicta culpa laboriosam doloribus facere?</Text>
+      </div>
+
+      <div>
+        <Heading>Text success</Heading>
+        <Text success>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae magnam perferendis qui neque atque perspiciatis sed, sit numquam illum officiis fuga, adipisci amet eius vero dicta culpa laboriosam doloribus facere?</Text>
+      </div>
+
+      <div>
+        <Heading>Text primary</Heading>
+        <Text primary>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae magnam perferendis qui neque atque perspiciatis sed, sit numquam illum officiis fuga, adipisci amet eius vero dicta culpa laboriosam doloribus facere?</Text>
+      </div>
+
+      <div>
+        <Heading>Text bold</Heading>
+        <Text bold>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae magnam perferendis qui neque atque perspiciatis sed, sit numquam illum officiis fuga, adipisci amet eius vero dicta culpa laboriosam doloribus facere?</Text>
+      </div>
+      <div>
+        <Heading>Text bold</Heading>
+        <Text :maxLines="5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum veritatis possimus, debitis, repellat pariatur accusantium necessitatibus repudiandae placeat ratione nostrum quibusdam incidunt accusamus velit? Deserunt magni vero maiores qui fugiat. Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsa delectus possimus vitae, animi quod reiciendis soluta nesciunt et! Deserunt necessitatibus quibusdam explicabo beatae repudiandae dolorum omnis fuga! Praesentium, officiis. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo, cumque aliquam porro asperiores harum minus debitis illum numquam architecto eum blanditiis excepturi voluptas repellat vitae? Accusamus fugit hic velit culpa.</Text>
+      </div>
+    </section>
     
     <section v-for="(button, key) in buttons" :key="key">
       
+      <Heading size="2lg">{{ button.title }}</Heading>
+      <Heading size="2lg" subtitle>{{ button.title }} subtitle</Heading>
       <Heading size="lg">{{ button.title }}</Heading>
       <Heading size="lg" subtitle>{{ button.title }} subtitle</Heading>
       <Heading size="md">{{ button.title }}</Heading>
@@ -72,11 +143,13 @@
 import { ref, defineComponent } from 'vue'
 import Button from './buttons/Button.vue'
 import Heading from './typography/Heading.vue'
+import Text from './typography/Text.vue'
 
 export default defineComponent({
   components: {
     Button,
-    Heading
+    Heading,
+    Text,
   },
   name: 'HelloWorld',
   props: {

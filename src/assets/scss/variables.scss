@@ -30,7 +30,10 @@ $line-height-md: 1.5;
 $line-height-lg: 2;
 $line-height-base: $line-height-md;
 $font-color-base: $cool-gray-900;
-$font-color-muted: $gray-500;
+$font-color-muted: $cool-gray-400;
+$font-color-danger: $danger-color;
+$font-color-success: $success-color;
+$font-color-primary: $primary-color;
 
 // ========
 // Headings
@@ -45,6 +48,8 @@ $heading-md-font-size: $font-size-base + 8px;
 $heading-md-font-weight: $font-weight-bold;
 $heading-lg-font-size: $font-size-base + 18px;
 $heading-lg-font-weight: $font-weight-extra-bold;
+$heading-2lg-font-size: $font-size-base + 26px;
+$heading-2lg-font-weight: $font-weight-extra-bold;
 
 // ===========
 // Transitions
