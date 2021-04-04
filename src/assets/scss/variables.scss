@@ -1,0 +1,86 @@
+// ========
+// Spacings
+// ========
+@import 'spacings';
+
+// ======
+// Colors
+// ======
+@import 'colors';
+
+// ============
+// Fonts, texts
+// ============
+$font-family-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+$font-family-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+$font-family-base: $font-family-sans;
+$font-size-sm: 14px;
+$font-size-md: 16px;
+$font-size-xl: 18px;
+$font-size-base: $font-size-md;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-bold: 700;
+$font-weight-extra-bold: 800;
+$font-weight-default: $font-weight-normal;
+$line-height-sm: 1;
+$line-height-md: 1.5;
+$line-height-xl: 2;
+$line-height-base: $line-height-md;
+
+// ===========
+// Transitions
+// ===========
+$transition-cubic: all cubic-bezier(0.4, 0, 0.2, 1) 150ms;
+$transition-base: $transition-cubic;
+
+// ======
+// Radius
+// ======
+$radius-sm: 4px;
+$radius-md: 6px;
+$radius-xl: 8px;
+$radius-base: $radius-md;
+
+// =======
+// Borders
+// =======
+$border-color-base: $gray-600;
+
+// ======
+// Inputs
+// ======
+$input-height-sm: 38px;
+$input-height-md: 42px;
+$input-height-xl: 48px;
+$input-height-base: $input-height-md;
+$input-radius-sm: $radius-md;
+$input-radius-md: $radius-md;
+$input-radius-xl: $radius-xl;
+$input-radius-base: $input-radius-md;
+$input-border-color: $border-color-base;
+
+// =======
+// Buttons
+// =======
+$button-bg-primary: $primary-color;
+$button-font-color: $white;
+$button-font-weight: $font-weight-medium;
+$button-border-size: 0;
+$button-sm-height: $input-height-sm;
+$button-sm-font-size: $font-size-sm;
+$button-sm-radius: $input-radius-sm;
+$button-sm-padding-vertical: $spacing-xs;
+$button-sm-padding-horizontal: $spacing-md;
+$button-md-height: $input-height-md;
+$button-md-font-size: $font-size-md;
+$button-md-radius: $input-radius-md;
+$button-md-padding-vertical: $spacing-md;
+$button-md-padding-horizontal: $spacing-xl;
+$button-xl-height: $input-height-xl;
+$button-xl-font-size: $font-size-xl;
+$button-xl-radius: $input-radius-xl;
+$button-xl-padding-vertical: $spacing-xl;
+$button-xl-padding-horizontal: $spacing-2xl;
