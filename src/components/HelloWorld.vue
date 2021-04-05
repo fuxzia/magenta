@@ -64,9 +64,15 @@
         <Heading>Text bold</Heading>
         <Text bold>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae magnam perferendis qui neque atque perspiciatis sed, sit numquam illum officiis fuga, adipisci amet eius vero dicta culpa laboriosam doloribus facere?</Text>
       </div>
+
       <div>
-        <Heading>Text bold</Heading>
+        <Heading>Text maxLines="5"</Heading>
         <Text :maxLines="5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum veritatis possimus, debitis, repellat pariatur accusantium necessitatibus repudiandae placeat ratione nostrum quibusdam incidunt accusamus velit? Deserunt magni vero maiores qui fugiat. Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsa delectus possimus vitae, animi quod reiciendis soluta nesciunt et! Deserunt necessitatibus quibusdam explicabo beatae repudiandae dolorum omnis fuga! Praesentium, officiis. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo, cumque aliquam porro asperiores harum minus debitis illum numquam architecto eum blanditiis excepturi voluptas repellat vitae? Accusamus fugit hic velit culpa.</Text>
+      </div>
+
+      <div>
+        <Heading>Text code</Heading>
+        <Text :maxLines="5" code>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum veritatis possimus, debitis, repellat pariatur accusantium necessitatibus repudiandae placeat ratione nostrum quibusdam incidunt accusamus velit? Deserunt magni vero maiores qui fugiat. Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsa delectus possimus vitae, animi quod reiciendis soluta nesciunt et! Deserunt necessitatibus quibusdam explicabo beatae repudiandae dolorum omnis fuga! Praesentium, officiis. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo, cumque aliquam porro asperiores harum minus debitis illum numquam architecto eum blanditiis excepturi voluptas repellat vitae? Accusamus fugit hic velit culpa.</Text>
       </div>
     </section>
     

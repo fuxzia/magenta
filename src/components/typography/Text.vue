@@ -57,13 +57,17 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    code: {
+      type: Boolean,
+      default: false,
+    },
     maxLines: {
       type: Number,
       default: null,
     }
   },
   setup: (props) => {
-    const { size, bold, muted, danger, ellipsis, primary, success, maxLines, italic, nowrap } = props
+    const { size, code, bold, muted, danger, ellipsis, primary, success, maxLines, italic, nowrap } = props
     const computedClasses = computed(() => {
       return [
         'mag-text',
@@ -73,6 +77,7 @@ export default defineComponent({
           'mag-text-lg': size === Sizes.Large,
           'mag-text-2lg': size === Sizes.LargeX2,
           'mag-text-bold': bold,
+          'mag-text-code': code,
           'mag-text-muted': muted,
           'mag-text-italic': italic,
           'mag-text-nowrap': nowrap,
@@ -101,14 +106,26 @@ export default defineComponent({
 
   &.mag-text-sm {
     font-size: $font-size-sm;
+
+    &.mag-text-code {
+      font-size: $font-size-sm * .95;
+    }
   }
 
   &.mag-text-md {
     font-size: $font-size-md;
+
+    &.mag-text-code {
+      font-size: $font-size-md * .95;
+    }
   }
 
   &.mag-text-lg {
     font-size: $font-size-lg;
+
+    &.mag-text-code {
+      font-size: $font-size-lg * .95;
+    }
   }
 
   &.mag-text-2lg {
@@ -117,6 +134,11 @@ export default defineComponent({
 
   &.mag-text-bold {
     font-weight: $font-weight-bold;
+  }
+
+  &.mag-text-code {
+    color: $font-color-code;
+    font-family: $font-family-mono;
   }
 
   &.mag-text-muted {
