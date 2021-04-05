@@ -11,7 +11,9 @@
   "dependencies": {
     "@types/feather-icons": "^4.7.0",
     "feather-icons": "^4.28.0",
-    "vue": "^3.0.5"
+    "prismjs": "^1.23.0",
+    "vue": "^3.0.5",
+    "vue-prism-editor": "^2.0.0-alpha.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.2.1",

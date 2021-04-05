@@ -74,6 +74,17 @@
         <Heading>Text code</Heading>
         <Text :maxLines="5" code>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum veritatis possimus, debitis, repellat pariatur accusantium necessitatibus repudiandae placeat ratione nostrum quibusdam incidunt accusamus velit? Deserunt magni vero maiores qui fugiat. Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio ipsa delectus possimus vitae, animi quod reiciendis soluta nesciunt et! Deserunt necessitatibus quibusdam explicabo beatae repudiandae dolorum omnis fuga! Praesentium, officiis. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quo, cumque aliquam porro asperiores harum minus debitis illum numquam architecto eum blanditiis excepturi voluptas repellat vitae? Accusamus fugit hic velit culpa.</Text>
       </div>
+
+      <div>
+        <Heading>Code block</Heading>
+        <Code content="<template>
+  <Feather icon=`box` />
+</template>
+
+<script>
+import { Feather } from '@magenta/ui'
+</script>"/>
+      </div>
     </section>
     
     <section v-for="(button, key) in buttons" :key="key">
@@ -150,12 +161,14 @@ import { ref, defineComponent } from 'vue'
 import Button from './buttons/Button.vue'
 import Heading from './typography/Heading.vue'
 import Text from './typography/Text.vue'
+import Code from './typography/Code.vue'
 
 export default defineComponent({
   components: {
     Button,
     Heading,
     Text,
+    Code,
   },
   name: 'HelloWorld',
   props: {
