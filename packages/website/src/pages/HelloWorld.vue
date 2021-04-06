@@ -8,7 +8,7 @@
       
       <div>
         <Heading>Text default</Heading>
-        <Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio tempora animi quisquam illo sed suscipit voluptate similique? Tempore explicabo ut itaque inventore facilis cumque, quisquam maxime magnam tempora ab impedit?</Text>
+        <Text spacerAfter="6lg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio tempora animi quisquam illo sed suscipit voluptate similique? Tempore explicabo ut itaque inventore facilis cumque, quisquam maxime magnam tempora ab impedit?</Text>
       </div>
       
       <div>

@@ -1,21 +1,32 @@
 <template>
-  <p :class="computedClasses">
+  <component :is="tag" :class="computedClasses">
     <template v-if="$slots.default || content">
       <slot v-if="$slots.default"/>
       <template v-else-if="content">
         {{ content }}
       </template>
     </template>
-  </p>
+    <Spacer v-if="spacerAfter" :size="spacerAfter" />
+  </component>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
-import { Sizes } from '@magenta-ui/types/Text'
+import { Sizes, Tags } from '@magenta-ui/types/Text'
+import { Sizes as SpacerSizes } from '@magenta-ui/types/Spacer'
+import Spacer from '../spacers/Spacer.vue'
 
 export default defineComponent({
   name: 'MText',
+  components: {
+    Spacer
+  },
   props: {
+    tag: {
+      type: String as PropType<Tags>,
+      default: Tags.Default,
+      validator: (value: string) => (Object.values(Tags) as string[]).includes(value),
+    },
     size: {
       type: String as PropType<Sizes>,
       default: Sizes.Default,
@@ -64,6 +75,11 @@ export default defineComponent({
     maxLines: {
       type: Number,
       default: null,
+    },
+    spacerAfter: {
+      type: [Boolean, String],
+      default: SpacerSizes.Default,
+      validator: (value: string) => (Object.values(SpacerSizes) as string[]).includes(value) || typeof value === 'boolean',
     }
   },
   setup: (props) => {
