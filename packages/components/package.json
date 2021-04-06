@@ -1,14 +1,14 @@
 {
   "name": "@magenta-ui/components",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "index.ts",
   "license": "MIT",
   "scripts": {
     "build": "vue-tsc --noEmit && vite build"
   },
   "dependencies": {
-    "@magenta-ui/styles": "^0.2.0",
-    "@magenta-ui/types": "^0.2.0",
+    "@magenta-ui/styles": "^0.2.1",
+    "@magenta-ui/types": "^0.2.1",
     "@types/feather-icons": "4.7.0",
     "feather-icons": "4.28.0",
     "prismjs": "1.23.0",
