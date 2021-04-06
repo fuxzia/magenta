@@ -1,6 +1,6 @@
 {
   "name": "@magenta-ui/components",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "index.ts",
   "license": "MIT",
   "scripts": {

@@ -1,9 +1,7 @@
 {
   "name": "@magenta-ui/types",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
-  "dependencies": {
-  },
   "devDependencies": {
     "typescript": "4.1.3"
   },
