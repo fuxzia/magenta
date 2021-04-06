@@ -1,13 +1,15 @@
 <template>
-  <component :is="tag" :class="computedClasses">
-    <template v-if="$slots.default || content">
-      <slot v-if="$slots.default"/>
-      <template v-else-if="content">
-        {{ content }}
-      </template>
-    </template>
+  <div class="mag-text-wrapper">
+    <component :is="tag" :class="computedClasses">
+      <template v-if="$slots.default || content">
+        <slot v-if="$slots.default"/>
+        <template v-else-if="content">
+          {{ content }}
+        </template>
+      </template>  
+    </component>
     <Spacer v-if="spacerAfter" :size="spacerAfter" />
-  </component>
+  </div>
 </template>
 
 <script lang="ts">
@@ -91,7 +93,7 @@ export default defineComponent({
           'mag-text-sm': size === Sizes.Small,
           'mag-text-md': ([Sizes.Medium, Sizes.Default] as string[]).includes(size),
           'mag-text-lg': size === Sizes.Large,
-          'mag-text-2lg': size === Sizes.LargeX2,
+          'mag-text-xlg': size === Sizes.XLarge,
           'mag-text-bold': bold,
           'mag-text-code': code,
           'mag-text-muted': muted,
@@ -144,7 +146,7 @@ export default defineComponent({
     }
   }
 
-  &.mag-text-2lg {
+  &.mag-text-xlg {
     font-size: $font-size-lg + 2;
   }
 

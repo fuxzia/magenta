@@ -241,25 +241,19 @@ $success-color: $green-600;
 // ========
 // Spacings
 // ========
-$spacing-xs: 4px;
-$spacing-sm: 8px;
-$spacing-md: 16px;
-$spacing-lg: 24px;
-$spacing-2lg: 32px;
-$spacing-3lg: 40px;
-$spacing-4lg: 48px;
-$spacing-5lg: 56px;
-$spacing-6lg: 64px;
+$spacing-xs: 8px;
+$spacing-sm: 16px;
+$spacing-md: 24px;
+$spacing-lg: 32px;
+$spacing-xlg: 48px;
+$spacing-xxlg: 64px;
 $spacings: (
   'xs': $spacing-xs,
   'sm': $spacing-sm,
   'md': $spacing-md,
   'lg': $spacing-lg,
-  '2lg': $spacing-2lg,
-  '3lg': $spacing-3lg,
-  '4lg': $spacing-4lg,
-  '5lg': $spacing-5lg,
-  '6lg': $spacing-6lg,
+  'xlg': $spacing-xlg,
+  'xxlg': $spacing-xxlg,
 );
 
 // ============
@@ -305,8 +299,6 @@ $heading-md-font-size: $font-size-base + 8px;
 $heading-md-font-weight: $font-weight-bold;
 $heading-lg-font-size: $font-size-base + 18px;
 $heading-lg-font-weight: $font-weight-extra-bold;
-$heading-2lg-font-size: $font-size-base + 26px;
-$heading-2lg-font-weight: $font-weight-extra-bold;
 
 // ===========
 // Transitions
@@ -357,17 +349,17 @@ $button-sm-height: $input-height-sm;
 $button-sm-font-size: $font-size-sm;
 $button-sm-radius: $input-radius-sm;
 $button-sm-padding-vertical: 0;
-$button-sm-padding-horizontal: $spacing-md;
+$button-sm-padding-horizontal: $spacing-sm;
 $button-md-height: $input-height-md;
 $button-md-font-size: $font-size-md;
 $button-md-radius: $input-radius-md;
 $button-md-padding-vertical: 0;
-$button-md-padding-horizontal: $spacing-md;
+$button-md-padding-horizontal: $spacing-sm;
 $button-lg-height: $input-height-lg;
 $button-lg-font-size: $font-size-lg;
 $button-lg-radius: $input-radius-lg;
 $button-lg-padding-vertical: 0;
-$button-lg-padding-horizontal: $spacing-lg - $spacing-xs;
+$button-lg-padding-horizontal: $spacing-sm + 4px;
 
 // ========================
 // CodeEditor / Highlighter

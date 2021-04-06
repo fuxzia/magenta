@@ -10,11 +10,8 @@
         <Avatar size="sm" image="https://i.pravatar.cc/300" />
         <Avatar size="md" image="https://i.pravatar.cc/300" />
         <Avatar size="lg" image="https://i.pravatar.cc/300" />
-        <Avatar size="2lg" image="https://i.pravatar.cc/300" />
-        <Avatar size="3lg" image="https://i.pravatar.cc/300" />
-        <Avatar size="4lg" image="https://i.pravatar.cc/300" />
-        <Avatar size="5lg" image="https://i.pravatar.cc/300" />
-        <Avatar size="6lg" image="https://i.pravatar.cc/300" />
+        <Avatar size="xlg" image="https://i.pravatar.cc/300" />
+        <Avatar size="xxlg" image="https://i.pravatar.cc/300" />
       </div>
 
       <Spacer size="lg" />
@@ -22,11 +19,8 @@
         <Avatar size="sm" />
         <Avatar size="md" />
         <Avatar size="lg" />
-        <Avatar size="2lg" />
-        <Avatar size="3lg" />
-        <Avatar size="4lg" />
-        <Avatar size="5lg" />
-        <Avatar size="6lg" icon="archive" />
+        <Avatar size="xlg" />
+        <Avatar size="xxlg" />
       </div>
 
       <Spacer size="lg" />
@@ -34,11 +28,8 @@
         <Avatar size="sm" square />
         <Avatar size="md" square />
         <Avatar size="lg" square />
-        <Avatar size="2lg" square />
-        <Avatar size="3lg" square />
-        <Avatar size="4lg" square />
-        <Avatar size="5lg" square />
-        <Avatar size="6lg" square icon="archive" />
+        <Avatar size="xlg" square />
+        <Avatar size="xxlg" square />
       </div>
 
       <Spacer size="lg" />
@@ -46,11 +37,8 @@
         <Avatar size="sm"  square  image="https://i.pravatar.cc/300" />
         <Avatar size="md"  square image="https://i.pravatar.cc/300" />
         <Avatar size="lg"  square image="https://i.pravatar.cc/300" />
-        <Avatar size="2lg" square  image="https://i.pravatar.cc/300" />
-        <Avatar size="3lg" square  image="https://i.pravatar.cc/300" />
-        <Avatar size="4lg" square  image="https://i.pravatar.cc/300" />
-        <Avatar size="5lg" square  image="https://i.pravatar.cc/300" />
-        <Avatar size="6lg" square  image="https://i.pravatar.cc/300" />
+        <Avatar size="xlg" square  image="https://i.pravatar.cc/300" />
+        <Avatar size="xxlg" square  image="https://i.pravatar.cc/300" />
       </div>
 
       <Spacer size="lg" />
@@ -58,11 +46,8 @@
         <Avatar size="sm"  square>US</Avatar>
         <Avatar size="md"  square>US</Avatar>
         <Avatar size="lg"  square>US</Avatar>
-        <Avatar size="2lg" square>US</Avatar>
-        <Avatar size="3lg" square>US</Avatar>
-        <Avatar size="4lg" square>US</Avatar>
-        <Avatar size="5lg" square>US</Avatar>
-        <Avatar size="6lg" square>LM</Avatar>
+        <Avatar size="xlg" square>US</Avatar>
+        <Avatar size="xxlg" square>US</Avatar>
       </div>
 
       <Spacer size="lg" />
@@ -70,11 +55,8 @@
         <Avatar size="sm" >US</Avatar>
         <Avatar size="md" >US</Avatar>
         <Avatar size="lg" >US</Avatar>
-        <Avatar size="2lg">US</Avatar>
-        <Avatar size="3lg">US</Avatar>
-        <Avatar size="4lg">US</Avatar>
-        <Avatar size="5lg">US</Avatar>
-        <Avatar size="6lg">LM</Avatar>
+        <Avatar size="xlg">US</Avatar>
+        <Avatar size="xxlg">US</Avatar>
       </div>
 
       <Spacer size="lg" />
@@ -82,11 +64,8 @@
         <Avatar size="sm" badge="red">US</Avatar>
         <Avatar size="md" badge="green">US</Avatar>
         <Avatar size="lg" badge="gray">US</Avatar>
-        <Avatar size="2lg" badge="red">US</Avatar>
-        <Avatar size="3lg" badge="green">US</Avatar>
-        <Avatar size="4lg" badge="gray">US</Avatar>
-        <Avatar size="5lg" badge="red">US</Avatar>
-        <Avatar size="6lg" badge="green">LM</Avatar>
+        <Avatar size="xlg" badge="red">US</Avatar>
+        <Avatar size="xxlg" badge="green">US</Avatar>
       </div>
 
       <Spacer size="lg" />
@@ -94,11 +73,8 @@
         <Avatar size="sm" badge="red" :badgeNumber="99">US</Avatar>
         <Avatar size="md" badge="green" :badgeNumber="7">US</Avatar>
         <Avatar size="lg" badge="gray" :badgeNumber="77">US</Avatar>
-        <Avatar size="2lg" badge="red" :badgeNumber="84">US</Avatar>
-        <Avatar size="3lg" badge="green" :badgeNumber="25">US</Avatar>
-        <Avatar size="4lg" badge="gray" :badgeNumber="1">US</Avatar>
-        <Avatar size="5lg" badge="red" :badgeNumber="99">US</Avatar>
-        <Avatar size="6lg" badge="green" :badgeNumber="19">LM</Avatar>
+        <Avatar size="xlg" badge="red" :badgeNumber="84">US</Avatar>
+        <Avatar size="xxlg" badge="green" :badgeNumber="25">US</Avatar>
       </div>
       
       <Spacer size="lg" />
@@ -106,11 +82,8 @@
         <Avatar size="sm"  square badge="red" >US</Avatar>
         <Avatar size="md"  square badge="green">US</Avatar>
         <Avatar size="lg"  square badge="gray">US</Avatar>
-        <Avatar size="2lg" square  badge="red">US</Avatar>
-        <Avatar size="3lg" square  badge="green">US</Avatar>
-        <Avatar size="4lg" square  badge="gray" >US</Avatar>
-        <Avatar size="5lg" square  badge="red">US</Avatar>
-        <Avatar size="6lg" square  badge="green">LM</Avatar>
+        <Avatar size="xlg" square  badge="red">US</Avatar>
+        <Avatar size="xxlg" square  badge="green">US</Avatar>
       </div>
 
       <Spacer size="lg" />
@@ -118,11 +91,8 @@
         <Avatar size="sm"  square badge="red" >US</Avatar>
         <Avatar size="md"  square badge="green">US</Avatar>
         <Avatar size="lg"  square badge="gray">US</Avatar>
-        <Avatar size="2lg" square  badge="red">US</Avatar>
-        <Avatar size="3lg" square  badge="green">US</Avatar>
-        <Avatar size="4lg" square  badge="gray" >US</Avatar>
-        <Avatar size="5lg" square  badge="red">US</Avatar>
-        <Avatar size="6lg" square  badge="green">LM</Avatar>
+        <Avatar size="xlg" square  badge="red">US</Avatar>
+        <Avatar size="xxlg" square  badge="green">US</Avatar>
       </div>
 
       <Spacer size="lg" />
@@ -130,11 +100,8 @@
         <Avatar size="sm"  square badge="red" :badgeNumber="99" image="https://i.pravatar.cc/300"/>
         <Avatar size="md"  square badge="green" :badgeNumber="7" image="https://i.pravatar.cc/300"/>
         <Avatar size="lg"  square badge="gray" :badgeNumber="77" image="https://i.pravatar.cc/300"/>
-        <Avatar size="2lg" square  badge="red" :badgeNumber="84" image="https://i.pravatar.cc/300"/>
-        <Avatar size="3lg" square  badge="green" :badgeNumber="25" image="https://i.pravatar.cc/300"/>
-        <Avatar size="4lg" square  badge="gray" :badgeNumber="1" image="https://i.pravatar.cc/300"/>
-        <Avatar size="5lg" square  badge="red" :badgeNumber="99" image="https://i.pravatar.cc/300"/>
-        <Avatar size="6lg" square  badge="green" :badgeNumber="19" image="https://i.pravatar.cc/300"/>
+        <Avatar size="xlg" square  badge="red" :badgeNumber="84" image="https://i.pravatar.cc/300"/>
+        <Avatar size="xxlg" square  badge="green" :badgeNumber="25" image="https://i.pravatar.cc/300"/>
       </div>
 
       <Spacer size="lg" />
@@ -142,11 +109,8 @@
         <Avatar size="sm"  badge="red" :badgeNumber="99" image="https://i.pravatar.cc/300"/>
         <Avatar size="md"  badge="green" :badgeNumber="7" image="https://i.pravatar.cc/300"/>
         <Avatar size="lg"  badge="gray" :badgeNumber="77" image="https://i.pravatar.cc/300"/>
-        <Avatar size="2lg"  badge="red" :badgeNumber="84" image="https://i.pravatar.cc/300"/>
-        <Avatar size="3lg"  badge="green" :badgeNumber="25" image="https://i.pravatar.cc/300"/>
-        <Avatar size="4lg"  badge="gray" :badgeNumber="1" image="https://i.pravatar.cc/300"/>
-        <Avatar size="5lg"  badge="red" :badgeNumber="99" image="https://i.pravatar.cc/300"/>
-        <Avatar size="6lg"  badge="green" :badgeNumber="19" image="https://i.pravatar.cc/300"/>
+        <Avatar size="xlg"  badge="red" :badgeNumber="84" image="https://i.pravatar.cc/300"/>
+        <Avatar size="xxlg"  badge="green" :badgeNumber="25" image="https://i.pravatar.cc/300"/>
       </div>
 
       <Spacer size="lg" />
@@ -154,11 +118,8 @@
         <Avatar size="sm"  badge="red" image="https://i.pravatar.cc/300"/>
         <Avatar size="md"  badge="green" image="https://i.pravatar.cc/300"/>
         <Avatar size="lg"  badge="gray" image="https://loremflickr.com/640/360"/>
-        <Avatar size="2lg"  badge="red" image="https://i.pravatar.cc/300"/>
-        <Avatar size="3lg"  badge="green" image="https://i.pravatar.cc/300"/>
-        <Avatar size="4lg"  badge="gray" image="https://i.pravatar.cc/300"/>
-        <Avatar size="5lg"  badge="red" image="https://i.pravatar.cc/300"/>
-        <Avatar size="6lg"  badge="green" image="https://i.pravatar.cc/300"/>
+        <Avatar size="xlg"  badge="red" image="https://i.pravatar.cc/300"/>
+        <Avatar size="xxlg"  badge="green" image="https://i.pravatar.cc/300"/>
       </div>
 
     </section>
@@ -170,7 +131,12 @@
       
       <div>
         <Heading>Text default</Heading>
-        <Text spacerAfter="6lg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio tempora animi quisquam illo sed suscipit voluptate similique? Tempore explicabo ut itaque inventore facilis cumque, quisquam maxime magnam tempora ab impedit?</Text>
+        <Text>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio tempora animi quisquam illo sed suscipit voluptate similique? Tempore explicabo ut itaque inventore facilis cumque, quisquam maxime magnam tempora ab impedit?</Text>
+      </div>
+
+      <div>
+        <Heading>Text with no spacer after</Heading>
+        <Text :spacerAfter="false">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio tempora animi quisquam illo sed suscipit voluptate similique? Tempore explicabo ut itaque inventore facilis cumque, quisquam maxime magnam tempora ab impedit?</Text>
       </div>
       
       <div>
@@ -179,8 +145,8 @@
       </div>
 
       <div>
-        <Heading>Text 2lg</Heading>
-        <Text size="2lg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda eveniet consequuntur vitae dolorem est rerum at necessitatibus aspernatur? Vitae quisquam quidem incidunt dolor veritatis ab omnis, dicta repudiandae porro quae.</Text>
+        <Heading>Text xlg</Heading>
+        <Text size="xlg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda eveniet consequuntur vitae dolorem est rerum at necessitatibus aspernatur? Vitae quisquam quidem incidunt dolor veritatis ab omnis, dicta repudiandae porro quae.</Text>
       </div>
 
       <div>
@@ -252,8 +218,6 @@ import { Feather } from '@magenta/ui'
     
     <section v-for="(button, key) in buttons" :key="key">
       
-      <Heading size="2lg">{{ button.title }}</Heading>
-      <Heading size="2lg" subtitle>{{ button.title }} subtitle</Heading>
       <Heading size="lg">{{ button.title }}</Heading>
       <Heading size="lg" subtitle>{{ button.title }} subtitle</Heading>
       <Heading size="md">{{ button.title }}</Heading>

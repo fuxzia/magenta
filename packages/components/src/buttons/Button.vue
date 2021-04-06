@@ -177,7 +177,7 @@ export default defineComponent({
     }
 
     &.mag-button-rounded {
-      padding: $button-sm-padding-vertical $button-sm-padding-horizontal * 1.5;
+      padding: $button-sm-padding-vertical $button-sm-padding-horizontal * 1.2;
     }
   }
 
@@ -242,7 +242,7 @@ export default defineComponent({
     color: $button-font-color;
     
     + span {
-      margin-left: $spacing-sm;
+      margin-left: $spacing-xs;
     }
   }
 
@@ -252,7 +252,7 @@ export default defineComponent({
     align-items: center;
 
     + span {
-      margin-left: $spacing-sm;
+      margin-left: $spacing-xs;
     }
   }
 

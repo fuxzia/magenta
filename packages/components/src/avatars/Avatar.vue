@@ -68,11 +68,8 @@ export default defineComponent({
           'mag-avatar-md': ([Sizes.Medium, Sizes.Default] as string[]).includes(size),
           'mag-avatar-sm': size === Sizes.Small,
           'mag-avatar-lg': size === Sizes.Large,
-          'mag-avatar-2lg': size === Sizes.LargeX2,
-          'mag-avatar-3lg': size === Sizes.LargeX3,
-          'mag-avatar-4lg': size === Sizes.LargeX4,
-          'mag-avatar-5lg': size === Sizes.LargeX5,
-          'mag-avatar-6lg': size === Sizes.LargeX6,
+          'mag-avatar-xlg': size === Sizes.XLarge,
+          'mag-avatar-xxlg': size === Sizes.XXLarge,
         }
       ]
     })
@@ -89,6 +86,7 @@ export default defineComponent({
 .mag-avatar {
   position: relative;
   display: inline-flex;
+  flex: 0 0 auto;
   align-items: center;
   justify-content: center;
   line-height: 1;

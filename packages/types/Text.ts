@@ -10,5 +10,5 @@ export enum Sizes {
   Small = 'sm',
   Medium = 'md',
   Large = 'lg',
-  LargeX2 = '2lg',
+  XLarge = 'xlg',
 }

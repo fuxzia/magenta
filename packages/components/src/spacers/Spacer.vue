@@ -24,11 +24,8 @@ export default defineComponent({
           'mag-spacer-sm': size === Sizes.Small,
           'mag-spacer-md': ([Sizes.Medium, Sizes.Default] as string[]).includes(size),
           'mag-spacer-lg': size === Sizes.Large,
-          'mag-spacer-2lg': size === Sizes.LargeX2,
-          'mag-spacer-3lg': size === Sizes.LargeX3,
-          'mag-spacer-4lg': size === Sizes.LargeX4,
-          'mag-spacer-5lg': size === Sizes.LargeX5,
-          'mag-spacer-6lg': size === Sizes.LargeX6,
+          'mag-spacer-xlg': size === Sizes.XLarge,
+          'mag-spacer-xxlg': size === Sizes.XXLarge,
         }
       ]
     })
