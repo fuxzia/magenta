@@ -7,6 +7,8 @@
     "build": "vue-tsc --noEmit && vite build"
   },
   "dependencies": {
+    "@magenta-ui/styles": "^0.1.1",
+    "@magenta-ui/types": "^0.1.1",
     "@types/feather-icons": "4.7.0",
     "feather-icons": "4.28.0",
     "prismjs": "1.23.0",

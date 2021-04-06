@@ -1,4 +1,5 @@
-// export { default as scss } from './src/assets/scss/styles.scss'; 
+// Buttons
+export { default as Avatar } from './src/avatars/Avatar.vue'
 
 // Buttons
 export { default as Button } from './src/buttons/Button.vue'
