@@ -1,0 +1,9 @@
+{
+  "name": "@magenta-ui/styles",
+  "version": "0.1.0",
+  "main": "./scss/styles.scss",
+  "license": "MIT",
+  "devDependencies": {
+    "sass": "1.32.8"
+  }
+}
