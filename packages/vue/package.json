@@ -1,0 +1,26 @@
+{
+  "name": "@magenta-ui/components",
+  "version": "0.2.1",
+  "main": "index.ts",
+  "license": "MIT",
+  "scripts": {
+    "build": "vue-tsc --noEmit && vite build"
+  },
+  "dependencies": {
+    "@magenta-ui/styles": "^0.2.1",
+    "@magenta-ui/types": "^0.2.1",
+    "@types/feather-icons": "4.7.0",
+    "feather-icons": "4.28.0",
+    "prismjs": "1.23.0",
+    "vue": "3.0.5",
+    "vue-prism-editor": "2.0.0-alpha.2"
+  },
+  "devDependencies": {
+    "sass": "1.32.8",
+    "typescript": "4.1.3",
+    "vue-tsc": "0.0.15"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
