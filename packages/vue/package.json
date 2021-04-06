@@ -1,5 +1,5 @@
 {
-  "name": "@magenta-ui/components",
+  "name": "@magenta-ui/vue",
   "version": "0.3.0",
   "main": "index.ts",
   "license": "MIT",
