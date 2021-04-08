@@ -1,5 +1,6 @@
 // Buttons
 export { default as Avatar } from './src/avatars/Avatar.vue'
+export { default as AvatarStack } from './src/avatars/AvatarStack.vue'
 
 // Buttons
 export { default as Button } from './src/buttons/Button.vue'
