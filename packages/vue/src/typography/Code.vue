@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import * as prism from 'prismjs'
+import prism from 'prismjs'
 import { defineComponent, computed } from 'vue'
 import { PrismEditor } from 'vue-prism-editor'
 import 'vue-prism-editor/dist/prismeditor.min.css'

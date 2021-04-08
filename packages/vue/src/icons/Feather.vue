@@ -5,14 +5,14 @@
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
 
-import * as feather from 'feather-icons'
+import feather from 'feather-icons'
 
 export default defineComponent({
   name: 'MFeather',
   props: {
     icon: {
       type: String,
-      default: 'archive',
+      default: 'box',
     },
   },
   setup: (props) => {
