@@ -324,6 +324,12 @@ $radius-base: $radius-md;
 // =======
 $border-color-base: $cool-gray-300;
 
+// =======
+// Shadows
+// =======
+$shadow-md: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+$shadow-base: $shadow-md;
+
 // ======
 // Inputs
 // ======
@@ -382,3 +388,23 @@ $avatar-badge-bg-gray: $cool-gray-200;
 $avatar-badge-bg-green: $green-400;
 $avatar-badge-bg-red: $red-400;
 $avatar-badge-font-weight: $font-weight-medium;
+
+// =========
+// Dropdowns
+// =========
+$dropdown-bg: $white;
+$dropdown-z-index: 1000;
+$dropdown-transition: $transition-base;
+$dropdown-min-width: 200px;
+$dropdown-border: 1px solid $border-color-base;
+$dropdown-radius: $radius-md;
+$dropdown-shadow: $shadow-base;
+$dropdown-item-bg: $white;
+$dropdown-item-hover-bg: $gray-100;
+$dropdown-item-transition: $transition-base;
+$dropdown-item-height: $input-height-base;
+$dropdown-item-padding-vertical: 0;
+$dropdown-item-padding-horizontal: $spacing-sm;
+$dropdown-item-font-color: $font-color-base;
+$dropdown-item-icon-color: $font-color-contrast;
+$dropdown-item-separator-color: $cool-gray-200;

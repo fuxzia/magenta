@@ -10,7 +10,7 @@
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
 import { Sizes, BadgeTypes } from '@magenta-ui/types/Avatar'
-import Icon from '../icons/Feather.vue'
+import Icon from '../icon/Feather.vue'
 
 export default defineComponent({
   name: 'MAvatar',
