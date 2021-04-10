@@ -16,7 +16,7 @@
 import { computed, defineComponent, PropType } from 'vue'
 import { Sizes, Tags } from '@magenta-ui/types/Text'
 import { Sizes as SpacerSizes } from '@magenta-ui/types/Spacer'
-import Spacer from '../spacers/Spacer.vue'
+import Spacer from '../spacer/Spacer.vue'
 
 export default defineComponent({
   name: 'MText',
