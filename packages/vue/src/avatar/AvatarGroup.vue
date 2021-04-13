@@ -1,5 +1,5 @@
 <template>
-  <div class="mag-avatar-stack">
+  <div class="mag-avatar-group">
     <slot />
   </div>
 </template>
@@ -8,7 +8,7 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'MAvatarStack',
+  name: 'MAvatarGroup',
 })
 </script>
 
@@ -16,7 +16,7 @@ export default defineComponent({
 
 @import '@magenta-ui/styles/scss/variables.scss';
 
-.mag-avatar-stack {
+.mag-avatar-group {
   position: relative;
   display: flex;
   flex: 0 0 auto;
