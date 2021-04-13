@@ -156,7 +156,7 @@ export default defineComponent({
   &.mag-button-outline {
     background: $white !important;
     color: $button-font-color-outline;
-    border: 1px solid $border-color-base;
+    border: 1px solid $button-outline-border-color;
 
     & .mag-spinner {
       color: $primary-color;

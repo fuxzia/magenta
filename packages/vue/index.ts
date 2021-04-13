@@ -6,6 +6,7 @@ const AvatarStack = defineAsyncComponent(() => import('./src/avatar/AvatarStack.
 
 // Button
 const Button = defineAsyncComponent(() => import('./src/button/Button.vue'))
+const ButtonGroup = defineAsyncComponent(() => import('./src/button/ButtonGroup.vue'))
 
 // Dropdown
 const Dropdown = defineAsyncComponent(() => import('./src/dropdown/Dropdown.vue'))
@@ -30,6 +31,7 @@ export {
   Avatar,
   AvatarStack,
   Button,
+  ButtonGroup,
   Dropdown,
   DropdownItem,
   Icon,
