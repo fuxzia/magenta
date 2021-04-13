@@ -6,8 +6,7 @@
       fill="none"
       viewBox="0 0 24 24"
       height="1em"
-      width="1em"
-    >
+      width="1em">
       <circle
         cx="12"
         cy="12"
