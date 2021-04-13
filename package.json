@@ -13,9 +13,11 @@
     ]
   },
   "scripts": {
-    "lerna": "lerna"
+    "lerna": "lerna",
+    "prepare": "husky install"
   },
   "devDependencies": {
+    "husky": "^6.0.0",
     "lerna": "^4.0.0"
   }
 }
