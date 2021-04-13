@@ -21,14 +21,14 @@
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.22.0",
-    "@typescript-eslint/parser": "4.22.0",
-    "eslint": "7.24.0",
-    "eslint-plugin-vue": "7.9.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "eslint": "^7.24.0",
+    "eslint-plugin-vue": "^7.9.0",
     "husky": "^6.0.0",
     "pre-commit": "^1.2.2",
-    "sass": "1.32.8",
-    "typescript": "4.2.4",
-    "vue-tsc": "0.0.15"
+    "sass": "^1.32.8",
+    "typescript": "^4.2.4",
+    "vue-tsc": "^0.0.15"
   },
   "publishConfig": {
     "access": "public"
