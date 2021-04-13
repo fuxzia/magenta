@@ -1,9 +1,12 @@
 <template>
   <button :class="computedClasses">
     <Spinner v-if="loading" />
-    <Icon v-if="icon && !loading" :icon="icon" />
+    <Icon
+      v-if="icon && !loading"
+      :icon="icon"
+    />
     <span v-if="$slots.default || label">
-      <slot v-if="$slots.default"/>
+      <slot v-if="$slots.default" />
       <template v-else-if="label">
         {{ label }}
       </template>
@@ -63,8 +66,9 @@ export default defineComponent({
     },
   },
   setup: (props) => {
-    const { label, rounded, circle, outline, loading, size, secondary, danger } = props
     const computedClasses = computed(() => {
+      const { rounded, circle, outline, loading, size, secondary, danger } = props
+      
       return [
         'mag-button', 
         {
@@ -79,12 +83,12 @@ export default defineComponent({
           'mag-button-lg': size === Sizes.Large,
           'mag-button-loading': loading,
           'mag-button-outline': outline,
-        }
+        },
       ]
     })
 
-    return { computedClasses, label }
-  }
+    return { computedClasses }
+  },
 })
 </script>
 

@@ -1,7 +1,7 @@
 <template>
   <div :class="computedClasses">
     <span v-if="$slots.default || label">
-      <slot v-if="$slots.default"/>
+      <slot v-if="$slots.default" />
       <template v-else-if="label">
         {{ label }}
       </template>
@@ -31,8 +31,9 @@ export default defineComponent({
     },
   },
   setup: (props) => {
-    const { size, subtitle } = props
     const computedClasses = computed(() => {
+      const { size, subtitle } = props
+      
       return [
         'mag-heading',
         {
@@ -40,12 +41,12 @@ export default defineComponent({
           'mag-heading-md': size === Sizes.Medium,
           'mag-heading-lg': size === Sizes.Large,
           'mag-heading-subtitle': subtitle,
-        }
+        },
       ]
     })
 
     return { computedClasses }
-  }
+  },
 })
 </script>
 

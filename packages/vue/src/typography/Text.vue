@@ -1,14 +1,20 @@
 <template>
   <div class="mag-text-wrapper">
-    <component :is="tag" :class="computedClasses">
+    <component
+      :is="tag"
+      :class="computedClasses"
+    >
       <template v-if="$slots.default || content">
-        <slot v-if="$slots.default"/>
+        <slot v-if="$slots.default" />
         <template v-else-if="content">
           {{ content }}
         </template>
       </template>  
     </component>
-    <Spacer v-if="spacerAfter" :size="spacerAfter" />
+    <Spacer
+      v-if="spacerAfter"
+      :size="spacerAfter"
+    />
   </div>
 </template>
 
@@ -21,7 +27,7 @@ import Spacer from '../spacer/Spacer.vue'
 export default defineComponent({
   name: 'MText',
   components: {
-    Spacer
+    Spacer,
   },
   props: {
     tag: {
@@ -82,11 +88,12 @@ export default defineComponent({
       type: [Boolean, String],
       default: SpacerSizes.Default,
       validator: (value: string) => (Object.values(SpacerSizes) as string[]).includes(value) || typeof value === 'boolean',
-    }
+    },
   },
   setup: (props) => {
-    const { size, code, bold, muted, danger, ellipsis, primary, success, maxLines, italic, nowrap } = props
     const computedClasses = computed(() => {
+      const { size, code, bold, muted, danger, ellipsis, primary, success, maxLines, italic, nowrap } = props
+
       return [
         'mag-text',
         {
@@ -104,12 +111,12 @@ export default defineComponent({
           'mag-text-primary': primary,
           'mag-text-ellipsis': ellipsis,
           [`mag-text-max-lines-${maxLines}`]: maxLines,
-        }
+        },
       ]
     })
 
     return { computedClasses }
-  }
+  },
 })
 </script>
 

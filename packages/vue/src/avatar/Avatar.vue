@@ -1,8 +1,14 @@
 <template>
   <div :class="computedClasses">
-    <Icon v-if="icon && !$slots.default" :icon="icon" :size="size" />
+    <Icon
+      v-if="icon && !$slots.default"
+      :icon="icon"
+      :size="size"
+    />
     <img :src="image">
-    <span :class="computedBadgeClasses" v-html="badgeNumber"/>
+    <span :class="computedBadgeClasses">
+      {{ badgeNumber }}
+    </span>
     <slot />
   </div>
 </template>
@@ -46,17 +52,19 @@ export default defineComponent({
     },
   },
   setup: (props) => {
-    const { size, image, square, icon, badge, badgeNumber } = props
-
     const computedBadgeClasses = computed(() => {
+      const { badge } = props
+
       return [
         'mag-avatar-badge', {
-          [`mag-avatar-badge-${badge}`]: badge 
-        }
+          [`mag-avatar-badge-${badge}`]: badge,
+        },
       ]
     })
 
     const computedClasses = computed(() => {
+      const { size, image, square, icon, badge, badgeNumber } = props
+
       return [
         'mag-avatar', 
         {
@@ -70,12 +78,12 @@ export default defineComponent({
           'mag-avatar-lg': size === Sizes.Large,
           'mag-avatar-xlg': size === Sizes.XLarge,
           'mag-avatar-xxlg': size === Sizes.XXLarge,
-        }
+        },
       ]
     })
 
     return { computedClasses, computedBadgeClasses }
-  }
+  },
 })
 </script>
 

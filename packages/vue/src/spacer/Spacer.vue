@@ -1,5 +1,5 @@
 <template>
-  <div :class="computedClasses"/>
+  <div :class="computedClasses" />
 </template>
 
 <script lang="ts">
@@ -16,8 +16,9 @@ export default defineComponent({
     },
   },
   setup: (props) => {
-    const { size } = props
     const computedClasses = computed(() => {
+      const { size } = props
+
       return [
         'mag-spacer', 
         {
@@ -26,12 +27,12 @@ export default defineComponent({
           'mag-spacer-lg': size === Sizes.Large,
           'mag-spacer-xlg': size === Sizes.XLarge,
           'mag-spacer-xxlg': size === Sizes.XXLarge,
-        }
+        },
       ]
     })
 
     return { computedClasses }
-  }
+  },
 })
 </script>
 

@@ -5,10 +5,16 @@
     @mouseover="handlerHoverOpenTrigger"
     @mouseleave="handlerHoverCloseTrigger"
   >
-    <span class="mag-dropdown-trigger" @click="handlerClickTrigger">
+    <span
+      class="mag-dropdown-trigger"
+      @click="handlerClickTrigger"
+    >
       <slot />
     </span>
-    <div class="mag-dropdown-menu" @click="close">
+    <div
+      class="mag-dropdown-menu"
+      @click="close"
+    >
       <slot name="menu" />
     </div>
   </div>
@@ -34,20 +40,22 @@ export default defineComponent({
       type: String as PropType<Positions>,
       default: Positions.Default,
       validator: (value: string) => (Object.values(Positions) as string[]).includes(value),
-    }
+    },
   },
+  emits: ['visibility-change'],
   setup: (props, { emit }) => {
-    const { open, position, trigger } = props
-    const visible = ref(open)
+    const visible = ref(false)
     const dropdownMenuContainer = ref(null)
 
     const computedClasses = computed(() => {
+      const { position } = props
+      
       return [
         'mag-dropdown', 
         `mag-dropdown-${position}`,
         {
-          'mag-dropdown-open': visible.value
-        }
+          'mag-dropdown-open': visible.value,
+        },
       ]
     })
 
@@ -64,24 +72,24 @@ export default defineComponent({
     }
 
     const handlerHoverOpenTrigger = () => {
-      if (trigger === Triggers.Hover) {
+      if (props.trigger === Triggers.Hover) {
         visible.value = true
       }
     }
 
     const handlerHoverCloseTrigger = () => {
-      if (trigger === Triggers.Hover) {
+      if (props.trigger === Triggers.Hover) {
         close()
       }
     }
 
     const handlerClickTrigger = () => {
-      if (trigger === Triggers.Click) {
+      if (props.trigger === Triggers.Click) {
         visible.value = !visible.value
       }
     }
 
-    if (trigger === Triggers.Click) {
+    if (props.trigger === Triggers.Click) {
       const documentClick = (e: Event) => {
         let el = dropdownMenuContainer.value
         let target = e.target

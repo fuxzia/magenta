@@ -1,8 +1,11 @@
 <template>
   <div :class="computedClasses">
-    <Icon v-if="icon" :icon="icon" />
+    <Icon
+      v-if="icon"
+      :icon="icon"
+    />
     <span v-if="$slots.default || label">
-      <slot v-if="$slots.default"/>
+      <slot v-if="$slots.default" />
       <template v-else-if="label">
         {{ label }}
       </template>
@@ -38,19 +41,20 @@ export default defineComponent({
     },
   },
   setup: (props) => {
-    const { label, header, separator } = props
     const computedClasses = computed(() => {
+      const { header, separator } = props
+
       return [
         'mag-dropdown-item', 
         {
           'mag-dropdown-item-header': header,
           'mag-dropdown-item-separator': separator,
-        }
+        },
       ]
     })
 
-    return { computedClasses, label }
-  }
+    return { computedClasses }
+  },
 })
 </script>
 

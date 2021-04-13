@@ -1,10 +1,11 @@
 <template>
   <PrismEditor
-    class="mag-code"
     v-model="editorCode"
+    class="mag-code"
     :highlight="highlighter"
     :line-numbers="lineNumbers"
-    readonly />
+    readonly
+  />
 </template>
 
 <script>
@@ -33,10 +34,9 @@ export default defineComponent({
     },
   },
   setup(props) {
-    const { language, content } = props
-    const editorCode = computed(() => content)
+    const editorCode = computed(() => props.content)
     const highlighter = (code) => {
-      return prism.highlight(code, prism.languages[language]);
+      return prism.highlight(code, prism.languages[props.language])
     }
 
     return { editorCode, highlighter }

@@ -1,5 +1,10 @@
 <template>
-  <i class="mag-icon" v-if="svg" v-html="svg" />
+  <i
+    v-if="svg"
+    class="mag-icon"
+  >
+    {{ svg }}
+  </i>
 </template>
 
 <script lang="ts">
@@ -16,9 +21,8 @@ export default defineComponent({
     },
   },
   setup: (props) => {
-    const { icon } = props
-    
     const svg = computed(() => {
+      const { icon } = props
       if (!feather.icons[icon]) {
         return null
       }
