@@ -2,9 +2,8 @@
   <i
     v-if="svg"
     class="mag-icon"
-  >
-    {{ svg }}
-  </i>
+    v-html="svg"
+  />
 </template>
 
 <script lang="ts">

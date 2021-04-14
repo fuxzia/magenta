@@ -19,7 +19,7 @@ module.exports = {
   rules: {
     'semi': ['error', 'never'],
     'comma-dangle': ['error', 'always-multiline'],
-    'vue/no-v-html': 'error',
+    'vue/no-v-html': 'off',
     'vue/attributes-order': 'error',
     'vue/order-in-components': 'error',
     'vue/require-explicit-emits': 'error',
