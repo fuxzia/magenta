@@ -15,6 +15,10 @@ const DropdownItem = defineAsyncComponent(() => import('./src/dropdown/DropdownI
 // Icon
 const Icon = defineAsyncComponent(() => import('./src/icon/Feather.vue'))
 
+// Input
+const Input = defineAsyncComponent(() => import('./src/input/Input.vue'))
+const InputPassword = defineAsyncComponent(() => import('./src/input/InputPassword.vue'))
+
 // Loader
 const Spinner = defineAsyncComponent(() => import('./src/loader/Spinner.vue'))
 
@@ -35,6 +39,8 @@ export {
   Dropdown,
   DropdownItem,
   Icon,
+  Input,
+  InputPassword,
   Spinner,
   Spacer,
   Code,

@@ -111,16 +111,16 @@ export default defineComponent({
   font-weight: $button-font-weight;
   font-family: $font-family-base;
   font-size: $font-size-base;
-  transition: $transition-base;
+  transition: $button-transition;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   
   &:focus {
-    box-shadow: 0 0 0 calc(4px) lighten($button-bg-primary, 40%);
+    box-shadow: $button-focus-shadow;
   }
 
   &:active {
-    box-shadow: 0 0 0 calc(4px) lighten($button-bg-primary, 40%);
+    box-shadow: $button-active-shadow;
   }
 
   &:hover {

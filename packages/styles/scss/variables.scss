@@ -237,6 +237,7 @@ $gray-900: #18181B;
 $primary-color: $pink-600;
 $danger-color: $red-600;
 $success-color: $green-600;
+$warning-color: $yellow-500;
 
 // ========
 // Spacings
@@ -255,6 +256,12 @@ $spacings: (
   'xlg': $spacing-xlg,
   'xxlg': $spacing-xxlg,
 );
+
+// ===========
+// Grid system
+// ===========
+$grid-size-columns: 24;
+$grid-gutter: $spacing-md;
 
 // ============
 // Fonts, texts
@@ -329,19 +336,42 @@ $border-color-base: $cool-gray-300;
 // =======
 $shadow-md: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 $shadow-base: $shadow-md;
+$shadow-focus: 0 0 0 calc(4px) lighten($primary-color, 40%);
 
 // ======
 // Inputs
 // ======
-$input-height-sm: 38px;
-$input-height-md: 42px;
-$input-height-lg: 48px;
-$input-height-base: $input-height-md;
-$input-radius-sm: $radius-md;
-$input-radius-md: $radius-md;
-$input-radius-lg: $radius-lg;
-$input-radius-base: $input-radius-md;
+$input-sm-height: 38px;
+$input-sm-radius: $radius-md;
+$input-sm-font-size: $font-size-sm;
+$input-sm-padding-vertical: 0;
+$input-sm-padding-horizontal: $spacing-sm;
+$input-md-height: 42px;
+$input-md-radius: $radius-md;
+$input-md-padding-vertical: 0;
+$input-md-padding-horizontal: $spacing-sm;
+$input-lg-height: 48px;
+$input-lg-radius: $radius-md;
+$input-lg-font-size: $font-size-lg;
+$input-lg-padding-vertical: 0;
+$input-lg-padding-horizontal: $spacing-sm + 4px;
 $input-border-color: $border-color-base;
+$input-base-height: $input-md-height;
+$input-base-radius: $input-md-radius;
+$input-transition: $transition-base;
+$input-font-color: $font-color-contrast;
+$input-icon-color: $font-color-base;
+$input-focus-shadow: 0 0 0 1px $primary-color;
+$input-active-shadow: 0 0 0 1px $primary-color;
+$input-error-shadow: 0 0 0 1px $danger-color;
+$input-success-shadow: 0 0 0 1px $success-color;
+$input-warning-shadow: 0 0 0 1px $warning-color;
+$input-label-font-size: $font-size-sm;
+$input-label-font-weight: $font-weight-medium;
+$input-label-font-color: $font-color-base;
+$input-placeholder-color: $font-color-muted;
+$input-disabled-bg: $gray-100;
+$input-disabled-font-color: $cool-gray-400;
 
 // =======
 // Buttons
@@ -352,21 +382,24 @@ $button-font-color: $white;
 $button-font-color-outline: $font-color-contrast;
 $button-font-weight: $font-weight-medium;
 $button-border-size: 0;
-$button-sm-height: $input-height-sm;
-$button-sm-font-size: $font-size-sm;
-$button-sm-radius: $input-radius-sm;
-$button-sm-padding-vertical: 0;
-$button-sm-padding-horizontal: $spacing-sm;
-$button-md-height: $input-height-md;
+$button-transition: $transition-base;
+$button-focus-shadow: $shadow-focus;
+$button-active-shadow: $shadow-focus;
+$button-sm-height: $input-sm-height;
+$button-sm-font-size: $input-sm-font-size;
+$button-sm-radius: $input-sm-radius;
+$button-sm-padding-vertical: $input-sm-padding-vertical;
+$button-sm-padding-horizontal: $input-sm-padding-horizontal;
+$button-md-height: $input-md-height;
 $button-md-font-size: $font-size-md;
-$button-md-radius: $input-radius-md;
-$button-md-padding-vertical: 0;
-$button-md-padding-horizontal: $spacing-sm;
-$button-lg-height: $input-height-lg;
-$button-lg-font-size: $font-size-lg;
-$button-lg-radius: $input-radius-lg;
-$button-lg-padding-vertical: 0;
-$button-lg-padding-horizontal: $spacing-sm + 4px;
+$button-md-radius: $input-md-radius;
+$button-md-padding-vertical: $input-md-padding-vertical;
+$button-md-padding-horizontal: $input-md-padding-horizontal;
+$button-lg-height: $input-lg-height;
+$button-lg-font-size: $input-lg-font-size;
+$button-lg-radius: $input-lg-radius;
+$button-lg-padding-vertical: $input-lg-padding-vertical;
+$button-lg-padding-horizontal: $input-lg-padding-horizontal;
 
 // ========================
 // CodeEditor / Highlighter
@@ -403,7 +436,7 @@ $dropdown-shadow: $shadow-base;
 $dropdown-item-bg: $white;
 $dropdown-item-hover-bg: $gray-100;
 $dropdown-item-transition: $transition-base;
-$dropdown-item-height: $input-height-base;
+$dropdown-item-height: $input-base-height;
 $dropdown-item-padding-vertical: 0;
 $dropdown-item-padding-horizontal: $spacing-sm;
 $dropdown-item-font-color: $font-color-base;
