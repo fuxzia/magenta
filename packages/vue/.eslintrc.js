@@ -17,7 +17,7 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
-    '@typescript-eslint/no-unused-vars': ['error'],
+    'no-unused-vars': ['error'],
     'semi': ['error', 'never'],
     'comma-dangle': ['error', 'always-multiline'],
     'vue/no-v-html': 'off',

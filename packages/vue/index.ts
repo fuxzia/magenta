@@ -10,7 +10,11 @@ const ButtonGroup = defineAsyncComponent(() => import('./src/button/ButtonGroup.
 
 // Dropdown
 const Dropdown = defineAsyncComponent(() => import('./src/dropdown/Dropdown.vue'))
-const DropdownItem = defineAsyncComponent(() => import('./src/dropdown/DropdownItem.vue'))
+const DropdownMenu = defineAsyncComponent(() => import('./src/dropdown/DropdownMenu.vue'))
+const DropdownMenuItem = defineAsyncComponent(() => import('./src/dropdown/DropdownMenuItem.vue'))
+
+// Grid
+const Grid = defineAsyncComponent(() => import('./src/grid/Grid.vue'))
 
 // Icon
 const Icon = defineAsyncComponent(() => import('./src/icon/Feather.vue'))
@@ -37,7 +41,9 @@ export {
   Button,
   ButtonGroup,
   Dropdown,
-  DropdownItem,
+  DropdownMenu,
+  DropdownMenuItem,
+  Grid,
   Icon,
   Input,
   InputPassword,

@@ -2,21 +2,11 @@
   <div
     ref="dropdownMenuContainer"
     :class="computedClasses"
+    @click="handlerClickTrigger"
     @mouseover="handlerHoverOpenTrigger"
     @mouseleave="handlerHoverCloseTrigger"
   >
-    <span
-      class="mag-dropdown-trigger"
-      @click="handlerClickTrigger"
-    >
-      <slot />
-    </span>
-    <div
-      class="mag-dropdown-menu"
-      @click="close"
-    >
-      <slot name="menu" />
-    </div>
+    <slot />
   </div>
 </template>
 
@@ -86,6 +76,8 @@ export default defineComponent({
     const handlerClickTrigger = () => {
       if (props.trigger === Triggers.Click) {
         visible.value = !visible.value
+      } else if (props.trigger === Triggers.Hover) {
+        visible.value = false
       }
     }
 
@@ -125,31 +117,16 @@ export default defineComponent({
   position: relative;
 
   &.mag-dropdown-open {
-    > .mag-dropdown-menu {
+    :deep(.mag-dropdown-menu) {
       opacity: 1;
       visibility: visible;
     }
   }
 
   &.mag-dropdown-bottom-right {
-    > .mag-dropdown-menu {
+    :deep(.mag-dropdown-menu) {
       right: 0;
     }
-  }
-
-  > .mag-dropdown-menu {
-    z-index: $dropdown-z-index;
-    position: absolute;
-    margin-top: 4px;
-    opacity: 0;
-    visibility: hidden;
-    overflow: hidden;
-    min-width: $dropdown-min-width;
-    background: $dropdown-bg;
-    border: $dropdown-border;
-    transition: $dropdown-transition;
-    border-radius: $dropdown-radius;
-    box-shadow: $dropdown-shadow;
   }
 }
 </style>

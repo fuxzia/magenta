@@ -18,7 +18,7 @@ import { computed, defineComponent } from 'vue'
 import Icon from '../icon/Feather.vue'
 
 export default defineComponent({
-  name: 'MDropdownItem',
+  name: 'MDropdownMenuItem',
   components: {
     Icon,
   },
@@ -45,10 +45,10 @@ export default defineComponent({
       const { header, separator } = props
 
       return [
-        'mag-dropdown-item', 
+        'mag-dropdown-menu-item', 
         {
-          'mag-dropdown-item-header': header,
-          'mag-dropdown-item-separator': separator,
+          'mag-dropdown-menu-item-header': header,
+          'mag-dropdown-menu-item-separator': separator,
         },
       ]
     })
@@ -62,7 +62,7 @@ export default defineComponent({
 
 @import '@magenta-ui/styles/scss/variables.scss';
 
-.mag-dropdown-item {
+.mag-dropdown-menu-item {
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -78,7 +78,7 @@ export default defineComponent({
     background: $dropdown-item-hover-bg;
   }
 
-  &.mag-dropdown-item-header {
+  &.mag-dropdown-menu-item-header {
     cursor: default;
     padding: $spacing-xs $dropdown-item-padding-horizontal;
 
@@ -87,7 +87,7 @@ export default defineComponent({
     }
   }
 
-  &.mag-dropdown-item-separator {
+  &.mag-dropdown-menu-item-separator {
     min-height: 0;
     height: 0;
     margin: 0;
