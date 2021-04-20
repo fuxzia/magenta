@@ -6,11 +6,14 @@
     :line-numbers="lineNumbers"
     readonly
   />
+  <div class="mag-code-content">
+    <slot />
+  </div>
 </template>
 
 <script>
 import prism from 'prismjs'
-import { defineComponent, computed } from 'vue'
+import { computed, defineComponent } from 'vue'
 import { PrismEditor } from 'vue-prism-editor'
 import 'vue-prism-editor/dist/prismeditor.min.css'
 import 'prismjs/themes/prism-funky.css'
@@ -33,11 +36,17 @@ export default defineComponent({
       default: false,
     },
   },
-  setup(props) {
-    const editorCode = computed(() => props.content)
+  setup(props, { slots }) {
+    const editorCode = computed(() => {
+      const code = slots.default()[0].children || props.content
+      return code.trim()
+    })
+    
     const highlighter = (code) => {
       return prism.highlight(code, prism.languages[props.language])
     }
+
+    console.log(slots.default()[0])
 
     return { editorCode, highlighter }
   },
@@ -56,6 +65,10 @@ export default defineComponent({
   line-height: $code-editor-line-height;
   border-radius: $code-editor-radius;
   padding: $code-editor-padding-vertical $code-editor-padding-horizontal;
+}
+
+.mag-code-content {
+  display: none;
 }
 
 .prism-editor__textarea:focus {
