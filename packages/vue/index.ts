@@ -23,6 +23,9 @@ const Icon = defineAsyncComponent(() => import('./src/icon/Feather.vue'))
 const Input = defineAsyncComponent(() => import('./src/input/Input.vue'))
 const InputPassword = defineAsyncComponent(() => import('./src/input/InputPassword.vue'))
 
+// Link
+const Link = defineAsyncComponent(() => import('./src/link/Link.vue'))
+
 // Loader
 const Spinner = defineAsyncComponent(() => import('./src/loader/Spinner.vue'))
 
@@ -47,6 +50,7 @@ export {
   Icon,
   Input,
   InputPassword,
+  Link,
   Spinner,
   Spacer,
   Code,
