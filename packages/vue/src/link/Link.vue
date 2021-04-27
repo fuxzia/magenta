@@ -52,8 +52,6 @@ export default defineComponent({
   },
   setup: (props) => {
     const { isActive, isExactActive } = useLink(props)
-
-    console.log(props.to, isActive.value, isExactActive.value)
     
     const isExternalLink = computed(() => {
       return typeof props.to === 'string' && props.to.startsWith('http')

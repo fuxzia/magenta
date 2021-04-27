@@ -18,7 +18,7 @@
 import { computed, defineComponent, PropType } from 'vue'
 import { Sizes } from '@magenta-ui/types/Button'
 import Icon from '../icon/Feather.vue'
-import Spinner from '../loader/Spinner.vue'
+import Spinner from '../spinner/Spinner.vue'
 
 export default defineComponent({
   name: 'MButton',

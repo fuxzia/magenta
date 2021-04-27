@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
-import Input from './Input.vue'
+import Input from '../input/Input.vue'
 import Icon from '../icon/Feather.vue'
 
 export default defineComponent({

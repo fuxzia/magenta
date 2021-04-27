@@ -2,16 +2,16 @@ import { defineAsyncComponent } from 'vue'
 
 // Avatar
 const Avatar = defineAsyncComponent(() => import('./src/avatar/Avatar.vue'))
-const AvatarGroup = defineAsyncComponent(() => import('./src/avatar/AvatarGroup.vue'))
+const AvatarGroup = defineAsyncComponent(() => import('./src/avatar-group/AvatarGroup.vue'))
 
 // Button
 const Button = defineAsyncComponent(() => import('./src/button/Button.vue'))
-const ButtonGroup = defineAsyncComponent(() => import('./src/button/ButtonGroup.vue'))
+const ButtonGroup = defineAsyncComponent(() => import('./src/button-group/ButtonGroup.vue'))
 
 // Dropdown
 const Dropdown = defineAsyncComponent(() => import('./src/dropdown/Dropdown.vue'))
-const DropdownMenu = defineAsyncComponent(() => import('./src/dropdown/DropdownMenu.vue'))
-const DropdownMenuItem = defineAsyncComponent(() => import('./src/dropdown/DropdownMenuItem.vue'))
+const DropdownMenu = defineAsyncComponent(() => import('./src/dropdown-menu/DropdownMenu.vue'))
+const DropdownMenuItem = defineAsyncComponent(() => import('./src/dropdown-menu-item/DropdownMenuItem.vue'))
 
 // Grid
 const Grid = defineAsyncComponent(() => import('./src/grid/Grid.vue'))
@@ -21,13 +21,13 @@ const Icon = defineAsyncComponent(() => import('./src/icon/Feather.vue'))
 
 // Input
 const Input = defineAsyncComponent(() => import('./src/input/Input.vue'))
-const InputPassword = defineAsyncComponent(() => import('./src/input/InputPassword.vue'))
+const InputPassword = defineAsyncComponent(() => import('./src/input-password/InputPassword.vue'))
 
 // Link
 const Link = defineAsyncComponent(() => import('./src/link/Link.vue'))
 
 // Loader
-const Spinner = defineAsyncComponent(() => import('./src/loader/Spinner.vue'))
+const Spinner = defineAsyncComponent(() => import('./src/spinner/Spinner.vue'))
 
 // Spacer
 const Spacer = defineAsyncComponent(() => import('./src/spacer/Spacer.vue'))
