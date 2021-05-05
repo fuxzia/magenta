@@ -38,15 +38,15 @@ export default defineComponent({
   },
   setup(props, { slots }) {
     const editorCode = computed(() => {
-      const code = slots.default()[0].children || props.content
+      const code = slots.default
+        ? slots.default()[0].children || props.content
+        : props.content
       return code.trim()
     })
     
     const highlighter = (code) => {
       return prism.highlight(code, prism.languages[props.language])
     }
-
-    console.log(slots.default()[0])
 
     return { editorCode, highlighter }
   },

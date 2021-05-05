@@ -32,6 +32,9 @@ const Spinner = defineAsyncComponent(() => import('./src/spinner/Spinner.vue'))
 // Spacer
 const Spacer = defineAsyncComponent(() => import('./src/spacer/Spacer.vue'))
 
+// Table
+const Table = defineAsyncComponent(() => import('./src/table/Table.vue'))
+
 // Typography
 const Code = defineAsyncComponent(() => import('./src/typography/Code.vue'))
 const Heading = defineAsyncComponent(() => import('./src/typography/Heading.vue'))
@@ -53,6 +56,7 @@ export {
   Link,
   Spinner,
   Spacer,
+  Table,
   Code,
   Heading,
   Text,

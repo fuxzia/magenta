@@ -214,6 +214,7 @@ export default defineComponent({
     .mag-input-wrapper {
       .mag-input-component {
         height: $input-sm-height;
+        line-height: $input-sm-height;
         padding: $input-sm-padding-vertical $button-sm-padding-horizontal;
         border-radius: $input-sm-radius;
         font-size: $input-sm-font-size;
@@ -225,6 +226,7 @@ export default defineComponent({
     .mag-input-wrapper {
       .mag-input-component {
         height: $input-md-height;
+        line-height: $input-md-height;
         padding: $input-md-padding-vertical $input-md-padding-horizontal;
         border-radius: $input-md-radius;
         font-size: $font-size-base;
@@ -236,6 +238,7 @@ export default defineComponent({
     .mag-input-wrapper {
       .mag-input-component {
         height: $input-lg-height;
+        line-height: $input-lg-height;
         padding: $input-lg-padding-vertical $input-lg-padding-horizontal;
         border-radius: $input-lg-radius;
         font-size: $input-lg-font-size;
