@@ -30,8 +30,8 @@
               :key="i"
               :width="th.width"
               :fixed="th.fixed"
-              :position="i"
               :ellipsis="ellipsis"
+              :position="i"
               :all-columns="computedColumns"
             >
               <slot
@@ -69,7 +69,15 @@ export default defineComponent({
       type: Array as PropType<Data<unknown>>,
       default: null,
     },
+    bordered: {
+      type: Boolean,
+      default: false,
+    },
     hoverable: {
+      type: Boolean,
+      default: false,
+    },
+    rounded: {
       type: Boolean,
       default: false,
     },
@@ -90,11 +98,13 @@ export default defineComponent({
     })
 
     const computedTableClasses = computed(() => {
-      const { hoverable } = props
+      const { bordered, hoverable, rounded } = props
 
       return [
         'mag-table',
         {
+          'mag-table-rounded': rounded,
+          'mag-table-bordered': bordered,
           'mag-table-hoverable': hoverable,
         },
       ]
@@ -143,11 +153,49 @@ export default defineComponent({
     white-space: nowrap;
 
     &.mag-table-hoverable { 
-      tbody tr:hover {
+      > tbody tr:hover {
         > td {
           transition: $transition-base;
           background: $cool-gray-100;
         }
+      }
+    }
+    
+    &.mag-table-rounded { 
+      > thead tr th {
+        &:first-child {
+          border-top-left-radius: $radius-lg;
+        }
+        &:last-child {
+          border-top-right-radius: $radius-lg;
+        }
+      }
+      > tbody tr:last-child td {
+        &:first-child {
+          border-bottom-left-radius: $radius-lg;
+        }
+        &:last-child {
+          border-bottom-right-radius: $radius-lg;
+        }
+      }
+    }
+    
+    &.mag-table-bordered { 
+      > thead tr th,
+      > tbody tr td {
+        border-left: 1px solid $border-color-base;
+
+        &:first-child {
+          padding-left: $spacing-sm;
+        }
+        &:last-child {
+          padding-right: $spacing-sm;
+          border-right: 1px solid $border-color-base;
+        }
+      }
+
+      > thead tr th {
+        border-top: 1px solid $border-color-base;
       }
     }
   }
