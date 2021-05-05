@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
-import { Column } from '@magenta-ui/types/Table'
+import { Column, Aligns } from '@magenta-ui/types/Table'
 
 export default defineComponent({
   name: 'MTable',
@@ -22,6 +22,11 @@ export default defineComponent({
     fixed: {
       type: Boolean,
       default: false,
+    },
+    align: {
+      type: String as PropType<Aligns>,
+      default: Aligns.Default,
+      validator: (value: string) => (Object.values(Aligns) as string[]).includes(value),
     },
     width: {
       type: Number,
@@ -44,9 +49,10 @@ export default defineComponent({
     const tag = computed(() => props.header ? 'th' : 'td')
 
     const computedCellClasses = computed(() => {
-      const { header, fixed, width, ellipsis } = props
+      const { header, fixed, width, ellipsis, align } = props
       return [
         'mag-table-cell',
+        `mag-table-cell-align-${align.toLowerCase()}`,
         {
           'mag-table-cell-header': header,
           'mag-table-cell-fixed': fixed && width,
@@ -95,7 +101,6 @@ export default defineComponent({
 .mag-table-cell {
   position: sticky;
   border-bottom: 1px solid $border-color-base;
-  text-align: left;
   vertical-align: top;
   padding: $spacing-sm;
   font-size: $font-size-base;
@@ -125,6 +130,18 @@ export default defineComponent({
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  &.mag-table-cell-align-left {
+    text-align: left;
+  }
+
+  &.mag-table-cell-align-right {
+    text-align: right;
+  }
+
+  &.mag-table-cell-align-center {
+    text-align: center;
   }
 
   &.mag-table-cell-ellipsis {
