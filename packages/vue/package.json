@@ -1,6 +1,6 @@
 {
   "name": "@magenta-ui/vue",
-  "version": "0.3.11",
+  "version": "0.4.0",
   "main": "index.ts",
   "license": "MIT",
   "scripts": {
@@ -9,8 +9,8 @@
     "lint:fix": "eslint --fix --ext .js,.vue,.ts src"
   },
   "dependencies": {
-    "@magenta-ui/styles": "^0.3.10",
-    "@magenta-ui/types": "^0.3.8",
+    "@magenta-ui/styles": "^0.4.0",
+    "@magenta-ui/types": "^0.4.0",
     "@types/feather-icons": "4.7.0",
     "@types/prismjs": "1.16.4",
     "feather-icons": "4.28.0",
