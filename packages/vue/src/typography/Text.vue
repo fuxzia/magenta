@@ -20,8 +20,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
-import { TextSizes, TextTags } from '@magenta-ui/types'
-import { Sizes as SpacerSizes } from '@magenta-ui/types/Spacer'
+import { SpacerSizes, TextSizes, TextTags } from '@magenta-ui/types'
 import Spacer from '../spacer/Spacer.vue'
 
 export default defineComponent({
