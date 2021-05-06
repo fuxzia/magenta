@@ -25,15 +25,15 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
-import { Sizes } from '@magenta-ui/types/Spinner'
+import { SpinnerSizes } from '@magenta-ui/types'
 
 export default defineComponent({
   name: 'MSpinner',
   props: {
     size: {
-      type: String as PropType<Sizes>,
-      default: Sizes.Default,
-      validator: (value: string) => (Object.values(Sizes) as string[]).includes(value),
+      type: String as PropType<SpinnerSizes>,
+      default: SpinnerSizes.Default,
+      validator: (value: string) => (Object.values(SpinnerSizes) as string[]).includes(value),
     },
   },
   setup: (props) => {
@@ -43,9 +43,9 @@ export default defineComponent({
       return [
         'mag-spinner', 
         {
-          'mag-spinner-md': ([Sizes.Medium, Sizes.Default] as string[]).includes(size),
-          'mag-spinner-sm': size === Sizes.Small,
-          'mag-spinner-xl': size === Sizes.Large,
+          'mag-spinner-md': size === SpinnerSizes.Medium,
+          'mag-spinner-sm': size === SpinnerSizes.Small,
+          'mag-spinner-xl': size === SpinnerSizes.Large,
         },
       ]
     })

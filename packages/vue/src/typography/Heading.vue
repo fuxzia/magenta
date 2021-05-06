@@ -11,15 +11,15 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
-import { Sizes } from '@magenta-ui/types/Heading'
+import { HeadingSizes } from '@magenta-ui/types'
 
 export default defineComponent({
   name: 'MHeading',
   props: {
     size: {
-      type: String as PropType<Sizes>,
+      type: String as PropType<HeadingSizes>,
       default: 'sm',
-      validator: (value: string) => (Object.values(Sizes) as string[]).includes(value),
+      validator: (value: string) => (Object.values(HeadingSizes) as string[]).includes(value),
     },
     label: {
       type: String,
@@ -37,9 +37,9 @@ export default defineComponent({
       return [
         'mag-heading',
         {
-          'mag-heading-sm': ([Sizes.Small, Sizes.Default] as string[]).includes(size),
-          'mag-heading-md': size === Sizes.Medium,
-          'mag-heading-lg': size === Sizes.Large,
+          'mag-heading-sm': size === HeadingSizes.Small,
+          'mag-heading-md': size === HeadingSizes.Medium,
+          'mag-heading-lg': size === HeadingSizes.Large,
           'mag-heading-subtitle': subtitle,
         },
       ]

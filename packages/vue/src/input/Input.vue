@@ -52,7 +52,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
-import { Alignments, Sizes, Status } from '@magenta-ui/types/Input'
+import { InputAlignments, InputSizes, InputStatus } from '@magenta-ui/types'
 import Icon from '../icon/Feather.vue'
 
 export default defineComponent({
@@ -82,14 +82,14 @@ export default defineComponent({
       default: null,
     },
     size: {
-      type: String as PropType<Sizes>,
-      default: Sizes.Default,
-      validator: (value: string) => (Object.values(Sizes) as string[]).includes(value),
+      type: String as PropType<InputSizes>,
+      default: InputSizes.Default,
+      validator: (value: string) => (Object.values(InputSizes) as string[]).includes(value),
     },
     status: {
-      type: String as PropType<Status>,
+      type: String as PropType<InputStatus>,
       default: null,
-      validator: (value: string) => (Object.values(Status) as string[]).includes(value),
+      validator: (value: string) => (Object.values(InputStatus) as string[]).includes(value),
     },
     placeholder: {
       type: String,
@@ -108,9 +108,9 @@ export default defineComponent({
       default: false,
     },
     alignment: {
-      type: String as PropType<Alignments>,
-      default: Alignments.Default,
-      validator: (value: string) => (Object.values(Alignments) as string[]).includes(value),
+      type: String as PropType<InputAlignments>,
+      default: InputAlignments.Default,
+      validator: (value: string) => (Object.values(InputAlignments) as string[]).includes(value),
     },
     labelWidth: {
       type: [Number, String],
@@ -137,17 +137,17 @@ export default defineComponent({
       return [
         'mag-input', 
         {
-          'mag-input-vertical': alignment === Alignments.Vertical,
-          'mag-input-horizontal': alignment === Alignments.Horizontal,
-          'mag-input-sm': size === Sizes.Small,
-          'mag-input-md': size === Sizes.Medium,
-          'mag-input-lg': size === Sizes.Large,
+          'mag-input-vertical': alignment === InputAlignments.Vertical,
+          'mag-input-horizontal': alignment === InputAlignments.Horizontal,
+          'mag-input-sm': size === InputSizes.Small,
+          'mag-input-md': size === InputSizes.Medium,
+          'mag-input-lg': size === InputSizes.Large,
           'mag-input-with-icon-left': icon || iconLeft,
           'mag-input-with-icon-right': iconRight,
           'mag-input-disabled': disabled,
-          'mag-input-error': status === Status.Error,
-          'mag-input-warning': status === Status.Warning,
-          'mag-input-success': status === Status.Success,
+          'mag-input-error': status === InputStatus.Error,
+          'mag-input-warning': status === InputStatus.Warning,
+          'mag-input-success': status === InputStatus.Success,
         },
       ]
     })
@@ -156,7 +156,7 @@ export default defineComponent({
       const { alignment, labelWidth } = props
       let styles = null
 
-      if (alignment === Alignments.Horizontal) {
+      if (alignment === InputAlignments.Horizontal) {
         const width = typeof labelWidth === 'number' ? `${labelWidth}px` : labelWidth
         styles = { flex: `0 0 ${width}` }
       }

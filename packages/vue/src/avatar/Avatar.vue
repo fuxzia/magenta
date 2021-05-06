@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
-import { Sizes, BadgeTypes } from '@magenta-ui/types/Avatar'
+import { AvatarSizes, AvatarBadgeTypes } from '@magenta-ui/types'
 import Icon from '../icon/Feather.vue'
 
 export default defineComponent({
@@ -25,9 +25,9 @@ export default defineComponent({
   },
   props: {
     size: {
-      type: String as PropType<Sizes>,
-      default: Sizes.Default,
-      validator: (value: string) => (Object.values(Sizes) as string[]).includes(value),
+      type: String as PropType<AvatarSizes>,
+      default: AvatarSizes.Default,
+      validator: (value: string) => (Object.values(AvatarSizes) as string[]).includes(value),
     },
     icon: {
       type: String,
@@ -42,9 +42,9 @@ export default defineComponent({
       default: false,
     },
     badge: {
-      type: String as PropType<BadgeTypes>,
+      type: String as PropType<AvatarBadgeTypes>,
       default: null,
-      validator: (value: string) => (Object.values(BadgeTypes) as string[]).includes(value),
+      validator: (value: string) => (Object.values(AvatarBadgeTypes) as string[]).includes(value),
     },
     badgeNumber: {
       type: Number,
@@ -73,11 +73,11 @@ export default defineComponent({
           'mag-avatar-with-image': image,
           'mag-avatar-with-badge': badge,
           'mag-avatar-with-badge-number': typeof badgeNumber === 'number',
-          'mag-avatar-md': ([Sizes.Medium, Sizes.Default] as string[]).includes(size),
-          'mag-avatar-sm': size === Sizes.Small,
-          'mag-avatar-lg': size === Sizes.Large,
-          'mag-avatar-xlg': size === Sizes.XLarge,
-          'mag-avatar-xxlg': size === Sizes.XXLarge,
+          'mag-avatar-md': size === AvatarSizes.Medium,
+          'mag-avatar-sm': size === AvatarSizes.Small,
+          'mag-avatar-lg': size === AvatarSizes.Large,
+          'mag-avatar-xlg': size === AvatarSizes.XLarge,
+          'mag-avatar-xxlg': size === AvatarSizes.XXLarge,
         },
       ]
     })

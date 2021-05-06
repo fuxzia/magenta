@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, onUnmounted, PropType, ref, watch } from 'vue'
-import { Positions, Triggers } from '@magenta-ui/types/Dropdown'
+import { DropdownPositions, DropdownTriggers } from '@magenta-ui/types'
 
 export default defineComponent({
   name: 'MDropdown',
@@ -22,14 +22,14 @@ export default defineComponent({
       default: false,
     },
     trigger: {
-      type: String as PropType<Triggers>,
-      default: Triggers.Default,
-      validator: (value: string) => (Object.values(Triggers) as string[]).includes(value),
+      type: String as PropType<DropdownTriggers>,
+      default: DropdownTriggers.Default,
+      validator: (value: string) => (Object.values(DropdownTriggers) as string[]).includes(value),
     },
     position: {
-      type: String as PropType<Positions>,
-      default: Positions.Default,
-      validator: (value: string) => (Object.values(Positions) as string[]).includes(value),
+      type: String as PropType<DropdownPositions>,
+      default: DropdownPositions.Default,
+      validator: (value: string) => (Object.values(DropdownPositions) as string[]).includes(value),
     },
   },
   emits: ['visibility-change'],
@@ -62,26 +62,26 @@ export default defineComponent({
     }
 
     const handlerHoverOpenTrigger = () => {
-      if (props.trigger === Triggers.Hover) {
+      if (props.trigger === DropdownTriggers.Hover) {
         visible.value = true
       }
     }
 
     const handlerHoverCloseTrigger = () => {
-      if (props.trigger === Triggers.Hover) {
+      if (props.trigger === DropdownTriggers.Hover) {
         close()
       }
     }
 
     const handlerClickTrigger = () => {
-      if (props.trigger === Triggers.Click) {
+      if (props.trigger === DropdownTriggers.Click) {
         visible.value = !visible.value
-      } else if (props.trigger === Triggers.Hover) {
+      } else if (props.trigger === DropdownTriggers.Hover) {
         visible.value = false
       }
     }
 
-    if (props.trigger === Triggers.Click) {
+    if (props.trigger === DropdownTriggers.Click) {
       const documentClick = (e: Event) => {
         let el = dropdownMenuContainer.value
         let target = e.target

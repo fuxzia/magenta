@@ -16,7 +16,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
-import { Sizes } from '@magenta-ui/types/Button'
+import { ButtonSizes } from '@magenta-ui/types'
 import Icon from '../icon/Feather.vue'
 import Spinner from '../spinner/Spinner.vue'
 
@@ -36,9 +36,9 @@ export default defineComponent({
       default: null,
     },
     size: {
-      type: String as PropType<Sizes>,
-      default: Sizes.Default,
-      validator: (value: string) => (Object.values(Sizes) as string[]).includes(value),
+      type: String as PropType<ButtonSizes>,
+      default: ButtonSizes.Default,
+      validator: (value: string) => (Object.values(ButtonSizes) as string[]).includes(value),
     },
     loading: {
       type: Boolean,
@@ -78,9 +78,9 @@ export default defineComponent({
           'mag-button-circle': circle,
           'mag-button-rounded': rounded,
           'mag-button-square': !circle && !rounded,
-          'mag-button-sm': size === Sizes.Small,
-          'mag-button-md': ([Sizes.Medium, Sizes.Default] as string[]).includes(size),
-          'mag-button-lg': size === Sizes.Large,
+          'mag-button-sm': size === ButtonSizes.Small,
+          'mag-button-md': size === ButtonSizes.Medium,
+          'mag-button-lg': size === ButtonSizes.Large,
           'mag-button-loading': loading,
           'mag-button-outline': outline,
         },

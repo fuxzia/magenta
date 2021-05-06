@@ -55,7 +55,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, onBeforeUnmount, PropType, ref } from 'vue'
-import { Column, Data } from '@magenta-ui/types/Table'
+import { TableColumn, TableData } from '@magenta-ui/types'
 import Cell from './Cell.vue'
 import Scroller from './Scroller.vue'
 import { TableSortDirections } from '@magenta-ui/types'
@@ -68,11 +68,11 @@ export default defineComponent({
   },
   props: {
     columns: {
-      type: Array as PropType<Column[]>,
+      type: Array as PropType<TableColumn[]>,
       default: null,
     },
     data: {
-      type: Array as PropType<Data<unknown>>,
+      type: Array as PropType<TableData<unknown>>,
       default: null,
     },
     bordered: {
@@ -139,7 +139,7 @@ export default defineComponent({
         return
       }
       
-      const defaultSorter = (itemA: Column, itemB: Column) => {
+      const defaultSorter = (itemA: TableColumn, itemB: TableColumn) => {
         let a = itemA[key] || ''
         let b = itemB[key] || ''
 

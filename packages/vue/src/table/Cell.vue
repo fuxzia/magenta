@@ -15,8 +15,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType, ref } from 'vue'
-import { Column, Aligns } from '@magenta-ui/types/Table'
-import { TableSortDirections } from '@magenta-ui/types'
+import { TableColumn, TableAlignments, TableSortDirections } from '@magenta-ui/types'
 import Sorter from './Sorter.vue'
 
 export default defineComponent({
@@ -38,9 +37,9 @@ export default defineComponent({
       default: false,
     },
     align: {
-      type: String as PropType<Aligns>,
-      default: Aligns.Default,
-      validator: (value: string) => (Object.values(Aligns) as string[]).includes(value),
+      type: String as PropType<TableAlignments>,
+      default: TableAlignments.Default,
+      validator: (value: string) => (Object.values(TableAlignments) as string[]).includes(value),
     },
     width: {
       type: Number,
@@ -59,7 +58,7 @@ export default defineComponent({
       default: 0,
     },
     allColumns: {
-      type: Array as PropType<Column[]>,
+      type: Array as PropType<TableColumn[]>,
       default: null,
     },
   },

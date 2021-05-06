@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, getCurrentInstance, PropType } from 'vue'
-import { Gutters } from '@magenta-ui/types/Grid'
+import { GridGutters } from '@magenta-ui/types'
 
 export default defineComponent({
   name: 'MGrid',
@@ -19,11 +19,11 @@ export default defineComponent({
       default: null,
     },
     gutter: {
-      type: [Number, String] as PropType<number | Gutters>,
+      type: [Number, String] as PropType<number | GridGutters>,
       default: null,
       validator: (value: string | number) => {
         if (typeof value === 'string') {
-          return (Object.values(Gutters) as string[]).includes(value)
+          return (Object.values(GridGutters) as string[]).includes(value)
         }
         return typeof value === 'number'
       },
@@ -37,7 +37,7 @@ export default defineComponent({
       return [
         'mag-grid',
         {
-          [`mag-grid-gutter-${gutter}`]: gutter && typeof gutter === 'string' && (Object.values(Gutters) as string[]).includes(gutter),
+          [`mag-grid-gutter-${gutter}`]: gutter && typeof gutter === 'string' && (Object.values(GridGutters) as string[]).includes(gutter),
         },
       ]
     })
@@ -75,8 +75,5 @@ export default defineComponent({
   grid-template-rows: 1fr;
   grid-auto-rows: auto;
   column-gap: $grid-gutter;
-  // @media only screen and (max-width: 768px) {
-  //   grid-template-columns: repeat(1, 1fr) !important;
-  // }
 }
 </style>

@@ -20,7 +20,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
-import { Sizes, Tags } from '@magenta-ui/types/Text'
+import { TextSizes, TextTags } from '@magenta-ui/types'
 import { Sizes as SpacerSizes } from '@magenta-ui/types/Spacer'
 import Spacer from '../spacer/Spacer.vue'
 
@@ -31,14 +31,14 @@ export default defineComponent({
   },
   props: {
     tag: {
-      type: String as PropType<Tags>,
-      default: Tags.Default,
-      validator: (value: string) => (Object.values(Tags) as string[]).includes(value),
+      type: String as PropType<TextTags>,
+      default: TextTags.Default,
+      validator: (value: string) => (Object.values(TextTags) as string[]).includes(value),
     },
     size: {
-      type: String as PropType<Sizes>,
-      default: Sizes.Default,
-      validator: (value: string) => (Object.values(Sizes) as string[]).includes(value),
+      type: String as PropType<TextSizes>,
+      default: TextSizes.Default,
+      validator: (value: string) => (Object.values(TextSizes) as string[]).includes(value),
     },
     content: {
       type: String,
@@ -97,10 +97,10 @@ export default defineComponent({
       return [
         'mag-text',
         {
-          'mag-text-sm': size === Sizes.Small,
-          'mag-text-md': ([Sizes.Medium, Sizes.Default] as string[]).includes(size),
-          'mag-text-lg': size === Sizes.Large,
-          'mag-text-xlg': size === Sizes.XLarge,
+          'mag-text-sm': size === TextSizes.Small,
+          'mag-text-md': size === TextSizes.Medium,
+          'mag-text-lg': size === TextSizes.Large,
+          'mag-text-xlg': size === TextSizes.XLarge,
           'mag-text-bold': bold,
           'mag-text-code': code,
           'mag-text-muted': muted,

@@ -8,7 +8,6 @@
 
 <script lang="ts">
 import { computed, defineComponent } from 'vue'
-
 import feather from 'feather-icons'
 
 export default defineComponent({

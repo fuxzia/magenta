@@ -9,13 +9,13 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
-import { Column } from '@magenta-ui/types/Table'
+import { TableColumn } from '@magenta-ui/types'
 
 export default defineComponent({
   name: 'MTableScroller',
   props: {
     columns: {
-      type: Array as PropType<Column[]>,
+      type: Array as PropType<TableColumn[]>,
       default: null,
     },
   },
