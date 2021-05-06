@@ -18,7 +18,7 @@ export type Column = {
   width?: number
   align?: Aligns
   fixed?: boolean
-  sortable?: boolean
+  sortable?: boolean | Function
 }
 
 export type Data<T> = Array<T>

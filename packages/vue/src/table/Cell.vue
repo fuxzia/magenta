@@ -3,18 +3,32 @@
     :is="tag"
     :style="computedCellStyle"
     :class="computedCellClasses"
+    @click="handleCellClick"
   >
     <slot />
+    <Sorter
+      v-if="sortable"
+      :direction="sortDirection"
+    />
   </component>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue'
+import { computed, defineComponent, PropType, ref } from 'vue'
 import { Column, Aligns } from '@magenta-ui/types/Table'
+import { TableSortDirections } from '@magenta-ui/types'
+import Sorter from './Sorter.vue'
 
 export default defineComponent({
-  name: 'MTable',
+  name: 'MTableCell',
+  components: {
+    Sorter,
+  },
   props: {
+    columnKey: {
+      type: String,
+      default: null,
+    },
     header: {
       type: Boolean,
       default: false,
@@ -36,6 +50,10 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    sortable: {
+      type: [Boolean, Function],
+      default: false,
+    },
     position: {
       type: Number,
       default: 0,
@@ -45,11 +63,15 @@ export default defineComponent({
       default: null,
     },
   },
-  setup: (props) => {
+  emits: ['sort'],
+  setup: (props, { emit }) => {
+    const sortCount = ref(0)
+    const sortDirection = ref(null)
+
     const tag = computed(() => props.header ? 'th' : 'td')
 
     const computedCellClasses = computed(() => {
-      const { header, fixed, width, ellipsis, align } = props
+      const { header, fixed, width, ellipsis, align, sortable } = props
       return [
         'mag-table-cell',
         `mag-table-cell-align-${align.toLowerCase()}`,
@@ -57,6 +79,7 @@ export default defineComponent({
           'mag-table-cell-header': header,
           'mag-table-cell-fixed': fixed && width,
           'mag-table-cell-ellipsis': ellipsis,
+          'mag-table-cell-sortable': sortable,
         },
       ]
     })
@@ -89,7 +112,37 @@ export default defineComponent({
       return styles
     })
 
-    return { tag, computedCellStyle, computedCellClasses }
+    const handleCellClick = () => {
+      if (props.sortable) {
+        handleSort()
+      }
+    }
+
+    const handleSort = () => {
+      sortCount.value++
+
+      switch (sortCount.value) {
+        case 1:
+          sortDirection.value = TableSortDirections.Up
+          break
+
+        case 2:
+          sortDirection.value = TableSortDirections.Down
+          break
+
+        default:
+          sortCount.value = 0
+          sortDirection.value = TableSortDirections.Reset
+      }
+
+      emit('sort', {
+        key: props.columnKey,
+        direction: sortDirection.value,
+        sorter: props.sortable,
+      })
+    }
+
+    return { tag, computedCellStyle, computedCellClasses, handleCellClick, sortDirection }
   },
 })
 </script>
@@ -153,6 +206,15 @@ export default defineComponent({
       white-space: nowrap !important;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+  }
+
+  &.mag-table-cell-sortable {
+    cursor: pointer;
+    transition: $transition-base;
+    
+    &:hover {
+      background-color: $cool-gray-100;
     }
   }
 }

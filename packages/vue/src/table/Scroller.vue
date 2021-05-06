@@ -12,7 +12,7 @@ import { computed, defineComponent, PropType } from 'vue'
 import { Column } from '@magenta-ui/types/Table'
 
 export default defineComponent({
-  name: 'MTable',
+  name: 'MTableScroller',
   props: {
     columns: {
       type: Array as PropType<Column[]>,

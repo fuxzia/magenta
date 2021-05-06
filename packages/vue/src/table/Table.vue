@@ -10,31 +10,34 @@
             <Cell
               v-for="(th, i) in computedColumns"
               :key="i"
+              :position="i"
+              :all-columns="computedColumns"
+              :column-key="th.key"
               :width="th.width"
               :fixed="th.fixed"
               :align="th.align"
-              :position="i"
-              :all-columns="computedColumns"
+              :sortable="th.sortable"
               :header="true"
+              @sort="sort"
             >
               {{ th.label }}
             </Cell>
           </tr>
         </thead>
-        <tbody v-if="data">
+        <tbody v-if="computedData">
           <tr
-            v-for="(row, ri) in data"
+            v-for="(row, ri) in computedData"
             :key="ri"
           >
             <Cell
               v-for="(th, i) in computedColumns"
-              :key="i"
+              :key="th.key"
+              :position="i"
+              :all-columns="computedColumns"
               :width="th.width"
               :fixed="th.fixed"
               :align="th.align"
               :ellipsis="ellipsis"
-              :position="i"
-              :all-columns="computedColumns"
             >
               <slot
                 :name="th.key"
@@ -55,6 +58,7 @@ import { computed, defineComponent, onMounted, onBeforeUnmount, PropType, ref } 
 import { Column, Data } from '@magenta-ui/types/Table'
 import Cell from './Cell.vue'
 import Scroller from './Scroller.vue'
+import { TableSortDirections } from '@magenta-ui/types'
 
 export default defineComponent({
   name: 'MTable',
@@ -90,6 +94,7 @@ export default defineComponent({
   },
   setup: (props) => {
     const refTable = ref(null as HTMLTableElement)
+    const list = ref([])
 
     const computedColumns = computed(() => {
       const { columns } = props
@@ -97,6 +102,10 @@ export default defineComponent({
         ...columns.filter(item => item.fixed && item.width),
         ...columns.filter(item => !item.fixed || (item.fixed && !item.width)),
       ]
+    })
+
+    const computedData = computed(() => {
+      return list.value.length > 0 ? list.value : props.data
     })
 
     const computedTableClasses = computed(() => {
@@ -123,6 +132,59 @@ export default defineComponent({
       }
     })
 
+    const sort = ({ key, direction, sorter }) => {
+      list.value = [...props.data]
+      
+      if (direction === TableSortDirections.Reset) {
+        return
+      }
+      
+      const defaultSorter = (itemA: Column, itemB: Column) => {
+        let a = itemA[key] || ''
+        let b = itemB[key] || ''
+
+        switch (typeof a) {
+          case 'string':
+            a = a ? a.toUpperCase() : ''
+            break
+
+          case 'number':
+            a = a || 0
+            break
+
+          default:
+          case 'boolean':
+            a = a ? 1 : 0
+            break
+        }
+
+        switch (typeof b) {
+          case 'string':
+            b = b ? b.toUpperCase() : ''
+            break
+
+          case 'number':
+            b = b || 0
+            break
+
+          default:
+          case 'boolean':
+            b = b ? 1 : 0
+            break
+        }
+
+        if (direction === TableSortDirections.Up) {
+          return (a < b) ? -1 : (a > b) ? 1 : 0
+        } else {
+          return (b < a) ? -1 : (b > a) ? 1 : 0
+        }
+      }
+
+      const listSorter = typeof sorter === 'function' ? sorter : defaultSorter
+
+      list.value = list.value.sort(listSorter)
+    }
+
     onMounted(() => {
       const rows = refTable.value.querySelectorAll('tbody tr')
       rows.forEach(row => resizeObserver.observe(row))
@@ -133,7 +195,7 @@ export default defineComponent({
       rows.forEach(row => resizeObserver.unobserve(row))
     })
 
-    return { refTable, computedTableClasses, computedColumns }
+    return { refTable, computedTableClasses, computedColumns, computedData, sort }
   },
 })
 </script>
