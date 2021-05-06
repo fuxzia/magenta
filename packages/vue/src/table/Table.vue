@@ -125,8 +125,8 @@ export default defineComponent({
       for (let entry of entries) {
         const tr = entry.target as HTMLTableRowElement
         if (tr) {
-          tr.querySelectorAll('td').forEach((td) => {
-            td.style.height = `${tr.scrollHeight}px`
+          tr.querySelectorAll('td, th').forEach((td) => {
+            (td as HTMLElement).style.height = `${tr.scrollHeight}px`
           })
         }
       }
@@ -186,12 +186,12 @@ export default defineComponent({
     }
 
     onMounted(() => {
-      const rows = refTable.value.querySelectorAll('tbody tr')
+      const rows = refTable.value.querySelectorAll('tbody tr, thead tr')
       rows.forEach(row => resizeObserver.observe(row))
     })
 
     onBeforeUnmount(() => {
-      const rows = refTable.value.querySelectorAll('tbody tr')
+      const rows = refTable.value.querySelectorAll('tbody tr, thead tr')
       rows.forEach(row => resizeObserver.unobserve(row))
     })
 
@@ -214,13 +214,12 @@ export default defineComponent({
     padding: 0;
     border-collapse: separate;
     border-spacing: 0;
-    white-space: nowrap;
 
     &.mag-table-hoverable { 
       > tbody tr:hover {
         > td {
-          transition: $transition-base;
-          background: $cool-gray-100;
+          transition: $table-transition;
+          background: $table-cell-hoverable-bg;
         }
       }
     }
@@ -228,18 +227,18 @@ export default defineComponent({
     &.mag-table-rounded { 
       > thead tr th {
         &:first-child {
-          border-top-left-radius: $radius-lg;
+          border-top-left-radius: $table-rounded-radius;
         }
         &:last-child {
-          border-top-right-radius: $radius-lg;
+          border-top-right-radius: $table-rounded-radius;
         }
       }
       > tbody tr:last-child td {
         &:first-child {
-          border-bottom-left-radius: $radius-lg;
+          border-bottom-left-radius: $table-rounded-radius;
         }
         &:last-child {
-          border-bottom-right-radius: $radius-lg;
+          border-bottom-right-radius: $table-rounded-radius;
         }
       }
     }
@@ -247,19 +246,19 @@ export default defineComponent({
     &.mag-table-bordered { 
       > thead tr th,
       > tbody tr td {
-        border-left: 1px solid $border-color-base;
+        border-left: 1px solid $table-border-color;
 
         &:first-child {
-          padding-left: $spacing-sm;
+          padding-left: $table-cell-padding-horizontal;
         }
         &:last-child {
-          padding-right: $spacing-sm;
-          border-right: 1px solid $border-color-base;
+          padding-right: $table-cell-padding-horizontal;
+          border-right: 1px solid $table-border-color;
         }
       }
 
       > thead tr th {
-        border-top: 1px solid $border-color-base;
+        border-top: 1px solid $table-border-color;
       }
     }
   }

@@ -151,14 +151,14 @@ export default defineComponent({
 @import '@magenta-ui/styles/scss/variables.scss';
 
 .mag-table-cell {
-  position: sticky;
-  border-bottom: 1px solid $border-color-base;
-  vertical-align: top;
-  padding: $spacing-sm;
-  font-size: $font-size-base;
-  background: $white;
+  position: relative;
+  border-bottom: 1px solid $table-border-color;
+  vertical-align: $table-cell-vertical-align;
+  padding: $table-cell-padding-vertical $table-cell-padding-horizontal;
+  font-size: $table-cell-font-size;
+  background: $table-cell-bg;
   word-wrap: break-word;
-  white-space: normal;
+  white-space: $table-cell-white-space;
 
   &:first-child {
     padding-left: 0;
@@ -170,16 +170,37 @@ export default defineComponent({
 
   &.mag-table-cell-fixed {
     z-index: 2;
+    display: flex;
+    @if($table-cell-vertical-align == 'top') {
+      align-items: flex-start;
+    }
+    @if($table-cell-vertical-align == 'middle') {
+      align-items: center;
+    }
+    @if($table-cell-vertical-align == 'bottom') {
+      align-items: flex-end;
+    }
+
+    &.mag-table-cell-header {
+      @if($table-cell-header-vertical-align == 'top') {
+        align-items: flex-start;
+      }
+      @if($table-cell-header-vertical-align == 'middle') {
+        align-items: center;
+      }
+      @if($table-cell-header-vertical-align == 'bottom') {
+        align-items: flex-end;
+      }
+    }
   }
 
   &.mag-table-cell-header {
-    font-size: $font-size-sm;
-    text-transform: uppercase;
-    font-weight: $font-weight-bold;
-    color: $font-color-muted;
-    color: $cool-gray-400;
-    color: $font-color-contrast;
-    white-space: nowrap;
+    font-size: $table-cell-header-font-size;
+    text-transform: $table-cell-header-text-transform;
+    font-weight: $table-cell-header-font-weight;
+    color: $table-cell-header-font-color;
+    white-space: $table-cell-header-white-space;
+    vertical-align: $table-cell-header-vertical-align;
     overflow: hidden;
     text-overflow: ellipsis;
   }
@@ -210,10 +231,10 @@ export default defineComponent({
 
   &.mag-table-cell-sortable {
     cursor: pointer;
-    transition: $transition-base;
+    transition: $table-transition;
     
     &:hover {
-      background-color: $cool-gray-100;
+      background-color: $table-cell-sortable-hover-bg;
     }
   }
 }

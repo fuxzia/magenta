@@ -453,3 +453,24 @@ $dropdown-item-padding-horizontal: $spacing-sm;
 $dropdown-item-font-color: $font-color-base;
 $dropdown-item-icon-color: $font-color-contrast;
 $dropdown-item-separator-color: $cool-gray-200;
+
+// ======
+// Tables
+// ======
+$table-transition: $transition-base;
+$table-border-color: $border-color-base;
+$table-cell-white-space: normal;
+$table-cell-bg: $white;
+$table-cell-font-size: $font-size-base;
+$table-cell-vertical-align: top;
+$table-cell-padding-vertical: $spacing-sm;
+$table-cell-padding-horizontal: $spacing-sm;
+$table-cell-header-font-size: $font-size-sm;
+$table-cell-header-font-color: $font-color-contrast;
+$table-cell-header-font-weight: $font-weight-bold;
+$table-cell-header-text-transform: uppercase;
+$table-cell-header-white-space: nowrap;
+$table-cell-header-vertical-align: middle;
+$table-cell-hoverable-bg: $cool-gray-100;
+$table-cell-sortable-hover-bg: $cool-gray-100;
+$table-rounded-radius: $radius-lg;
