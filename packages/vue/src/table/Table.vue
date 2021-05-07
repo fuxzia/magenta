@@ -1,6 +1,9 @@
 <template>
   <div class="mag-table-wrapper">
-    <Scroller :columns="computedColumns">
+    <Scroller
+      :columns="computedColumns"
+      :selectable="selectable"
+    >
       <table
         ref="refTable"
         :class="computedTableClasses"
@@ -20,7 +23,10 @@
               :header="true"
               @sort="sort"
             >
-              {{ th.label }}
+              <Selector v-if="th._isCellSelector" />
+              <template v-else>
+                {{ th.label }}
+              </template>
             </Cell>
           </tr>
         </thead>
@@ -39,7 +45,9 @@
               :align="th.align"
               :ellipsis="ellipsis"
             >
+              <Selector v-if="th._isCellSelector" />
               <slot
+                v-else
                 :name="th.key"
                 :item="row"
               >
@@ -55,16 +63,17 @@
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, onBeforeUnmount, PropType, ref } from 'vue'
-import { TableColumn, TableData } from '@magenta-ui/types'
+import { TableColumn, TableData, TableSortDirections } from '@magenta-ui/types'
 import Cell from './Cell.vue'
 import Scroller from './Scroller.vue'
-import { TableSortDirections } from '@magenta-ui/types'
+import Selector from './Selector.vue'
 
 export default defineComponent({
   name: 'MTable',
   components: {
     Cell,
     Scroller,
+    Selector,
   },
   props: {
     columns: {
@@ -75,11 +84,15 @@ export default defineComponent({
       type: Array as PropType<TableData<unknown>>,
       default: null,
     },
-    bordered: {
+    hoverable: {
       type: Boolean,
       default: false,
     },
-    hoverable: {
+    selectable: {
+      type: Boolean,
+      default: false,
+    },
+    bordered: {
       type: Boolean,
       default: false,
     },
@@ -97,10 +110,23 @@ export default defineComponent({
     const list = ref([])
 
     const computedColumns = computed(() => {
-      const { columns } = props
+      const { columns, selectable } = props
+
+      const columnsFixed = columns.filter(item => item.fixed && item.width)
+      const columnsRemaining = columns.filter(item => !item.fixed || (item.fixed && !item.width))
+      
+      const selector = {
+        _isCellSelector: true,
+        width: 60,
+        align: 'center',
+        fixed: columnsFixed.length > 0,
+      }
+      const columnSelector = selectable ? [selector] : []
+      
       return [
-        ...columns.filter(item => item.fixed && item.width),
-        ...columns.filter(item => !item.fixed || (item.fixed && !item.width)),
+        ...columnSelector,
+        ...columnsFixed,
+        ...columnsRemaining,
       ]
     })
 

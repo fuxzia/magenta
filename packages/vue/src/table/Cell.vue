@@ -159,6 +159,7 @@ export default defineComponent({
   background: $table-cell-bg;
   word-wrap: break-word;
   white-space: $table-cell-white-space;
+  overflow: hidden;
 
   &:first-child {
     padding-left: 0;
@@ -191,6 +192,22 @@ export default defineComponent({
       @if($table-cell-header-vertical-align == 'bottom') {
         align-items: flex-end;
       }
+    }
+
+    &.mag-table-cell-align-left {
+      justify-content: flex-start;
+    }
+
+    &.mag-table-cell-align-right {
+      justify-content: flex-end;
+    }
+
+    &.mag-table-cell-align-center {
+      justify-content: center;
+    }
+
+    :deep(.mag-table-sorter) {
+      top: -17px;
     }
   }
 
