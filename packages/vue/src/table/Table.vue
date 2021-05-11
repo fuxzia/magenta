@@ -25,7 +25,9 @@
             >
               <Checkbox
                 v-if="th.MAGENTA_UI_IS_SELECTOR"
+                :checked="computedAllRowsSelected"
                 class="mag-table-selector"
+                @click="selectAllRows"
               />
               <template v-else>
                 {{ th.label }}
@@ -53,7 +55,7 @@
                 v-if="th.MAGENTA_UI_IS_SELECTOR"
                 :checked="row.MAGENTA_UI_IS_SELECTED"
                 class="mag-table-selector"
-                @click="select(row, ri)"
+                @click="selectRow(row, ri)"
               />
               <slot
                 v-else
@@ -114,7 +116,7 @@ export default defineComponent({
       default: false,
     },
   },
-  emits: ['select'],
+  emits: ['select', 'sort'],
   setup: (props, { emit }) => {
     const refTable = ref(null as HTMLTableElement)
     const list = ref([])
@@ -142,6 +144,10 @@ export default defineComponent({
 
     const computedData = computed(() => {
       return list.value.length > 0 ? list.value as [] : props.data
+    })
+
+    const computedAllRowsSelected = computed(() => {
+      return computedData.value.filter((item: TableRow) => item.MAGENTA_UI_IS_SELECTED).length >= computedData.value.length
     })
 
     const computedTableClasses = computed(() => {
@@ -185,13 +191,25 @@ export default defineComponent({
       return clearMagentaKeys(selected.filter((item) => item.MAGENTA_UI_IS_SELECTED))
     }
 
-    const select = (row: TableRow, index: number) => {
+    const selectRow = (row: TableRow, index: number) => {
       const data = [...computedData.value]
       data[index] = {
         ...row,
         MAGENTA_UI_IS_SELECTED: row.MAGENTA_UI_IS_SELECTED ? false : true,
       }
       list.value = [...data]
+      emit('select', [...getSelectedRows()])
+    }
+
+    const selectAllRows = () => {
+      const data = [...computedData.value]
+      const currentSelected = data.filter((item: TableRow) => item.MAGENTA_UI_IS_SELECTED).length
+      const statusAllSelected = currentSelected !== data.length ? true : false
+      
+      list.value = data.map((item: TableRow) => ({
+        ...item,
+        MAGENTA_UI_IS_SELECTED: statusAllSelected,
+      }))
       emit('select', [...getSelectedRows()])
     }
 
@@ -246,6 +264,11 @@ export default defineComponent({
       const listSorter = typeof sorter === 'function' ? sorter : defaultSorter
 
       list.value = data.sort(listSorter)
+      emit('sort', {
+        key,
+        direction,
+        data: clearMagentaKeys([...list.value]),
+      })
     }
 
     onMounted(() => {
@@ -258,7 +281,7 @@ export default defineComponent({
       rows.forEach(row => resizeObserver.unobserve(row))
     })
 
-    return { refTable, computedTableClasses, computedColumns, computedData, sort, select }
+    return { refTable, computedTableClasses, computedColumns, computedAllRowsSelected, computedData, sort, selectRow, selectAllRows }
   },
 })
 </script>
