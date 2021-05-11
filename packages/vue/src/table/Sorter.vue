@@ -43,12 +43,11 @@ export default defineComponent({
 @import '@magenta-ui/styles/scss/variables.scss';
 
 .mag-table-sorter {
-  position: relative;
   display: inline-flex;
   flex-direction: column;
-  top: -8px;
-  left: 5px;
-  height: 0;
+  margin-top: -6px;
+  margin-left: 5px;
+  line-height: 1;
   overflow: visible;
 
   :deep(.mag-icon) {

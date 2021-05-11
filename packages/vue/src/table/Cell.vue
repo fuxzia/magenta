@@ -5,11 +5,15 @@
     :class="computedCellClasses"
     @click="handleCellClick"
   >
-    <slot />
-    <Sorter
-      v-if="sortable"
-      :direction="sortDirection"
-    />
+    <div class="mag-table-cell-content-wrapper">
+      <div class="mag-table-cell-content">
+        <slot />
+      </div>
+      <Sorter
+        v-if="sortable"
+        :direction="sortDirection"
+      />
+    </div>
   </component>
 </template>
 
@@ -53,6 +57,10 @@ export default defineComponent({
       type: [Boolean, Function],
       default: false,
     },
+    selected: {
+      type: Boolean,
+      default: false,
+    },
     position: {
       type: Number,
       default: 0,
@@ -70,7 +78,8 @@ export default defineComponent({
     const tag = computed(() => props.header ? 'th' : 'td')
 
     const computedCellClasses = computed(() => {
-      const { header, fixed, width, ellipsis, align, sortable } = props
+      const { header, fixed, width, ellipsis, align, sortable, selected } = props
+
       return [
         'mag-table-cell',
         `mag-table-cell-align-${align.toLowerCase()}`,
@@ -79,6 +88,7 @@ export default defineComponent({
           'mag-table-cell-fixed': fixed && width,
           'mag-table-cell-ellipsis': ellipsis,
           'mag-table-cell-sortable': sortable,
+          'mag-table-cell-selected': selected,
         },
       ]
     })
@@ -171,43 +181,21 @@ export default defineComponent({
 
   &.mag-table-cell-fixed {
     z-index: 2;
-    display: flex;
-    @if($table-cell-vertical-align == 'top') {
-      align-items: flex-start;
-    }
-    @if($table-cell-vertical-align == 'middle') {
-      align-items: center;
-    }
-    @if($table-cell-vertical-align == 'bottom') {
-      align-items: flex-end;
-    }
 
-    &.mag-table-cell-header {
-      @if($table-cell-header-vertical-align == 'top') {
+    .mag-table-cell-content-wrapper {
+      height: 100%;
+      
+      @if($table-cell-vertical-align == 'top') {
         align-items: flex-start;
       }
-      @if($table-cell-header-vertical-align == 'middle') {
+
+      @if($table-cell-vertical-align == 'middle') {
         align-items: center;
       }
-      @if($table-cell-header-vertical-align == 'bottom') {
+
+      @if($table-cell-vertical-align == 'bottom') {
         align-items: flex-end;
       }
-    }
-
-    &.mag-table-cell-align-left {
-      justify-content: flex-start;
-    }
-
-    &.mag-table-cell-align-right {
-      justify-content: flex-end;
-    }
-
-    &.mag-table-cell-align-center {
-      justify-content: center;
-    }
-
-    :deep(.mag-table-sorter) {
-      top: -17px;
     }
   }
 
@@ -216,22 +204,36 @@ export default defineComponent({
     text-transform: $table-cell-header-text-transform;
     font-weight: $table-cell-header-font-weight;
     color: $table-cell-header-font-color;
-    white-space: $table-cell-header-white-space;
-    vertical-align: $table-cell-header-vertical-align;
-    overflow: hidden;
-    text-overflow: ellipsis;
+
+    .mag-table-cell-content {
+      white-space: $table-cell-header-white-space !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+    }
   }
 
   &.mag-table-cell-align-left {
     text-align: left;
+
+    .mag-table-cell-content-wrapper {
+      justify-content: flex-start;
+    }
   }
 
   &.mag-table-cell-align-right {
     text-align: right;
+
+    .mag-table-cell-content-wrapper {
+      justify-content: flex-end;
+    }
   }
 
   &.mag-table-cell-align-center {
     text-align: center;
+
+    .mag-table-cell-content-wrapper {
+      justify-content: center;
+    }
   }
 
   &.mag-table-cell-ellipsis {
@@ -252,6 +254,25 @@ export default defineComponent({
     
     &:hover {
       background-color: $table-cell-sortable-hover-bg;
+    }
+  }
+
+  &.mag-table-cell-selected {
+    background-color: $table-cell-selected-bg !important;
+  }
+
+  .mag-table-cell-content-wrapper {
+    display: flex;
+    justify-content: center;
+    
+    .mag-table-cell-content {
+      flex: 0 1 auto;
+      white-space: normal;
+      overflow: hidden;
+    }
+
+    :deep(.mag-table-sorter) {
+      flex: 0;
     }
   }
 }

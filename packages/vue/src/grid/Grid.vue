@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, getCurrentInstance, PropType } from 'vue'
+import { computed, defineComponent, PropType } from 'vue'
 import { GridGutters } from '@magenta-ui/types'
 
 export default defineComponent({
@@ -30,7 +30,6 @@ export default defineComponent({
     },
   },
   setup: (props) => {
-    console.log(getCurrentInstance())
     const computedClasses = computed(() => {
       const { gutter } = props
       

@@ -33,6 +33,10 @@ export default defineComponent({
   name: 'MLink',
   props: {
     ...RouterLink.props,
+    to: {
+      type: String,
+      default: '#',
+    },
     target: {
       type: String,
       default: null,

@@ -8,6 +8,9 @@ const AvatarGroup = defineAsyncComponent(() => import('./src/avatar-group/Avatar
 const Button = defineAsyncComponent(() => import('./src/button/Button.vue'))
 const ButtonGroup = defineAsyncComponent(() => import('./src/button-group/ButtonGroup.vue'))
 
+// Checkbox
+const Checkbox = defineAsyncComponent(() => import('./src/checkbox/Checkbox.vue'))
+
 // Dropdown
 const Dropdown = defineAsyncComponent(() => import('./src/dropdown/Dropdown.vue'))
 const DropdownMenu = defineAsyncComponent(() => import('./src/dropdown-menu/DropdownMenu.vue'))
@@ -46,6 +49,7 @@ export {
   AvatarGroup,
   Button,
   ButtonGroup,
+  Checkbox,
   Dropdown,
   DropdownMenu,
   DropdownMenuItem,

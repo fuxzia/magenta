@@ -23,7 +23,10 @@
               :header="true"
               @sort="sort"
             >
-              <Selector v-if="th._isCellSelector" />
+              <Checkbox
+                v-if="th.MAGENTA_UI_IS_SELECTOR"
+                class="mag-table-selector"
+              />
               <template v-else>
                 {{ th.label }}
               </template>
@@ -43,9 +46,15 @@
               :width="th.width"
               :fixed="th.fixed"
               :align="th.align"
+              :selected="row.MAGENTA_UI_IS_SELECTED"
               :ellipsis="ellipsis"
             >
-              <Selector v-if="th._isCellSelector" />
+              <Checkbox
+                v-if="th.MAGENTA_UI_IS_SELECTOR"
+                :checked="row.MAGENTA_UI_IS_SELECTED"
+                class="mag-table-selector"
+                @click="select(row, ri)"
+              />
               <slot
                 v-else
                 :name="th.key"
@@ -63,17 +72,17 @@
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, onBeforeUnmount, PropType, ref } from 'vue'
-import { TableColumn, TableData, TableSortDirections } from '@magenta-ui/types'
+import { TableColumn, TableData, TableRow, TableSortDirections } from '@magenta-ui/types'
 import Cell from './Cell.vue'
+import Checkbox from '../checkbox/Checkbox.vue'
 import Scroller from './Scroller.vue'
-import Selector from './Selector.vue'
 
 export default defineComponent({
   name: 'MTable',
   components: {
     Cell,
+    Checkbox,
     Scroller,
-    Selector,
   },
   props: {
     columns: {
@@ -105,21 +114,22 @@ export default defineComponent({
       default: false,
     },
   },
-  setup: (props) => {
+  emits: ['select'],
+  setup: (props, { emit }) => {
     const refTable = ref(null as HTMLTableElement)
     const list = ref([])
 
     const computedColumns = computed(() => {
-      const { columns, selectable } = props
+      const { columns, selectable, bordered } = props
 
       const columnsFixed = columns.filter(item => item.fixed && item.width)
       const columnsRemaining = columns.filter(item => !item.fixed || (item.fixed && !item.width))
       
       const selector = {
-        _isCellSelector: true,
-        width: 60,
+        width: bordered ? 68 : 38,
         align: 'center',
         fixed: columnsFixed.length > 0,
+        MAGENTA_UI_IS_SELECTOR: true,
       }
       const columnSelector = selectable ? [selector] : []
       
@@ -131,7 +141,7 @@ export default defineComponent({
     })
 
     const computedData = computed(() => {
-      return list.value.length > 0 ? list.value : props.data
+      return list.value.length > 0 ? list.value as [] : props.data
     })
 
     const computedTableClasses = computed(() => {
@@ -158,8 +168,35 @@ export default defineComponent({
       }
     })
 
+    const clearMagentaKeys = (data: Array<TableRow>) => {
+      const keys = [
+        'MAGENTA_UI_IS_SELECTED',
+        'MAGENTA_UI_IS_SELECTOR',
+      ]
+      return data.map((item) => {
+        const newItem = { ...item }
+        keys.forEach(key => delete newItem[key])
+        return { ...newItem }
+      })
+    }
+
+    const getSelectedRows = () => {
+      const selected = computedData.value as Array<TableRow>
+      return clearMagentaKeys(selected.filter((item) => item.MAGENTA_UI_IS_SELECTED))
+    }
+
+    const select = (row: TableRow, index: number) => {
+      const data = [...computedData.value]
+      data[index] = {
+        ...row,
+        MAGENTA_UI_IS_SELECTED: row.MAGENTA_UI_IS_SELECTED ? false : true,
+      }
+      list.value = [...data]
+      emit('select', [...getSelectedRows()])
+    }
+
     const sort = ({ key, direction, sorter }) => {
-      list.value = [...props.data]
+      const data = [...computedData.value]
       
       if (direction === TableSortDirections.Reset) {
         return
@@ -208,7 +245,7 @@ export default defineComponent({
 
       const listSorter = typeof sorter === 'function' ? sorter : defaultSorter
 
-      list.value = list.value.sort(listSorter)
+      list.value = data.sort(listSorter)
     }
 
     onMounted(() => {
@@ -221,7 +258,7 @@ export default defineComponent({
       rows.forEach(row => resizeObserver.unobserve(row))
     })
 
-    return { refTable, computedTableClasses, computedColumns, computedData, sort }
+    return { refTable, computedTableClasses, computedColumns, computedData, sort, select }
   },
 })
 </script>
@@ -245,7 +282,7 @@ export default defineComponent({
       > tbody tr:hover {
         > td {
           transition: $table-transition;
-          background: $table-cell-hoverable-bg;
+          background-color: $table-cell-hoverable-bg !important;
         }
       }
     }
@@ -286,6 +323,12 @@ export default defineComponent({
       > thead tr th {
         border-top: 1px solid $table-border-color;
       }
+    }
+
+    .mag-table-selector {
+      position: relative;
+      margin: 0;
+      top: 1px;
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <Input
     v-bind="$props"
-    :password="hidePassword"
+    :type="computedType"
     :icon-right="icon"
     class="mag-input-password"
     @update:modelValue="handleInput"
@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import Input from '../input/Input.vue'
 import Icon from '../icon/Feather.vue'
 
@@ -38,6 +38,10 @@ export default defineComponent({
 
     const hidePassword = ref(true)
     const icon = ref('eye-off')
+
+    const computedType = computed(() => {
+      return hidePassword.value ? 'password' : 'text'
+    })
     
     const toggle = () => {
       hidePassword.value = !hidePassword.value
@@ -49,7 +53,7 @@ export default defineComponent({
       emit('update:modelValue', value)
     }
 
-    return { handleInput, toggle, hidePassword, icon }
+    return { computedType, handleInput, toggle, hidePassword, icon }
   },
 })
 </script>

@@ -92,6 +92,13 @@ export enum InputSizes {
   Large = 'lg',
 }
 
+export enum InputTypes {
+  Default = 'text',
+  Checkbox = 'checkbox',
+  Text = 'text',
+  Password = 'password',
+}
+
 export enum InputStatus {
   Default = '',
   Error = 'error',
@@ -157,6 +164,10 @@ export type TableColumn = {
   align?: TableAlignments
   fixed?: boolean
   sortable?: boolean | Function
+}
+
+export type TableRow = {
+  [key: string]: any
 }
 
 export type TableData<T> = Array<T>

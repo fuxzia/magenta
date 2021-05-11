@@ -1,37 +1,30 @@
 <template>
   <div :class="computedClasses">
-    <label
-      v-if="label || $slots.label"
-      :style="computedLabelStyles"
-      class="mag-input-label"
+    <Label
+      :slots="$slots"
+      :label="label"
+      :label-width="labelWidth"
+      :alignment="alignment"
     >
-      <slot name="label">
-        {{ label }}
-      </slot>
-    </label>
+      <template #label>
+        <slot name="label" />
+      </template>
+    </Label>
     <div class="mag-input-wrapper">
-      <span
-        v-if="icon || iconLeft || $slots.icon || $slots['icon-left']"
-        class="mag-input-icon-left"
+      <Icons
+        :slots="$slots"
+        :icon="icon"
+        :icon-left="iconLeft"
+        :icon-right="iconRight"
+        :input-type="type"
       >
-        <slot name="icon-left">
-          <Icon
-            v-if="icon || iconLeft"
-            :icon="icon || iconLeft"
-          />
-        </slot>
-      </span>
-      <span
-        v-if="iconRight || $slots['icon-right']"
-        class="mag-input-icon-right"
-      >
-        <slot name="icon-right">
-          <Icon
-            v-if="iconRight"
-            :icon="iconRight"
-          />
-        </slot>
-      </span>
+        <template #icon-left>
+          <slot name="icon-left" />
+        </template>
+        <template #icon-right>
+          <slot name="icon-right" />
+        </template>
+      </Icons>
       <input
         :value="modelValue"
         :placeholder="placeholder"
@@ -52,13 +45,15 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from 'vue'
-import { InputAlignments, InputSizes, InputStatus } from '@magenta-ui/types'
-import Icon from '../icon/Feather.vue'
+import { InputAlignments, InputSizes, InputStatus, InputTypes } from '@magenta-ui/types'
+import Icons from './Icons.vue'
+import Label from './Label.vue'
 
 export default defineComponent({
   name: 'MInput',
   components: {
-    Icon,
+    Icons,
+    Label,
   },
   props: {
     modelValue: {
@@ -80,6 +75,11 @@ export default defineComponent({
     iconRight: {
       type: String,
       default: null,
+    },
+    type: {
+      type: String as PropType<InputTypes>,
+      default: InputTypes.Default,
+      validator: (value: string) => (Object.values(InputTypes) as string[]).includes(value),
     },
     size: {
       type: String as PropType<InputSizes>,
@@ -126,11 +126,6 @@ export default defineComponent({
       emit('update:modelValue', element.value)
     }
 
-    const type = computed(() => {
-      const { password } = props
-      return password ? 'password' : 'text'
-    })
-
     const computedClasses = computed(() => {
       const { disabled, size, status, icon, iconLeft, iconRight, alignment } = props
       
@@ -152,19 +147,7 @@ export default defineComponent({
       ]
     })
 
-    const computedLabelStyles = computed(() => {
-      const { alignment, labelWidth } = props
-      let styles = null
-
-      if (alignment === InputAlignments.Horizontal) {
-        const width = typeof labelWidth === 'number' ? `${labelWidth}px` : labelWidth
-        styles = { flex: `0 0 ${width}` }
-      }
-
-      return styles
-    })
-
-    return { computedClasses, computedLabelStyles, handleInput, type }
+    return { computedClasses, handleInput }
   },
 })
 </script>
@@ -186,28 +169,6 @@ export default defineComponent({
   &.mag-input-horizontal {
     flex-direction: row;
     align-items: flex-start;
-
-    &.mag-input-sm {
-      .mag-input-label {
-        margin: $input-sm-height / 2 $spacing-xs 0 0;
-      }
-    }
-
-    &.mag-input-md {
-      .mag-input-label {
-        margin: $input-md-height / 2 $spacing-xs 0 0;
-      }
-    }
-
-    &.mag-input-lg {
-      .mag-input-label {
-        margin: $input-lg-height / 2 $spacing-xs 0 0;
-      }
-    }
-
-    .mag-input-label {
-      transform: translateY(-50%);
-    }
   }
 
   &.mag-input-sm { 
@@ -248,7 +209,7 @@ export default defineComponent({
 
   &.mag-input-with-icon-left {
     &.mag-input-sm {
-      .mag-input-icon-left {
+      :deep(.mag-input-icon-left) {
         top: $input-sm-height / 2;
         left: $input-sm-padding-horizontal;
       }
@@ -259,7 +220,7 @@ export default defineComponent({
     }
 
     &.mag-input-md {
-      .mag-input-icon-left {
+      :deep(.mag-input-icon-left) {
         top: $input-md-height / 2;
         left: $input-md-padding-horizontal;
       }
@@ -270,7 +231,7 @@ export default defineComponent({
     }
 
     &.mag-input-lg {
-      .mag-input-icon-left {
+      :deep(.mag-input-icon-left) {
         font-size: $input-lg-font-size;
         top: $input-lg-height / 2;
         left: $input-lg-padding-horizontal;
@@ -284,7 +245,7 @@ export default defineComponent({
 
   &.mag-input-with-icon-right {
     &.mag-input-sm {
-      .mag-input-icon-right {
+      :deep(.mag-input-icon-right) {
         top: $input-sm-height / 2;
         right: $input-sm-padding-horizontal;
       }
@@ -295,7 +256,7 @@ export default defineComponent({
     }
 
     &.mag-input-md {
-      .mag-input-icon-right {
+      :deep(.mag-input-icon-right) {
         top: $input-md-height / 2;
         right: $input-md-padding-horizontal;
       }
@@ -306,7 +267,7 @@ export default defineComponent({
     }
 
     &.mag-input-lg {
-      .mag-input-icon-right {
+      :deep(.mag-input-icon-right) {
         top: $input-lg-height / 2;
         right: $input-lg-padding-horizontal;
       }
@@ -324,7 +285,7 @@ export default defineComponent({
       color: $input-disabled-font-color;
     }
     
-    .mag-input-icon-left, .mag-input-icon-right {
+    :deep(.mag-input-icon-left, .mag-input-icon-right) {
       cursor: no-drop;
       color: $input-disabled-font-color;
     }
@@ -363,14 +324,6 @@ export default defineComponent({
     }
   }
 
-  .mag-input-label {
-    flex-grow: 1;
-    color: $input-label-font-color;
-    font-size: $input-label-font-size;
-    font-weight: $input-label-font-weight;
-    margin-bottom: $spacing-xs;
-  }
-
   .mag-input-description {
     flex-grow: 1;
     color: $font-color-muted;
@@ -407,12 +360,6 @@ export default defineComponent({
       &:active {
         box-shadow: $input-active-shadow;
       }
-    }
-    
-    .mag-input-icon-left, .mag-input-icon-right {
-      color: $input-icon-color;
-      position: absolute;
-      transform: translateY(-50%);
     }
   }
 }

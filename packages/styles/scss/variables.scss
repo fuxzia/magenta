@@ -384,6 +384,18 @@ $input-placeholder-color: $font-color-muted;
 $input-disabled-bg: $gray-100;
 $input-disabled-font-color: $cool-gray-400;
 
+// ========
+// Checkbox
+// ========
+$checkbox-sm-size: 18px;
+$checkbox-md-size: 22px;
+$checkbox-lg-size: 28px;
+$checkbox-hover-color: $primary-color;
+$checkbox-checked-color: $primary-color;
+$checkbox-disabled-color: $input-disabled-font-color;
+$checkbox-transition: $input-transition;
+$checkbox-space-after: $spacing-xs;
+
 // =======
 // Buttons
 // =======
@@ -470,7 +482,7 @@ $table-cell-header-font-color: $font-color-contrast;
 $table-cell-header-font-weight: $font-weight-bold;
 $table-cell-header-text-transform: uppercase;
 $table-cell-header-white-space: nowrap;
-$table-cell-header-vertical-align: middle;
+$table-cell-selected-bg: lighten($primary-color, 47%);
 $table-cell-hoverable-bg: $cool-gray-100;
 $table-cell-sortable-hover-bg: $cool-gray-100;
 $table-rounded-radius: $radius-lg;
