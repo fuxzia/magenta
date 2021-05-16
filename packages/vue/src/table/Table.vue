@@ -24,6 +24,13 @@
               @sort="sort"
             >
               <Checkbox
+                v-if="th.MAGENTA_UI_IS_COLLAPSE"
+                :checked="computedAllRowsCollapsed"
+                :custom-icons="customCollapseIcons"
+                class="mag-table-collapser"
+                @click="collapseAllRows"
+              />
+              <Checkbox
                 v-if="th.MAGENTA_UI_IS_SELECTOR"
                 :checked="computedAllRowsSelected"
                 class="mag-table-selector"
@@ -36,36 +43,56 @@
           </tr>
         </thead>
         <tbody v-if="computedData">
-          <tr
+          <template
             v-for="(row, ri) in computedData"
             :key="ri"
           >
-            <Cell
-              v-for="(th, i) in computedColumns"
-              :key="th.key"
-              :position="i"
-              :all-columns="computedColumns"
-              :width="th.width"
-              :fixed="th.fixed"
-              :align="th.align"
-              :selected="row.MAGENTA_UI_IS_SELECTED"
-              :ellipsis="ellipsis"
-            >
-              <Checkbox
-                v-if="th.MAGENTA_UI_IS_SELECTOR"
-                :checked="row.MAGENTA_UI_IS_SELECTED"
-                class="mag-table-selector"
-                @click="selectRow(row, ri)"
-              />
-              <slot
-                v-else
-                :name="th.key"
-                :item="row"
+            <tr class="mag-table-row">
+              <Cell
+                v-for="(th, i) in computedColumns"
+                :key="th.key"
+                :position="i"
+                :all-columns="computedColumns"
+                :width="th.width"
+                :fixed="th.fixed"
+                :align="th.align"
+                :selected="row.MAGENTA_UI_IS_SELECTED"
+                :ellipsis="ellipsis"
               >
-                {{ row[th.key] || '' }}
-              </slot>
-            </Cell>
-          </tr>
+                <Checkbox
+                  v-if="th.MAGENTA_UI_IS_COLLAPSE"
+                  :checked="row.MAGENTA_UI_IS_COLLAPSED"
+                  :custom-icons="customCollapseIcons"
+                  class="mag-table-collapser"
+                  @click="collapseRow(row, ri)"
+                />
+                <Checkbox
+                  v-if="th.MAGENTA_UI_IS_SELECTOR"
+                  :checked="row.MAGENTA_UI_IS_SELECTED"
+                  class="mag-table-selector"
+                  @click="selectRow(row, ri)"
+                />
+                <slot
+                  v-else
+                  :name="th.key"
+                  :item="row"
+                >
+                  {{ row[th.key] || '' }}
+                </slot>
+              </Cell>
+            </tr>
+            <tr
+              v-if="collapsible"
+              :class="getRowCollapseClasses(row)"
+            >
+              <Cell :colspan="computedColumns.length + 3">
+                <slot
+                  name="row-collapsed"
+                  :item="row"
+                />
+              </Cell>
+            </tr>
+          </template>
         </tbody>
       </table>
     </Scroller>
@@ -74,7 +101,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, onBeforeUnmount, PropType, ref } from 'vue'
-import { TableColumn, TableData, TableRow, TableSortDirections } from '@magenta-ui/types'
+import { CheckboxCustomIcons, TableColumn, TableData, TableRow, TableSortDirections } from '@magenta-ui/types'
 import Cell from './Cell.vue'
 import Checkbox from '../checkbox/Checkbox.vue'
 import Scroller from './Scroller.vue'
@@ -103,6 +130,10 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    collapsible: {
+      type: Boolean,
+      default: false,
+    },
     bordered: {
       type: Boolean,
       default: false,
@@ -116,26 +147,41 @@ export default defineComponent({
       default: false,
     },
   },
-  emits: ['select', 'sort'],
+  emits: ['sort', 'select', 'collapse'],
   setup: (props, { emit }) => {
     const refTable = ref(null as HTMLTableElement)
     const list = ref([])
+    const customCollapseIcons: CheckboxCustomIcons = {
+      default: 'plus-square',
+      checked: 'minus-square',
+    }
 
     const computedColumns = computed(() => {
-      const { columns, selectable, bordered } = props
+      const { columns, selectable, bordered, collapsible } = props
 
       const columnsFixed = columns.filter(item => item.fixed && item.width)
       const columnsRemaining = columns.filter(item => !item.fixed || (item.fixed && !item.width))
+      const width = bordered ? 68 : 38
+
+      const collapse = {
+        width,  
+        align: 'center',
+        fixed: columnsFixed.length > 0,
+        MAGENTA_UI_IS_COLLAPSE: true,
+      }
       
       const selector = {
-        width: bordered ? 68 : 38,
+        width,
         align: 'center',
         fixed: columnsFixed.length > 0,
         MAGENTA_UI_IS_SELECTOR: true,
       }
+
+      const columnCollapse = collapsible ? [collapse] : []
       const columnSelector = selectable ? [selector] : []
       
       return [
+        ...columnCollapse,
         ...columnSelector,
         ...columnsFixed,
         ...columnsRemaining,
@@ -150,6 +196,10 @@ export default defineComponent({
       return computedData.value.filter((item: TableRow) => item.MAGENTA_UI_IS_SELECTED).length >= computedData.value.length
     })
 
+    const computedAllRowsCollapsed = computed(() => {
+      return computedData.value.filter((item: TableRow) => item.MAGENTA_UI_IS_COLLAPSED).length >= computedData.value.length
+    })
+
     const computedTableClasses = computed(() => {
       const { bordered, hoverable, rounded } = props
 
@@ -162,6 +212,15 @@ export default defineComponent({
         },
       ]
     })
+
+    const getRowCollapseClasses = (row: TableRow) => {
+      return [
+        'mag-table-row-collapse',
+        {
+          'mag-table-row-collapse-open': row.MAGENTA_UI_IS_COLLAPSED,
+        },
+      ]
+    }
 
     const resizeObserver = new ResizeObserver((entries) => {
       for (let entry of entries) {
@@ -178,6 +237,7 @@ export default defineComponent({
       const keys = [
         'MAGENTA_UI_IS_SELECTED',
         'MAGENTA_UI_IS_SELECTOR',
+        'MAGENTA_UI_IS_COLLAPSE',
       ]
       return data.map((item) => {
         const newItem = { ...item }
@@ -191,6 +251,11 @@ export default defineComponent({
       return clearMagentaKeys(selected.filter((item) => item.MAGENTA_UI_IS_SELECTED))
     }
 
+    const getCollapsedRows = () => {
+      const selected = computedData.value as Array<TableRow>
+      return clearMagentaKeys(selected.filter((item) => item.MAGENTA_UI_IS_COLLAPSED))
+    }
+
     const selectRow = (row: TableRow, index: number) => {
       const data = [...computedData.value]
       data[index] = {
@@ -199,6 +264,19 @@ export default defineComponent({
       }
       list.value = [...data]
       emit('select', [...getSelectedRows()])
+    }
+
+    const collapseRow = (row: TableRow, index: number) => {
+      const data = [...computedData.value]
+      data[index] = {
+        ...row,
+        MAGENTA_UI_IS_COLLAPSED: row.MAGENTA_UI_IS_COLLAPSED ? false : true,
+      }
+      list.value = [...data]
+      emit('collapse', {
+        target: data[index],
+        collapsed: [...getCollapsedRows()],
+      })
     }
 
     const selectAllRows = () => {
@@ -211,6 +289,22 @@ export default defineComponent({
         MAGENTA_UI_IS_SELECTED: statusAllSelected,
       }))
       emit('select', [...getSelectedRows()])
+    }
+
+    const collapseAllRows = () => {
+      const data = [...computedData.value]
+      const currentCollapsed = data.filter((item: TableRow) => item.MAGENTA_UI_IS_COLLAPSED).length
+      const statusAllCollapsed = currentCollapsed !== data.length ? true : false
+      
+      list.value = data.map((item: TableRow) => ({
+        ...item,
+        MAGENTA_UI_IS_COLLAPSED: statusAllCollapsed,
+      }))
+
+      emit('collapse', {
+        target: [...getCollapsedRows()],
+        collapsed: [...getCollapsedRows()],
+      })
     }
 
     const sort = ({ key, direction, sorter }) => {
@@ -281,7 +375,21 @@ export default defineComponent({
       rows.forEach(row => resizeObserver.unobserve(row))
     })
 
-    return { refTable, computedTableClasses, computedColumns, computedAllRowsSelected, computedData, sort, selectRow, selectAllRows }
+    return {
+      refTable,
+      computedTableClasses,
+      computedColumns,
+      computedAllRowsSelected,
+      computedAllRowsCollapsed,
+      computedData,
+      customCollapseIcons,
+      getRowCollapseClasses,
+      sort,
+      selectRow,
+      selectAllRows,
+      collapseRow,
+      collapseAllRows,
+    }
   },
 })
 </script>
@@ -347,11 +455,12 @@ export default defineComponent({
         border-top: 1px solid $table-border-color;
       }
     }
+    .mag-table-row-collapse {
+      display: none;
 
-    .mag-table-selector {
-      position: relative;
-      margin: 0;
-      top: 1px;
+      &.mag-table-row-collapse-open {
+        display: table-row;
+      }
     }
   }
 }

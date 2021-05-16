@@ -40,6 +40,14 @@ export enum ButtonShapes {
 }
 
 /**
+ * Checkbox
+ */
+ export type CheckboxCustomIcons = {
+  default: string,
+  checked: string,
+}
+
+/**
  * Dropdown
  */
 export enum DropdownPositions {

@@ -22,9 +22,11 @@
         hidden
         @input="handleInput"
       >
-      <div class="mag-checkbox-marker">
-        <Icon :icon="icon" />
-      </div>
+      <Marker
+        :size="size"
+        :checked="checkboxValue"
+        :custom-icons="customIcons"
+      />
       <div
         v-if="$slots.default"
         class="mag-checkbox-content"
@@ -37,15 +39,15 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType, toRefs, ref, watch } from 'vue'
-import { InputAlignments, InputSizes, InputStatus } from '@magenta-ui/types'
-import Icon from '../icon/Feather.vue'
+import { CheckboxCustomIcons, InputAlignments, InputSizes, InputStatus } from '@magenta-ui/types'
 import Label from '../input/Label.vue'
+import Marker from './Marker.vue'
 
 export default defineComponent({
   name: 'MCheckbox',
   components: {
-    Icon,
     Label,
+    Marker,
   },
   props: {
     modelValue: {
@@ -83,6 +85,10 @@ export default defineComponent({
       default: InputAlignments.Default,
       validator: (value: string) => (Object.values(InputAlignments) as string[]).includes(value),
     },
+    customIcons: {
+      type: Object as PropType<CheckboxCustomIcons>,
+      default: null,
+    },
   },
   emits: ['change', 'checked', 'update:modelValue'],
   setup: (props, { emit }) => {
@@ -100,10 +106,6 @@ export default defineComponent({
       emit('checked', checkboxValue.value)
       emit('update:modelValue', checkboxValue.value)
     }
-
-    const icon = computed(() => {
-      return checkboxValue.value ? 'check-square' : 'square'
-    })
     
     const computedClasses = computed(() => {
       const { disabled, size, status, alignment } = props
@@ -133,7 +135,7 @@ export default defineComponent({
       checkboxValue.value = value
     })
 
-    return { checkboxValue, computedClasses, icon, toggle }
+    return { checkboxValue, computedClasses, toggle }
   },
 })
 </script>
@@ -171,7 +173,7 @@ export default defineComponent({
     }
     .mag-checkbox-content {
       font-size: $font-size-lg;
-      top: 1px;
+      top: 0;
     }
   }
 
@@ -183,16 +185,11 @@ export default defineComponent({
     }
   }
 
-  &.mag-checkbox-checked {
-    .mag-checkbox-marker {
-      color: $checkbox-checked-color;
-    }
-  }
-
   .mag-checkbox-wrapper {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
+    transition: $checkbox-transition;
 
     .mag-checkbox-content {
       position: relative;
@@ -203,12 +200,6 @@ export default defineComponent({
       svg {
         fill: white;
       }
-    }
-
-    .mag-checkbox-marker {
-      cursor: pointer;
-      transition: $checkbox-transition;
-      line-height: 1;
     }
 
     &:hover {  
