@@ -10,15 +10,19 @@
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "."
+    "baseUrl": ".",
+    "types":[
+      "@types/jest",
+      "@testing-library/jest-dom"
+    ]
   },
   "include": [
+    "src/shims-vue.d.ts",
+    "src/index.ts",
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue",
-    "shims-vue.d.ts",
-    "index.ts"
+    "src/**/*.vue"
   ],
   "exclude": [
     "node_modules"

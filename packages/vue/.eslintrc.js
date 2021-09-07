@@ -20,6 +20,7 @@ module.exports = {
     'no-unused-vars': ['error'],
     'semi': ['error', 'never'],
     'comma-dangle': ['error', 'always-multiline'],
+    '@typescript-eslint/no-explicit-any': 'off',
     'vue/no-v-html': 'off',
     'vue/attributes-order': 'error',
     'vue/order-in-components': 'error',

@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType, ref } from 'vue'
-import { TableColumn, TableAlignments, TableSortDirections } from '@magenta-ui/types'
+import { TableColumn, TableAlignments, TableSortDirections, TableEvents } from '@magenta-ui/types'
 import Sorter from './Sorter.vue'
 
 export default defineComponent({
@@ -61,6 +61,10 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    bordered: {
+      type: Boolean,
+      default: false,
+    },
     position: {
       type: Number,
       default: 0,
@@ -78,7 +82,7 @@ export default defineComponent({
     const tag = computed(() => props.header ? 'th' : 'td')
 
     const computedCellClasses = computed(() => {
-      const { header, fixed, width, ellipsis, align, sortable, selected } = props
+      const { header, fixed, width, ellipsis, align, sortable, selected, bordered } = props
 
       return [
         'mag-table-cell',
@@ -89,6 +93,7 @@ export default defineComponent({
           'mag-table-cell-ellipsis': ellipsis,
           'mag-table-cell-sortable': sortable,
           'mag-table-cell-selected': selected,
+          'mag-table-cell-bordered': bordered,
         },
       ]
     })
@@ -144,7 +149,7 @@ export default defineComponent({
           sortDirection.value = TableSortDirections.Reset
       }
 
-      emit('sort', {
+      emit(TableEvents.Sort, {
         key: props.columnKey,
         direction: sortDirection.value,
         sorter: props.sortable,
@@ -259,6 +264,22 @@ export default defineComponent({
 
   &.mag-table-cell-selected {
     background-color: $table-cell-selected-bg !important;
+  }
+
+  &.mag-table-cell-bordered {
+    border-right: 1px solid $table-border-color;
+
+    &.mag-table-cell-header {
+      border-top: 1px solid $table-border-color;
+    }
+
+    &:first-child {
+      padding-left: $table-cell-padding-horizontal;
+    }
+    &:last-child {
+      padding-right: $table-cell-padding-horizontal;
+      border-left: 1px solid $table-border-color;
+    }
   }
 
   .mag-table-cell-content-wrapper {

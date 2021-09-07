@@ -1,12 +1,13 @@
 {
   "name": "@magenta-ui/vue",
   "version": "0.4.3",
-  "main": "index.ts",
+  "main": "src/index.ts",
   "license": "MIT",
   "scripts": {
     "build": "vue-tsc --noEmit && vite build",
     "lint:check": "eslint --ext .js,.vue,.ts src",
-    "lint:fix": "eslint --fix --ext .js,.vue,.ts src"
+    "lint:fix": "eslint --fix --ext .js,.vue,.ts src",
+    "test": "jest src"
   },
   "dependencies": {
     "@magenta-ui/styles": "^0.4.3",
@@ -15,17 +16,24 @@
     "@types/prismjs": "1.16.4",
     "feather-icons": "4.28.0",
     "prismjs": "1.23.0",
-    "vue": "3.0.5",
+    "vue": "3.2.9",
     "vue-prism-editor": "2.0.0-alpha.2",
     "vue-router": "4"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/vue": "^6.4.2",
+    "@types/jest": "^27.0.1",
     "@typescript-eslint/eslint-plugin": "4.22.0",
     "@typescript-eslint/parser": "4.22.0",
+    "@vue/compiler-sfc": "^3.2.9",
     "eslint": "7.24.0",
     "eslint-plugin-vue": "7.9.0",
+    "jest": "^26.1.0",
     "sass": "1.32.8",
+    "ts-jest": "^26.0.5",
     "typescript": "4.2.4",
+    "vue-jest": "^5.0.0-alpha.10",
     "vue-tsc": "0.0.15"
   },
   "publishConfig": {

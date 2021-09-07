@@ -1,125 +1,60 @@
 <template>
   <div class="mag-table-wrapper">
-    <Scroller
-      :columns="computedColumns"
-      :selectable="selectable"
-    >
-      <table
-        ref="refTable"
-        :class="computedTableClasses"
-      >
-        <thead v-if="computedColumns">
-          <tr>
-            <Cell
-              v-for="(th, i) in computedColumns"
-              :key="i"
-              :position="i"
-              :all-columns="computedColumns"
-              :column-key="th.key"
-              :width="th.width"
-              :fixed="th.fixed"
-              :align="th.align"
-              :sortable="th.sortable"
-              :header="true"
-              @sort="sort"
-            >
-              <Checkbox
-                v-if="th.MAGENTA_UI_IS_COLLAPSE"
-                :checked="computedAllRowsCollapsed"
-                :custom-icons="customCollapseIcons"
-                class="mag-table-collapser"
-                @click="collapseAllRows"
-              />
-              <Checkbox
-                v-if="th.MAGENTA_UI_IS_SELECTOR"
-                :checked="computedAllRowsSelected"
-                class="mag-table-selector"
-                @click="selectAllRows"
-              />
-              <template v-else>
-                {{ th.label }}
-              </template>
-            </Cell>
-          </tr>
-        </thead>
-        <tbody v-if="computedData">
-          <template
-            v-for="(row, ri) in computedData"
-            :key="ri"
-          >
-            <tr class="mag-table-row">
-              <Cell
-                v-for="(th, i) in computedColumns"
-                :key="th.key"
-                :position="i"
-                :all-columns="computedColumns"
-                :width="th.width"
-                :fixed="th.fixed"
-                :align="th.align"
-                :selected="row.MAGENTA_UI_IS_SELECTED"
-                :ellipsis="ellipsis"
-              >
-                <Checkbox
-                  v-if="th.MAGENTA_UI_IS_COLLAPSE"
-                  :checked="row.MAGENTA_UI_IS_COLLAPSED"
-                  :custom-icons="customCollapseIcons"
-                  class="mag-table-collapser"
-                  @click="collapseRow(row, ri)"
-                />
-                <Checkbox
-                  v-if="th.MAGENTA_UI_IS_SELECTOR"
-                  :checked="row.MAGENTA_UI_IS_SELECTED"
-                  class="mag-table-selector"
-                  @click="selectRow(row, ri)"
-                />
-                <slot
-                  v-else
-                  :name="th.key"
-                  :item="row"
-                >
-                  {{ row[th.key] || '' }}
-                </slot>
-              </Cell>
-            </tr>
-            <tr
-              v-if="collapsible"
-              :class="getRowCollapseClasses(row)"
-            >
-              <Cell :colspan="computedColumns.length + 3">
-                <slot
-                  name="row-collapsed"
-                  :item="row"
-                />
-              </Cell>
-            </tr>
+    <Scroller :columns="tableColumns">
+      <table :class="tableClasses">
+        <Header
+          v-bind="$props"
+          :data="tableData"
+          :columns="tableColumns"
+          @sort="emitSort"
+          @select="emitSelect"
+          @collapse="emitCollapse"
+          @update-all-rows="updateAllRows"
+        />
+        <Body
+          v-bind="$props"
+          :data="tableData"
+          :columns="tableColumns"
+          :ellipsis="ellipsis"
+          :bordered="bordered"
+          :hoverable="hoverable"
+          @select="emitSelect"
+          @collapse="emitCollapse"
+          @update-row="updateRow"
+        >
+          <template #row-collapsed="{ item }">
+            <slot
+              name="row-collapsed"
+              :item="item"
+            />
           </template>
-        </tbody>
+        </Body>
       </table>
     </Scroller>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, onBeforeUnmount, PropType, ref } from 'vue'
-import { CheckboxCustomIcons, TableColumn, TableData, TableRow, TableSortDirections } from '@magenta-ui/types'
-import Cell from './Cell.vue'
-import Checkbox from '../checkbox/Checkbox.vue'
+import { computed, defineComponent, PropType, ref } from 'vue'
+import { TableColumn, TableData, TableEvents, TableRow } from '@magenta-ui/types'
+import Body from './Body.vue'
+import Header from './Header.vue'
 import Scroller from './Scroller.vue'
 
 export default defineComponent({
   name: 'MTable',
   components: {
-    Cell,
-    Checkbox,
+    Body,
+    Header,
     Scroller,
   },
   props: {
-    columns: {
-      type: Array as PropType<TableColumn[]>,
+    data: {
+      type: Array as PropType<TableData<any>>,
       default: null,
     },
-    data: {
-      type: Array as PropType<TableData<unknown>>,
+    columns: {
+      type: Array as PropType<TableColumn[]>,
       default: null,
     },
     hoverable: {
@@ -149,14 +84,9 @@ export default defineComponent({
   },
   emits: ['sort', 'select', 'collapse'],
   setup: (props, { emit }) => {
-    const refTable = ref(null as HTMLTableElement)
-    const list = ref([])
-    const customCollapseIcons: CheckboxCustomIcons = {
-      default: 'plus-square',
-      checked: 'minus-square',
-    }
+    const localData = ref([])
 
-    const computedColumns = computed(() => {
+    const tableColumns = computed(() => {
       const { columns, selectable, bordered, collapsible } = props
 
       const columnsFixed = columns.filter(item => item.fixed && item.width)
@@ -164,12 +94,12 @@ export default defineComponent({
       const width = bordered ? 68 : 38
 
       const collapse = {
-        width,  
+        width,
         align: 'center',
         fixed: columnsFixed.length > 0,
         MAGENTA_UI_IS_COLLAPSE: true,
       }
-      
+
       const selector = {
         width,
         align: 'center',
@@ -179,7 +109,7 @@ export default defineComponent({
 
       const columnCollapse = collapsible ? [collapse] : []
       const columnSelector = selectable ? [selector] : []
-      
+
       return [
         ...columnCollapse,
         ...columnSelector,
@@ -188,19 +118,13 @@ export default defineComponent({
       ]
     })
 
-    const computedData = computed(() => {
-      return list.value.length > 0 ? list.value as [] : props.data
+    const tableData = computed(() => {
+      return localData.value.length > 0
+        ? localData.value as []
+        : props.data
     })
 
-    const computedAllRowsSelected = computed(() => {
-      return computedData.value.filter((item: TableRow) => item.MAGENTA_UI_IS_SELECTED).length >= computedData.value.length
-    })
-
-    const computedAllRowsCollapsed = computed(() => {
-      return computedData.value.filter((item: TableRow) => item.MAGENTA_UI_IS_COLLAPSED).length >= computedData.value.length
-    })
-
-    const computedTableClasses = computed(() => {
+    const tableClasses = computed(() => {
       const { bordered, hoverable, rounded } = props
 
       return [
@@ -213,182 +137,32 @@ export default defineComponent({
       ]
     })
 
-    const getRowCollapseClasses = (row: TableRow) => {
-      return [
-        'mag-table-row-collapse',
-        {
-          'mag-table-row-collapse-open': row.MAGENTA_UI_IS_COLLAPSED,
-        },
-      ]
+    const updateRow = (payload: { row: TableRow, position: number }) => {
+      const { position, row } = payload
+      const data = [...tableData.value]
+      data[position] = row
+      localData.value = data
+
+      console.log(localData.value)
     }
 
-    const resizeObserver = new ResizeObserver((entries) => {
-      for (let entry of entries) {
-        const tr = entry.target as HTMLTableRowElement
-        if (tr) {
-          tr.querySelectorAll('td, th').forEach((td) => {
-            (td as HTMLElement).style.height = `${tr.scrollHeight}px`
-          })
-        }
-      }
-    })
-
-    const clearMagentaKeys = (data: Array<TableRow>) => {
-      const keys = [
-        'MAGENTA_UI_IS_SELECTED',
-        'MAGENTA_UI_IS_SELECTOR',
-        'MAGENTA_UI_IS_COLLAPSE',
-      ]
-      return data.map((item) => {
-        const newItem = { ...item }
-        keys.forEach(key => delete newItem[key])
-        return { ...newItem }
-      })
+    const updateAllRows = (payload: { rows: TableData<any> }) => {
+      localData.value = payload.rows
     }
 
-    const getSelectedRows = () => {
-      const selected = computedData.value as Array<TableRow>
-      return clearMagentaKeys(selected.filter((item) => item.MAGENTA_UI_IS_SELECTED))
-    }
-
-    const getCollapsedRows = () => {
-      const selected = computedData.value as Array<TableRow>
-      return clearMagentaKeys(selected.filter((item) => item.MAGENTA_UI_IS_COLLAPSED))
-    }
-
-    const selectRow = (row: TableRow, index: number) => {
-      const data = [...computedData.value]
-      data[index] = {
-        ...row,
-        MAGENTA_UI_IS_SELECTED: row.MAGENTA_UI_IS_SELECTED ? false : true,
-      }
-      list.value = [...data]
-      emit('select', [...getSelectedRows()])
-    }
-
-    const collapseRow = (row: TableRow, index: number) => {
-      const data = [...computedData.value]
-      data[index] = {
-        ...row,
-        MAGENTA_UI_IS_COLLAPSED: row.MAGENTA_UI_IS_COLLAPSED ? false : true,
-      }
-      list.value = [...data]
-      emit('collapse', {
-        target: data[index],
-        collapsed: [...getCollapsedRows()],
-      })
-    }
-
-    const selectAllRows = () => {
-      const data = [...computedData.value]
-      const currentSelected = data.filter((item: TableRow) => item.MAGENTA_UI_IS_SELECTED).length
-      const statusAllSelected = currentSelected !== data.length ? true : false
-      
-      list.value = data.map((item: TableRow) => ({
-        ...item,
-        MAGENTA_UI_IS_SELECTED: statusAllSelected,
-      }))
-      emit('select', [...getSelectedRows()])
-    }
-
-    const collapseAllRows = () => {
-      const data = [...computedData.value]
-      const currentCollapsed = data.filter((item: TableRow) => item.MAGENTA_UI_IS_COLLAPSED).length
-      const statusAllCollapsed = currentCollapsed !== data.length ? true : false
-      
-      list.value = data.map((item: TableRow) => ({
-        ...item,
-        MAGENTA_UI_IS_COLLAPSED: statusAllCollapsed,
-      }))
-
-      emit('collapse', {
-        target: [...getCollapsedRows()],
-        collapsed: [...getCollapsedRows()],
-      })
-    }
-
-    const sort = ({ key, direction, sorter }) => {
-      const data = [...computedData.value]
-      
-      if (direction === TableSortDirections.Reset) {
-        return
-      }
-      
-      const defaultSorter = (itemA: TableColumn, itemB: TableColumn) => {
-        let a = itemA[key] || ''
-        let b = itemB[key] || ''
-
-        switch (typeof a) {
-          case 'string':
-            a = a ? a.toUpperCase() : ''
-            break
-
-          case 'number':
-            a = a || 0
-            break
-
-          default:
-          case 'boolean':
-            a = a ? 1 : 0
-            break
-        }
-
-        switch (typeof b) {
-          case 'string':
-            b = b ? b.toUpperCase() : ''
-            break
-
-          case 'number':
-            b = b || 0
-            break
-
-          default:
-          case 'boolean':
-            b = b ? 1 : 0
-            break
-        }
-
-        if (direction === TableSortDirections.Up) {
-          return (a < b) ? -1 : (a > b) ? 1 : 0
-        } else {
-          return (b < a) ? -1 : (b > a) ? 1 : 0
-        }
-      }
-
-      const listSorter = typeof sorter === 'function' ? sorter : defaultSorter
-
-      list.value = data.sort(listSorter)
-      emit('sort', {
-        key,
-        direction,
-        data: clearMagentaKeys([...list.value]),
-      })
-    }
-
-    onMounted(() => {
-      const rows = refTable.value.querySelectorAll('tbody tr, thead tr')
-      rows.forEach(row => resizeObserver.observe(row))
-    })
-
-    onBeforeUnmount(() => {
-      const rows = refTable.value.querySelectorAll('tbody tr, thead tr')
-      rows.forEach(row => resizeObserver.unobserve(row))
-    })
+    const emitSort = (payload) => emit(TableEvents.Sort, payload)
+    const emitSelect = (payload) => emit(TableEvents.Select, payload)
+    const emitCollapse = (payload) => emit(TableEvents.Collapse, payload)
 
     return {
-      refTable,
-      computedTableClasses,
-      computedColumns,
-      computedAllRowsSelected,
-      computedAllRowsCollapsed,
-      computedData,
-      customCollapseIcons,
-      getRowCollapseClasses,
-      sort,
-      selectRow,
-      selectAllRows,
-      collapseRow,
-      collapseAllRows,
+      emitSort,
+      emitSelect,
+      emitCollapse,
+      tableData,
+      tableColumns,
+      tableClasses,
+      updateAllRows,
+      updateRow,
     }
   },
 })
@@ -409,25 +183,16 @@ export default defineComponent({
     border-collapse: separate;
     border-spacing: 0;
 
-    &.mag-table-hoverable { 
-      > tbody tr:hover {
-        > td {
-          transition: $table-transition;
-          background-color: $table-cell-hoverable-bg !important;
+    &.mag-table-bordered {
+      :deep(.mag-table-cell) {
+        &:first-child {
+          border-left: 1px solid $table-border-color;
         }
       }
     }
-    
-    &.mag-table-rounded { 
-      > thead tr th {
-        &:first-child {
-          border-top-left-radius: $table-rounded-radius;
-        }
-        &:last-child {
-          border-top-right-radius: $table-rounded-radius;
-        }
-      }
-      > tbody tr:last-child td {
+
+    &.mag-table-rounded {
+      :deep(tr.mag-table-row:nth-last-child(2) .mag-table-cell) {
         &:first-child {
           border-bottom-left-radius: $table-rounded-radius;
         }
@@ -435,31 +200,14 @@ export default defineComponent({
           border-bottom-right-radius: $table-rounded-radius;
         }
       }
-    }
-    
-    &.mag-table-bordered { 
-      > thead tr th,
-      > tbody tr td {
-        border-left: 1px solid $table-border-color;
 
+      :deep(.mag-table-header .mag-table-cell) {
         &:first-child {
-          padding-left: $table-cell-padding-horizontal;
+          border-top-left-radius: $table-rounded-radius;
         }
         &:last-child {
-          padding-right: $table-cell-padding-horizontal;
-          border-right: 1px solid $table-border-color;
+          border-top-right-radius: $table-rounded-radius;
         }
-      }
-
-      > thead tr th {
-        border-top: 1px solid $table-border-color;
-      }
-    }
-    .mag-table-row-collapse {
-      display: none;
-
-      &.mag-table-row-collapse-open {
-        display: table-row;
       }
     }
   }

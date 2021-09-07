@@ -180,6 +180,12 @@ export type TableRow = {
 
 export type TableData<T> = Array<T>
 
+export enum TableEvents {
+  Sort = 'sort',
+  Collapse = 'collapse',
+  Select = 'select',
+}
+
 /**
  * Text
  */
