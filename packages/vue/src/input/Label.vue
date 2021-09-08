@@ -2,7 +2,6 @@
   <label
     v-if="label || slots.label"
     :style="computedLabelStyles"
-    class="mag-input-label"
   >
     <slot name="label">
       {{ label }}
@@ -54,42 +53,3 @@ export default defineComponent({
   },
 })
 </script>
-
-<style lang="scss" scoped>
-
-@import '@magenta-ui/styles/scss/variables.scss';
-
-.mag-input-label {
-  flex-grow: 1;
-  cursor: text;
-  color: $input-label-font-color;
-  font-size: $input-label-font-size;
-  font-weight: $input-label-font-weight;
-  margin-bottom: $spacing-xs;
-}
-
-.mag-input-horizontal {
-
-  &.mag-input-sm {
-    .mag-input-label {
-      margin: $input-sm-height / 2 $spacing-xs 0 0;
-    }
-  }
-
-  &.mag-input-md {
-    .mag-input-label {
-      margin: $input-md-height / 2 $spacing-xs 0 0;
-    }
-  }
-
-  &.mag-input-lg {
-    .mag-input-label {
-      margin: $input-lg-height / 2 $spacing-xs 0 0;
-    }
-  }
-
-  .mag-input-label {
-    transform: translateY(-50%);
-  }
-}
-</style>

@@ -352,20 +352,21 @@ $shadow-focus: 0 0 0 calc(4px) lighten($primary-color, 40%);
 // ======
 // Inputs
 // ======
-$input-sm-height: 38px;
+$input-sm-height: 44px;
 $input-sm-radius: $radius-md;
 $input-sm-font-size: $font-size-sm;
 $input-sm-padding-vertical: 0;
 $input-sm-padding-horizontal: $spacing-sm;
-$input-md-height: 42px;
+$input-md-height: 50px;
 $input-md-radius: $radius-md;
 $input-md-padding-vertical: 0;
 $input-md-padding-horizontal: $spacing-sm;
-$input-lg-height: 48px;
+$input-lg-height: 56px;
 $input-lg-radius: $radius-md;
 $input-lg-font-size: $font-size-lg;
 $input-lg-padding-vertical: 0;
 $input-lg-padding-horizontal: $spacing-sm + 4px;
+$input-base-bg: $white;
 $input-border-color: $border-color-base;
 $input-base-height: $input-md-height;
 $input-base-radius: $input-md-radius;
@@ -378,6 +379,7 @@ $input-error-shadow: 0 0 0 1px $danger-color;
 $input-success-shadow: 0 0 0 1px $success-color;
 $input-warning-shadow: 0 0 0 1px $warning-color;
 $input-label-font-size: $font-size-sm;
+$input-label-font-size-active: 12px;
 $input-label-font-weight: $font-weight-medium;
 $input-label-font-color: $font-color-base;
 $input-placeholder-color: $font-color-muted;

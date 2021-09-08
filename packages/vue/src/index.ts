@@ -1,47 +1,47 @@
 import { defineAsyncComponent } from 'vue'
 
 // Avatar
-const Avatar = defineAsyncComponent(() => import('./src/avatar/Avatar.vue'))
-const AvatarGroup = defineAsyncComponent(() => import('./src/avatar-group/AvatarGroup.vue'))
+const Avatar = defineAsyncComponent(() => import('./avatar/Avatar.vue'))
+const AvatarGroup = defineAsyncComponent(() => import('./avatar-group/AvatarGroup.vue'))
 
 // Button
-const Button = defineAsyncComponent(() => import('./src/button/Button.vue'))
-const ButtonGroup = defineAsyncComponent(() => import('./src/button-group/ButtonGroup.vue'))
+const Button = defineAsyncComponent(() => import('./button/Button.vue'))
+const ButtonGroup = defineAsyncComponent(() => import('./button-group/ButtonGroup.vue'))
 
 // Checkbox
-const Checkbox = defineAsyncComponent(() => import('./src/checkbox/Checkbox.vue'))
+const Checkbox = defineAsyncComponent(() => import('./checkbox/Checkbox.vue'))
 
 // Dropdown
-const Dropdown = defineAsyncComponent(() => import('./src/dropdown/Dropdown.vue'))
-const DropdownMenu = defineAsyncComponent(() => import('./src/dropdown-menu/DropdownMenu.vue'))
-const DropdownMenuItem = defineAsyncComponent(() => import('./src/dropdown-menu-item/DropdownMenuItem.vue'))
+const Dropdown = defineAsyncComponent(() => import('./dropdown/Dropdown.vue'))
+const DropdownMenu = defineAsyncComponent(() => import('./dropdown-menu/DropdownMenu.vue'))
+const DropdownMenuItem = defineAsyncComponent(() => import('./dropdown-menu-item/DropdownMenuItem.vue'))
 
 // Grid
-const Grid = defineAsyncComponent(() => import('./src/grid/Grid.vue'))
+const Grid = defineAsyncComponent(() => import('./grid/Grid.vue'))
 
 // Icon
-const Icon = defineAsyncComponent(() => import('./src/icon/Feather.vue'))
+const Icon = defineAsyncComponent(() => import('./icon/Feather.vue'))
 
 // Input
-const Input = defineAsyncComponent(() => import('./src/input/Input.vue'))
-const InputPassword = defineAsyncComponent(() => import('./src/input-password/InputPassword.vue'))
+import Input from './Input/Input.vue'
+import InputPassword from './input-password/InputPassword.vue'
 
 // Link
-const Link = defineAsyncComponent(() => import('./src/link/Link.vue'))
+const Link = defineAsyncComponent(() => import('./link/Link.vue'))
 
 // Loader
-const Spinner = defineAsyncComponent(() => import('./src/spinner/Spinner.vue'))
+const Spinner = defineAsyncComponent(() => import('./spinner/Spinner.vue'))
 
 // Spacer
-const Spacer = defineAsyncComponent(() => import('./src/spacer/Spacer.vue'))
+const Spacer = defineAsyncComponent(() => import('./spacer/Spacer.vue'))
 
 // Table
-const Table = defineAsyncComponent(() => import('./src/table/Table.vue'))
+const Table = defineAsyncComponent(() => import('./table/Table.vue'))
 
 // Typography
-const Code = defineAsyncComponent(() => import('./src/typography/Code.vue'))
-const Heading = defineAsyncComponent(() => import('./src/typography/Heading.vue'))
-const Text = defineAsyncComponent(() => import('./src/typography/Text.vue'))
+const Code = defineAsyncComponent(() => import('./typography/Code.vue'))
+const Heading = defineAsyncComponent(() => import('./typography/Heading.vue'))
+const Text = defineAsyncComponent(() => import('./typography/Text.vue'))
 
 // Components
 export {
