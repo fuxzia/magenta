@@ -311,7 +311,7 @@ export default defineComponent({
     }
   }
 
-  &---disabled {
+  &--disabled {
     .mag-input__component {
       cursor: no-drop;
       background: $input-disabled-bg;
