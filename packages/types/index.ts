@@ -115,9 +115,9 @@ export enum InputStatus {
 }
 
 export enum InputAlignments {
-  Default = 'vertical',
-  Vertical = 'vertical',
-  Horizontal = 'horizontal',
+  Default = 'left',
+  Left = 'left',
+  Right = 'right',
 }
 
 /**

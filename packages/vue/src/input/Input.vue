@@ -1,19 +1,22 @@
 <template>
-  <div :class="computedClasses">
+  <div
+    :class="computedClasses"
+    data-testid="input"
+  >
     <div class="mag-input__wrapper">
-      <Label
-        :slots="$slots"
-        :label="label"
+      <label
+        v-if="label || slots.label"
         class="mag-input__label"
       >
-        <template #label>
-          <slot name="label" />
-        </template>
-      </Label>
+        <slot name="label">
+          {{ label }}
+        </slot>
+      </label>
       <Icon
         v-if="icon || iconLeft"
         :icon="icon || iconLeft"
         class="mag-input__icon-left"
+        data-testid="input-icon-left"
       >
         <template #icon-left>
           <slot name="icon-left" />
@@ -23,6 +26,7 @@
         v-if="iconRight"
         :icon="iconRight"
         class="mag-input__icon-right"
+        data-testid="input-icon-right"
       >
         <template #icon-right>
           <slot name="icon-right" />
@@ -34,6 +38,7 @@
         :type="type"
         :disabled="disabled"
         class="mag-input__component"
+        data-testid="input-component"
         @input="handleInput"
         @focus="handleFocus"
         @blur="handleBlur"
@@ -49,18 +54,20 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType, ref } from 'vue'
+import { computed, defineComponent, PropType, ref, Slot } from 'vue'
 import { InputAlignments, InputSizes, InputStatus, InputTypes } from '@magenta-ui/types'
 import Icon from '../icon/Feather.vue'
-import Label from './Label.vue'
 
 export default defineComponent({
   name: 'MInput',
   components: {
     Icon,
-    Label,
   },
   props: {
+    slots: {
+      type: Object as PropType<Slot>,
+      default: () => ({}),
+    },
     modelValue: {
       type: String,
       default: null,
@@ -108,10 +115,6 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
-    password: {
-      type: Boolean,
-      default: false,
-    },
     alignment: {
       type: String as PropType<InputAlignments>,
       default: InputAlignments.Default,
@@ -155,7 +158,7 @@ export default defineComponent({
     })
 
     const computedClasses = computed(() => {
-      const { disabled, size, status, icon, iconLeft, iconRight } = props
+      const { disabled, size, status, icon, iconLeft, iconRight, alignment } = props
       
       return [
         'mag-input', 
@@ -170,6 +173,8 @@ export default defineComponent({
           'mag-input--success': status === InputStatus.Success,
           'mag-input--with-icon-left': icon || iconLeft,
           'mag-input--with-icon-right': iconRight,
+          'mag-input--align-left': alignment === InputAlignments.Left,
+          'mag-input--align-right': alignment === InputAlignments.Right,
         },
       ]
     })
@@ -208,33 +213,51 @@ export default defineComponent({
     sm: (
       height: $input-sm-height,
       font-size: $input-sm-font-size,
+      padding-vertical: $input-sm-padding-vertical,
       padding-horizontal: $input-sm-padding-horizontal,
     ),
     md: (
       height: $input-md-height,
       font-size: $font-size-base,
+      padding-vertical: $input-md-padding-vertical,
       padding-horizontal: $input-md-padding-horizontal,
     ),
     lg: (
       height: $input-lg-height,
       font-size: $input-lg-font-size,
+      padding-vertical: $input-lg-padding-vertical,
       padding-horizontal: $input-lg-padding-horizontal,
     )
   );
 
+  $input-text-alignments: ('left', 'right');
+
   @each $size, $configs in $input-sizes {
     &--#{$size} {
-      .mag-input__label {
-        left: map-get($configs, 'padding-horizontal');
+      
+      @each $alignment in $input-text-alignments {
+        &.mag-input--align-#{$alignment} {
+          .mag-input__component {
+            text-align: #{$alignment};
+          }
+        }
       }
 
       .mag-input__icon-left {
         left: map-get($configs, 'padding-horizontal');
       }
 
+      .mag-input__icon-right {
+        right: map-get($configs, 'padding-horizontal');
+      }
+
+      .mag-input__label {
+        left: map-get($configs, 'padding-horizontal') + 1px;
+      }
+
       .mag-input__component {
         height: map-get($configs, 'height');
-        padding-left: map-get($configs, 'padding-horizontal');
+        padding: map-get($configs, 'padding-vertical') map-get($configs, 'padding-horizontal');
         font-size: map-get($configs, 'font-size');
         line-height: map-get($configs, 'height');
       }

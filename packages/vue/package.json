@@ -7,7 +7,7 @@
     "build": "vue-tsc --noEmit && vite build",
     "lint:check": "eslint --ext .js,.vue,.ts src",
     "lint:fix": "eslint --fix --ext .js,.vue,.ts src",
-    "test": "jest src"
+    "test": "jest src --verbose -c jest.config.js"
   },
   "dependencies": {
     "@magenta-ui/styles": "^0.4.3",

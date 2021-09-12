@@ -1,15 +1,12 @@
 <template>
   <div :class="computedClasses">
-    <Label
+    <label
       :slots="$slots"
-      :label="label"
-      :label-width="labelWidth"
-      :alignment="alignment"
     >
-      <template #label>
-        <slot name="label" />
-      </template>
-    </Label>
+      <slot name="label">
+        {{ label }}
+      </slot>
+    </label>
     <div
       class="mag-checkbox-wrapper"
       @click="toggle"
@@ -39,14 +36,12 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType, toRefs, ref, watch } from 'vue'
-import { CheckboxCustomIcons, InputAlignments, InputSizes, InputStatus } from '@magenta-ui/types'
-import Label from '../input/Label.vue'
+import { CheckboxCustomIcons, InputSizes, InputStatus } from '@magenta-ui/types'
 import Marker from './Marker.vue'
 
 export default defineComponent({
   name: 'MCheckbox',
   components: {
-    Label,
     Marker,
   },
   props: {
@@ -80,11 +75,6 @@ export default defineComponent({
       default: null,
       validator: (value: string) => (Object.values(InputStatus) as string[]).includes(value),
     },
-    alignment: {
-      type: String as PropType<InputAlignments>,
-      default: InputAlignments.Default,
-      validator: (value: string) => (Object.values(InputAlignments) as string[]).includes(value),
-    },
     customIcons: {
       type: Object as PropType<CheckboxCustomIcons>,
       default: null,
@@ -108,13 +98,11 @@ export default defineComponent({
     }
     
     const computedClasses = computed(() => {
-      const { disabled, size, status, alignment } = props
+      const { disabled, size, status } = props
       
       return [
         'mag-checkbox', 
         {
-          'mag-checkbox-vertical': alignment === InputAlignments.Vertical,
-          'mag-checkbox-horizontal': alignment === InputAlignments.Horizontal,
           'mag-checkbox-sm': size === InputSizes.Small,
           'mag-checkbox-md': size === InputSizes.Medium,
           'mag-checkbox-lg': size === InputSizes.Large,
